@@ -1,20 +1,16 @@
-- caption: Friday Theme on GitHub
-  href: https://github.com/sfreytag/friday-theme
+- caption: Nakkwan GitHub
+  href: https://github.com/Nakkwan
   icon: entypo/github.svg
 
 - caption: Stack Overflow
   href: https://stackoverflow.com
   icon: icons/stackoverflow.svg
 
-- caption: Facebook
-  href: https://www.facebook.com
-  icon: entypo/facebook.svg
+- caption: Instagram
+  href: https://www.instagram.com
+  icon: entypo/instagram.svg
 
-- caption: Twitter
-  href: https://www.twitter.com
-  icon: entypo/twitter.svg
-
-- caption: London
-  href: https://www.google.co.uk/maps/place/London/@51.528308,-0.3817765,10z/data=!3m1!4b1!4m5!3m4!1s0x47d8a00baf21de75:0x52963a5addd52a99!8m2!3d51.5073509!4d-0.1277583
+- caption: Seoul
+  href: https://www.google.co.uk/maps/place/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C/@37.5637733,126.8340013,11z/data=!3m1!4b1!4m5!3m4!1s0x357ca2012d5c39cf:0x7e11eca1405bf29b!8m2!3d37.566535!4d126.9779692
   icon: entypo/location-pin.svg
 
