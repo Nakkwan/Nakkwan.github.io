@@ -1,7 +1,9 @@
-- caption: E-mail
-  <
+<p>Electronic Engineering, KyungHee Univ.</p>
+
 - caption: E-mail
   <p>cvvc1997@gmail.com</p>
+  icon: entypo/email.svg
+
 - caption: Nakkwan GitHub
   href: https://github.com/Nakkwan
   icon: entypo/github.svg
