@@ -17,6 +17,7 @@
 - Autonomous Driving
 - Machine Learning
 - Automatic Control 
+- Embedded System
 <br>
 
 ### Skill
