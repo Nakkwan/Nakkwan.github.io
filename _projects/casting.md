@@ -11,7 +11,7 @@ title: About casting
 예를 들어, 1.5 + 2라는 float형과 int형의 연산이 실행될 때, 2를 2.0인 float형으로 변환해준다.
 
 - 명시적 형변환
-프로그래머가 casting을 사용하여 강제적으로 형을 변환해주는 것이다.
+프로그래머가 casting을 사용하여 강제적으로 형을 변환해주는 것이다.<br>
 ```float a = 3.5 + (float)2;```
 
 ## Casting Rank
@@ -20,7 +20,7 @@ title: About casting
 
 묵시적 형변환과 명시적 형변환에도 차이가 있다.
 
-묵시적 형 변환: float value = 3 / 2;
+묵시적 형 변환: float value = 3 / 2; <br>
 명시적 형 변환: float value = (float)3 / 2; 가 있다고 하자.
 
 명시적 형 변환의 경우 float로 casting이 된 3이 3.0으로 변환되어 1.5가 value에 저장된다. 하지만 묵시적 형 변환의 경우 3 / 2의 연산이 int 형이기 때문에 1로 연산이 끝난 후 value에 1.0으로 묵시적 형 변환이 일어나게 된다. 따라서 결과적으로 데이터의 손실이 일어난다.
