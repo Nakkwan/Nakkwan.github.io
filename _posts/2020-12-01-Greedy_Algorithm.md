@@ -1,4 +1,4 @@
---
+---
 title: Greedy Algorithm
 tags:
   - Algorithm
