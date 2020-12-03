@@ -20,3 +20,7 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/theme/css/syntax.css">
 
 </head>
+
+{% if page.use_math %}
+  {% include mathjax_support.html %}
+{% endif %}
