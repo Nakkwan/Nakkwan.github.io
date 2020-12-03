@@ -4,7 +4,9 @@ tags:
   - Machine Learning
   - Logistic Regression
   - Supervised Learning
-html header: <script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
 ---
 
 Machine Learning(기계학습)이란 __컴퓨터의 어떤 작업에 프로그래밍하지 않아도 스스로 배우는 능력을 가지는 것__ 을 의미합니다.<br>
