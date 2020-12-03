@@ -1,9 +1,14 @@
+html header: <script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 ---
 title: Logistic Regression
 tags:
   - Machine Learning
   - Logistic Regression
   - Supervised Learning
+use_math: true
+comments: true
+
 ---
 
 Machine Learning(기계학습)이란 __컴퓨터의 어떤 작업에 프로그래밍하지 않아도 스스로 배우는 능력을 가지는 것__ 을 의미합니다.<br>
@@ -27,3 +32,5 @@ Regression은 입력에 대한 연속된 출력으로부터 이산적인 결과�
 예를 들어, 입력된 Image가 고양이인지 아닌지에 대한 Classification이라면, 
 
 <img src="https://user-images.githubusercontent.com/48177363/100990248-05e19080-3595-11eb-9d52-3ea194c886ef.PNG" width="900" height="300">
+
+\\( x(t)=\frac{-b\pm \sqrt{{b}^{2}-4ac}}{2a} \\)
