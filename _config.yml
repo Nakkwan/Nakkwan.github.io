@@ -4,9 +4,7 @@ permalink: /:categories/:year/:month/:day/:title.html
 # Conversion
 markdown:         kramdown
 highlighter:      rouge
-lsi: false
 excerpt_separator: <!--more-->
-incremental: false
 
 # Config for your profile.
 title:            Nakkwan CHOI's Stduy Blog            # Site title
