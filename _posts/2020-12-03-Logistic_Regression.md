@@ -74,7 +74,7 @@ $$\frac{\sigma L}{\sigma w_{1}} = dw_{1} = x_{1}dz, dw_{2} = x_{2}dz,db = dz$$<b
 
 ### Vectorization
 이제까지 w, b를 학습시키는 방식에 대해 알아봤습니다. 하지만 training 해야하는 데이터는 한두개가 아니기 때문에 많은 data에 대한 학습도 생각해야합니다. 여기서 Vectorization이 중요합니다. 
-code를 짤 때 for문같은 반복문이 등장하게 된다면, 실행시간이 오래걸리기 때문에 for문을 code에서 최대한 없애야합니다. 이 때 쓰이는 것이 Vectorization입니다. python으로 코드를 짠다 가정했을 때 vectorization을 하지 않았을 경우 $$Z = WX_{T} + b$$의 식에서 <br>
+code를 짤 때 for문같은 반복문이 등장하게 된다면, 실행시간이 오래걸리기 때문에 for문을 code에서 최대한 없애야합니다. 이 때 쓰이는 것이 Vectorization입니다. python으로 코드를 짠다 가정했을 때 vectorization을 하지 않았을 경우 $$Z = WX^{T} + b$$의 식에서 <br>
 ```
 Z = 0
 for i in range(m)
