@@ -28,6 +28,11 @@ Regression은 입력에 대한 연속된 출력으로부터 이산적인 결과�
 
 <img src="https://user-images.githubusercontent.com/48177363/100990248-05e19080-3595-11eb-9d52-3ea194c886ef.PNG" width="900" height="300">
 
+위의 그림과 같이 training data(위의 예제에서는 (64*64*3, 1) vector) 하나를 $x^{i}$라 할 때 training data의 개수를 $n_{x}$라 정하면 전체 입력 data는 $X = \begin{bmatrix}
+x^{0} & . & . & x^{n_{x} - 1}
+\end{bmatrix}$, 출력 $y = \begin{bmatrix}
+y^{0} & . & . & y^{n_{x} - 1}
+\end{bmatrix}$가 된다.
 
 $$f(x)= if x < x_{min} : (x/x_{min})^a$$  
 $$otherwise : 0$$  
@@ -38,10 +43,20 @@ $$x = argmax_k((x_t-x_u+x_v)^T*x_m)/(||x_b-x_k+x_l||)$$
 
 Logistic Regression은 위와 같은 입력에 대한 출력을 학습시키는 방식입니다. 출력은 0 ~ 1사이의 값으로 나오고, 그 값은 확률을 의미합니다. y(label)의 값이 0,1만 존재할 때 사용할 수 있습니다.<br>
 Logistic Regression에서 쓰는 변수, 용어로는<br>
-- Input: x 
-- label: y
-- weight(가중치): w
-- threshold(임계점): b
-- Output: y
-- z:
-- sigmoid = 
+- Input: $x\in R^{n_{x}} $ 
+- label: $y\in 0, 1 $
+- weight(가중치): $w\in R^{n_{x}}$
+- threshold(임계점): $b\in R$
+- Output: $\hat{y} = \sigma (w^{T}x + b)$
+- z: $w^{T}x + b$
+- sigmoid : $\frac{1}{1+e^{-x}}$
+  - 0,1 사이의 확률로 나타내기 위해 쓰임
+
+Logistic Regression은 w와 b를 학습시키는 것 입니다. 이를 위해선 cost function(J)를 최소화하는 방향으로 학습이 진행되어야 합니다. Cost function은 Regression Loss(L)의 평균합으로 나타내어 집니다.
+$$J(w,b) = \frac{1}{m}\sum L(\hat{y}^{(i)}, y^{(i)})$$
+$$L(\hat{y}^{(i)}, y^{(i)}) = -(y^{{(i)}}log(\hat{y}^{(i)})) - (1 - y^{(i)})log(1-\hat{(i)})$$
+
+Logistic Loss로부터 <br>
+- $y^{(i)} = 0$일 때 : $L(\hat{y}^{(i)}, y^{(i)}) = - (1 - y^{(i)})log(1-\hat{(i)})$
+- $y^{(i)} = 1$일 때 : $L(\hat{y}^{(i)}, y^{(i)}) = -(y^{{(i)}}log(\hat{y}^{(i)}))$
+
