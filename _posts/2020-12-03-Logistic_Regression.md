@@ -60,7 +60,8 @@ Logistic Loss로부터 <br>
 
 Cost function을 줄이기 위한 방향으로 w, b를 학습시키는 방법입니다. $$J(w, b)$$를 각 변수로 편미분하는 방식으로 진행이 되는데 $$\alpha$$가 learning rate라고 할 때 식은 
 - $$w = w - \alpha \frac{\partial J(w, b)}{\partial w}$$
-- $$b = b - \alpha \frac{\partial J(w, b)}{\partial b}$$ <br>
+- $$b = b - \alpha \frac{\partial J(w, b)}{\partial b}$$
+
 로 나타납니다. 
 
 위의 식을 자세히 이해하기 위해 예제를 하나 들어보겠습니다.
@@ -68,6 +69,7 @@ Cost function을 줄이기 위한 방향으로 w, b를 학습시키는 방법입
 
 마찬가지로 $$ Z = w_{1}x_{1} + w_{2}x_{2} + b $$라면 $$a = \sigma (z)$$ , $$L(a, y)$$ 일 때, $$dz = a - y$$가 됩니다. 계산에 대한 자세한 증명은 생략하겠습니다. 
 $$\frac{\sigma L}{\sigma w_{1}} = dw_{1} = x_{1}dz, dw_{2} = x_{2}dz,db = dz$$ <br>
+
 - $$w_{1} = w_{1} - \alpha dw_{1}$$
 - $$w_{2} = w_{2} - \alpha dw_{2}$$
 - $$b = b - \alpha db$$
