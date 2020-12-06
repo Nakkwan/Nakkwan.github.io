@@ -11,7 +11,7 @@ Neural Network는 __특정한 직무나 기능을 수행하는 방법을 모델�
 <!--more-->
 
 다음 그림은 간단한 Neural Network입니다.
-<img src="https://user-images.githubusercontent.com/48177363/101283812-3721c100-3820-11eb-818c-58ac683fb901.PNG" width="500" height="400">
+<img src="https://user-images.githubusercontent.com/48177363/101283812-3721c100-3820-11eb-818c-58ac683fb901.PNG" width="500" height="350"> <br>
 Logistic Regression을 여러개 연결한 것 같은 모양으로, Input($$x_{i}$$), Output($$\hat{y}$$), Hidden Layer가 존재합니다. Hidden Layer는 입력, 출력과는 달리 보이지 않는 층으로, 그림에서는 2개의 Hidden Layer가 존재합니다. Layer를 말할 땐 입력층은 제외하기 때문에 그림은 2 Layer NN입니다. <br>
 NN에서 기호의 표현은 다음과 같습니다.
 - Layer는 윗 첨자의 대괄호로 나타낸다. 
@@ -26,3 +26,8 @@ NN에서 기호의 표현은 다음과 같습니다.
 - $$W^{[i]}$$ = (i Layer의 Unit 수, i Layer의 Input 수(= i - 1 Layer의 Output 수))
 - $$b^{[i]}$$ = (i Layer의 Unit 수, 1)
 - $$a^{[i]}$$ = (i Layer의 Unit 수, 1)
+
+Layer에서 계산 과정을 그림으로 보면 다음과 같습니다.
+<img src="https://user-images.githubusercontent.com/48177363/101284949-0f355c00-3826-11eb-87aa-07c34d6606ae.PNG" width="500" height="350"><br>
+
+...ing posting
