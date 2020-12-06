@@ -27,7 +27,7 @@ NN에서 기호의 표현은 다음과 같습니다.
 - $$b^{[i]}$$ = (i Layer의 Unit 수, 1)
 - $$a^{[i]}$$ = (i Layer의 Unit 수, 1)
 
-Layer에서 계산 과정을 그림으로 보면 다음과 같습니다.
+Layer에서 계산 과정을 그림으로 보면 다음과 같습니다. <br>
 <img src="https://user-images.githubusercontent.com/48177363/101284949-0f355c00-3826-11eb-87aa-07c34d6606ae.PNG" width="500" height="350"><br>
 
 ...ing posting
