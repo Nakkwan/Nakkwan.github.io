@@ -30,4 +30,39 @@ NN에서 기호의 표현은 다음과 같습니다.
 Layer에서 계산 과정을 그림으로 보면 다음과 같습니다. <br>
 <img src="https://user-images.githubusercontent.com/48177363/101284949-0f355c00-3826-11eb-87aa-07c34d6606ae.PNG" width="550" height="350"><br>
 
-...ing posting
+### Represntation
+
+$$Z = W^{T}x + b$$로 나타나는 NN의 1 Layer에서의 식은 Matrix로 보면 다음과 같습니다. <br>
+$$Z = \begin{bmatrix}
+-- & W^{[1]T}_{1} & --\\ 
+-- & W^{[1]T}_{2} & --\\ 
+-- & W^{[1]T}_{3} & --\\ 
+-- & W^{[1]T}_{4} & --
+\end{bmatrix}\begin{bmatrix}
+X_{1}\\ 
+X_{2}\\ 
+X_{3}
+\end{bmatrix} + \begin{bmatrix}
+b^{[1]}_{1}\\ 
+b^{[1]}_{2}\\ 
+b^{[1]}_{3}\\ 
+b^{[1]}_{4}
+\end{bmatrix} = \begin{bmatrix}
+W^{[1]T}_{1}X + b^{[1]}_{1}\\ 
+W^{[1]T}_{2}X + b^{[1]}_{2}\\ 
+W^{[1]T}_{3}X + b^{[1]}_{3}\\ 
+W^{[1]T}_{4}X + b^{[1]}_{4}
+\end{bmatrix} = \begin{bmatrix}
+Z^{[1]}_{1}\\ 
+Z^{[1]}_{2}\\ 
+Z^{[1]}_{3}\\ 
+Z^{[1]}_{4}
+\end{bmatrix}$$ <br>
+$$a^{[1]} = \sigma(Z^{[1]})$$ <br>
+위의 $$a^{[1]}$$은 2 Layer의 입력이 되어 들어갑니다.<br>
+
+이제까지 NN의 간단한 모델에 대해서 알아봤습니다. NN은 Deep한 NN과 Shallow한 NN이 있습니다. 그 기준이 명확한 것은 아니라, 상대적으로 Layer가 깊으면 Deep하다고 말하고, 얕으면 Shallow하다고 말하는 것 같습니다.<br>
+
+### Forward Propagation
+
+
