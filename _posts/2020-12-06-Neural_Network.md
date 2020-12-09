@@ -83,5 +83,5 @@ Forward propagation(전방향 전파)는 입력부터 Layer를 거쳐 출력을 
 좀 더 complex한 feature를 나타내기 때문입니다. <br>예를 들어,<br>
 얼굴 인식의 경우 => 윤곽 -> 이목구비 -> 얼굴 <br>
 언어 인식의 경우 => 알파벳 -> 단어 -> 문장 <br>
-즉, Shallow 할수록 Hidden unit의 개수가 더 많이 필요합니다. <br>공간 복잡도를 계산해보면, Rogistic Regression의 경우 $$O(\log n)$$, NN의 경우 $$2^{n}$$입니다.<br>
+즉, Shallow 할수록 Hidden unit의 개수가 더 많이 필요합니다. <br>공간 복잡도를 계산해보면, Rogistic Regression의 경우 $$O(\log n)$$, NN의 경우 $$O(2^{n})$$입니다.<br>
 따라서 속도적인 측면이나 여러가지 방면으로 NN이 효율적인 경우가 많습니다.
