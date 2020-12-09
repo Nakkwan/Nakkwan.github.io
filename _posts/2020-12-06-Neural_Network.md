@@ -66,3 +66,16 @@ Z^{[1]}_{4}
 
 ### Forward Propagation
 
+Forward propagation(전방향 전파)는 입력부터 Layer를 거쳐 출력을 얻는 것을 의미합니다. 앞에서 언급했던 것과 같은데 좀 더 일반적인 상황에서 보겠습니다. <br>
+<img src="https://user-images.githubusercontent.com/48177363/101565863-4ae04980-3a11-11eb-9416-6ecb810ff478.PNG" width="550" height="350"><br>
+
+위의 Neural Network는 4 Layer NN입니다. Forward propagation에 대한 일반식을 써보면,<br>
+- $$Z^{[l]} = W^{[l]}a^{[l]} + b^{[l]}$$
+- $$a^{[l]} = g^{[l]}(Z^{[l]})$$<br>
+
+각 Layer의 Unit수를 $$n^{[l]}$$, training data의 수를 m이라 했을 때, variable의 matrix dimension은 <br>
+- $$W^{[l]} : (n^{[l]}, n^{[n-1]})$$
+- $$b^{[l]} : (n^{[l]}, 1)$$, if Vectorization, $$(n^{[l]}, m)$$
+- $$dW^{[l]} : (n^{[l]}, n^{[n-1]})$$
+- $$db^{[l]} : (n^{[l]}, 1)$$, if Vectorization, $$(n^{[l]}, m)$$
+
