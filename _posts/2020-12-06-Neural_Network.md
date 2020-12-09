@@ -70,12 +70,17 @@ Forward propagation(전방향 전파)는 입력부터 Layer를 거쳐 출력을 
 <img src="https://user-images.githubusercontent.com/48177363/101565863-4ae04980-3a11-11eb-9416-6ecb810ff478.PNG" width="550" height="350"><br>
 
 위의 Neural Network는 4 Layer NN입니다. Forward propagation에 대한 일반식을 써보면,<br>
-- $$Z^{[l]} = W^{[l]}a^{[l]} + b^{[l]}$$
+- $$Z^{[l]} = W^{[l]}a^{[l]} + b^{[l]}$$<br>
 - $$a^{[l]} = g^{[l]}(Z^{[l]})$$<br>
 
 각 Layer의 Unit수를 $$n^{[l]}$$, training data의 수를 m이라 했을 때, variable의 matrix dimension은 <br>
-- $$W^{[l]} : (n^{[l]}, n^{[n-1]})$$
+- $$W^{[l]} : (n^{[l]}, n^{[n-1]})$$<br>
 - $$b^{[l]} : (n^{[l]}, 1)$$, if Vectorization, $$(n^{[l]}, m)$$
-- $$dW^{[l]} : (n^{[l]}, n^{[n-1]})$$
+- $$dW^{[l]} : (n^{[l]}, n^{[n-1]})$$<br>
 - $$db^{[l]} : (n^{[l]}, 1)$$, if Vectorization, $$(n^{[l]}, m)$$
 
+이 쯤에서 왜 Rogistic Regression 대신 Deep한 NN을 쓰는 이유가 궁금증이 생길 수 있습니다. 그 이유는 NN가 deep 할수록(Output에 가까운 Layer일수록)
+좀 더 complex한 feature를 나타내기 때문입니다. 예를 들어,<br>
+얼굴 인식의 경우 => 윤곽 -> 이목구비 -> 얼굴 <br>
+언어 인식의 경우 => 알파벳 -> 단어 -> 문장 <br>
+즉, Shallow 할수록 Hidden unit의 개수가 더 많이 필요합니다. 공간 복잡도를 계산해보면, Rogistic Regression의 경우 $$O(\log n)$$, NN의 경우 $$2^{n}$$입니다.
