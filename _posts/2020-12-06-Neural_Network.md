@@ -85,9 +85,10 @@ Backpropagation(후방향전파)는 전방향 전파로부터 나온 결과를 �
 [이전 포스팅](https://nakkwan.github.io/2020/12/03/Logistic_Regression.html)에서의 Gradient Descent와 같이, 연쇄법칙을 이용해 이뤄집니다.
 NN의 출력으로부터 각 layer의 gradient를 입력 쪽으로 전파해가며 구합니다. $$i$$번째 layer에서의 gradient를 구하는 식은 <br>
 - $$dz^{[i]} = W^{[i+1]T}dz^{[i+1]} * {g^{[i]}}'(z^{[i]})$$<br>
-- dW^{[i]} = dz{[i]}a^{[i]}^{T}<br>
-- db^{[i]} = dz^{[i]}
+- $$dW^{[i]} = dz{[i]}a^{[i]}^{T}$$<br>
+- $$db^{[i]} = dz^{[i]}$$<br>
 
+--- 
 
 이 쯤에서 왜 Rogistic Regression 대신 Deep한 NN을 쓰는 이유가 궁금증이 생길 수 있습니다. 그 이유는 NN가 deep 할수록(Output에 가까운 Layer일수록)
 좀 더 complex한 feature를 나타내기 때문입니다. <br>예를 들어,<br>
