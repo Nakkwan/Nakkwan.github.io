@@ -90,7 +90,7 @@ NN의 출력으로부터 각 layer의 gradient를 입력 쪽으로 전파해가�
 
 --- 
 
-이 쯤에서 왜 Rogistic Regression 대신 Deep한 NN을 쓰는 이유가 궁금증이 생길 수 있습니다. 그 이유는 NN가 deep 할수록(Output에 가까운 Layer일수록)
+왜 Rogistic Regression 대신 Deep한 NN을 쓰는 이유가 궁금증이 생길 수 있습니다. 그 이유는 NN가 deep 할수록(Output에 가까운 Layer일수록)
 좀 더 complex한 feature를 나타내기 때문입니다. <br>예를 들어,<br>
 얼굴 인식의 경우 => 윤곽 -> 이목구비 -> 얼굴 <br>
 언어 인식의 경우 => 알파벳 -> 단어 -> 문장 <br>
