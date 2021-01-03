@@ -16,7 +16,7 @@ tags:
 ##### Forward Propagation
 
 - Input: $$a^{[l-1]}$$ 
-- Output: $$a^{[l]}, cache W^{[l]}, b^{[l]}$$
+- Output: $$a^{[l]}, cache W^{[l]}, b^{[l]}$$<br>
 $$    Z^{[l]} = W^{[l]}a^{[l]} + b^{[l]}$$<br>
 $$    a^{[l]} = g^{[l]}(Z^{[l]})$$<br>
 
@@ -30,3 +30,6 @@ $$    dW^{[l]} = dz^{[l]}a^{[l-1}$$<br>
 $$    db^{[l]} = dz^{[l]}$$<br>
 $$    da^{[l-1]} = W^{[l]T}dz^{[l]}$$<br>
 $$    dz^{[l]} = W^{[l+1]T}dz^{[l+1]} * {g^{[l]}}'(z^{[l]})$$<br>
+
+위의 식들을 그림으로 나타내면 다음과 같습니다. <br>
+<img src="https://user-images.githubusercontent.com/48177363/103478885-104daf00-4e0d-11eb-9865-94d72253f5cc.PNG" width="550" height="450">
