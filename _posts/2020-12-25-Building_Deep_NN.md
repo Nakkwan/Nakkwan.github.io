@@ -32,4 +32,9 @@ $$    da^{[l-1]} = W^{[l]T}dz^{[l]}$$<br>
 $$    dz^{[l]} = W^{[l+1]T}dz^{[l+1]} * {g^{[l]}}'(z^{[l]})$$<br>
 
 위의 식들을 그림으로 나타내면 다음과 같습니다. <br>
-<img src="https://user-images.githubusercontent.com/48177363/103478885-104daf00-4e0d-11eb-9865-94d72253f5cc.PNG" width="700" height="450">
+<img src="https://user-images.githubusercontent.com/48177363/103478885-104daf00-4e0d-11eb-9865-94d72253f5cc.PNG" width="750" height="450">
+
+### Parameters & Hyperparameters
+
+NN을 학습함에 있어서 목표가 되는 W(weight), b(threshold)를 parameter라고 합니다. <br>
+Hyperparameter는 W,b를 Control하기 위한 변수들을 의미합니다. 그 예로는 $$\alpha $$(learning rate), iteration, L(Hiden layer), Hidden Unit, activation function 등을 의미합니다. Hyperparameter 조정을 통해, parameter의 학습 속도, 달성률 등등을 조정할 수 있습니다.
