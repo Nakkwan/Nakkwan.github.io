@@ -1,7 +1,9 @@
 ### Career
 
-- KyungHee Univ. (2016.03 ~ 2021.02)
+- KyungHee Univ, Undergraduate (2016.03 ~ 2021.02)
   - Electronic Engineering
+- UNIST, graduate (2021.03 ~)
+  - Electronical and Computer Science Engineering
 <br>
 
 ### Projects
@@ -16,8 +18,8 @@
 ### Interest
 - Autonomous Driving
 - Machine Learning
-- Automatic Control 
-- Embedded System
+- Objet Detection 
+- Denoising
 <br>
 
 ### Skill
