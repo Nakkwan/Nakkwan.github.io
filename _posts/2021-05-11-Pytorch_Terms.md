@@ -4,7 +4,7 @@ tags:
   - Machine Learning
   - Code
   - Neural Network
-  - - Pytorch
+  - Pytorch
 ---
 Code term for Pytorch
 <!--more-->
