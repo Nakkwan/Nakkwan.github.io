@@ -9,7 +9,7 @@ tags:
 Code term for Pytorch
 <!--more-->
 
-Model과 Param에 .cuda 설정<br>
+Model과 Param에 ```.cuda``` 설정<br>
 cuda check = ```torch.cuda.is_available()```
 
 ### Dataset
@@ -47,7 +47,6 @@ transforms.Compose([
             transforms.Normalize((0.5), (0.5))
         ])
 ```
-- 
 
 ### Model
 ---
