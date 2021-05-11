@@ -20,17 +20,17 @@ cuda check = ```torch.cuda.is_available()```
 
 ### Training
 ---
-##### Loss
+###### Loss
 Loss는 torch.nn에서 사용가능 <br>
 > ex) ```torch.nn.L1Loss()```, ```torch.nn.MSELoss()```, etc...
 torch.nn.MSELoss()는 Default가 mean이지만 reduction option을 sum으로 설정 가능
-##### Optimizer
+###### Optimizer
 torch.optim에서 사용가능
 > ex) ```torch.optim.Adam()```, ```torch.optim.SGD()```, ```torch.optim.RMSprop()```, etc...
 learning rate와 옵션들을 function에 따라서 lr= ... 등으로 설정 가능 <br>
 > ex) ```torch.optim.Adam(model.parameters(), lr=opt.lr, betas=(0.5, 0.999))```
 
-##### lr_scheduler
+###### lr_scheduler
 각 parameter나 시간에 따라 leraning rate를 조절해준다. Optimizer.step()을 호출한 후 Scheduler.step()을 호출한다. <br>
 (반대로하면 첫번째 learning rate를 optimizer가 건너뛰게 된다.)
 - 공통
@@ -45,7 +45,7 @@ learning rate와 옵션들을 function에 따라서 lr= ... 등으로 설정 가
 - ```torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones, gamma=0.1, last_epoch=-1, verbose=False)```
   - step size가 아닌 lr을 감소시킬 epoch를 지정
 
-##### grad
+###### grad
 grad가 붙은 함수들은 보통 미분 계산에 사용된다
 - ```zero_grad()```
   - Backpropagation을 사용하기 전 변화도를 0으로 만들어주는 함수
@@ -59,15 +59,15 @@ grad가 붙은 함수들은 보통 미분 계산에 사용된다
 ### Test
 ---
 
-##### Load Model
+###### Load Model
 ex) ```model.load_state_dict(torch.load("path"))```
 
-##### Model Save
+###### Model Save
 ex) ```torch.save(model.state_dict(), 'path/name.pth')```
 
 ### etc
 ---
-##### argparser
+###### argparser
 argument 설정에 용이. ```import argparse```로 사용<br>
 ```py
 parser = argparse.ArgumentParser()
@@ -79,5 +79,5 @@ parser.add_argument('--lr', type=float, default=0.0002, help='initial learning r
 opt = parser.parse_args()
 ```
 
-##### image print
+###### image print
 make_grid, torch.cat, save_image 사용
