@@ -10,12 +10,17 @@ Code term for Pytorch
 <!--more-->
 
 ### Dataset
+---
 
 ### Model
+---
 
 ### Training
+---
 
-#### grad <br>
+#### grad
+---
+
 grad가 붙은 함수들은 보통 미분 계산에 사용된다
 - zero_grad()
   - Backpropagation을 사용하기 전 변화도를 0으로 만들어주는 함수
@@ -27,3 +32,4 @@ grad가 붙은 함수들은 보통 미분 계산에 사용된다
   - default는 True다. 
 
 ### Test
+---
