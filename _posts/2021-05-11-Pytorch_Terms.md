@@ -17,6 +17,13 @@ Code term for Pytorch
 
 ### Training
 ---
+##### Loss
+Loss는 torch.nn에서 사용가능 <br>
+> ex) torch.nn.L1Loss(), torch.nn.MSELoss()
+torch.nn.MSELoss()는 Default가 mean이지만 reduction option을 sum으로 설정 가능
+##### Optimizer
+torch.optim에서 사용가능
+> ex) 
 ##### grad
 grad가 붙은 함수들은 보통 미분 계산에 사용된다
 - zero_grad()
