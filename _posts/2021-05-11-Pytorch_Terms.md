@@ -9,6 +9,9 @@ tags:
 Code term for Pytorch
 <!--more-->
 
+Model과 Param에 .cuda 설정<br>
+cuda check = ```torch.cuda.is_available()```
+
 ### Dataset
 ---
 
@@ -54,3 +57,8 @@ grad가 붙은 함수들은 보통 미분 계산에 사용된다
 
 ### Test
 ---
+##### Load Model
+ex) model.load_state_dict(torch.load("path"))
+
+##### Model Save
+ex) torch.save(model.state_dict(), 'path/name.pth')
