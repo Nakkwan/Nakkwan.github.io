@@ -1,21 +1,22 @@
 ---
 title: Clean Code for Python
 ---
-Pythonic한 code를 위한 Clean code method
+Pythonic한 code를 위한 Clean code method <br>
+PEP-8 (Python Enhancement Proposal 8번)에 따른 Style Guide for python code.
 ---
 ### Code Formatting
 ---
-##### Docstring
-```from torch.utils.data import DataLoader```로부터 DataLoader를 불러와서 사용 <br>
-ex) ```dataloader = DataLoader(dataset)```
-옵션으로는 
-- batch_size=1
-- shuffle=False
-- num_workers=0 <br>
-등이 있다. dataset에는 dataset이나 dataset을 상속받은 custom class를 넣을 수 있다.<br>
+Grepability를 위해서, keyword argument에는 띄어쓰기를 사용하지 않고, value에 값을 할당할 때에는 띄어쓰기를 사용한다. <br>
 ```py
- for epoch in range(opt.epoch, opt.n_epochs):
-        for i, batch in enumerate(dataloader):
+$ grep -nr "location=".
+./core/py:13: location=current_location,
 ```
-의 형식으로 쓸 수 있으며, batch에는 dataloader의 return, i에는 반복 횟수가 들어간다. <br>
-```Variable(batch['key'].type(Tensor)).cuda()```
+```py
+$ grep -nr "location =".
+./core/py:10: location = get_location()
+```
+
+##### Docstring
+docstring은 주석이 아니라 코드로 분류된다. 코드를 설명하는 주석을 다는 것보다(주석은 오해를 불러일으킬 수도 있음) 코드의 특징 component에 대한 문서화를 위해 doctring을 사용한다. 결국 clean code는 개발자가 개발자에게 이해하기 쉽도록 coding을 하는 것이다. docstring은 module, class, method들의 입력, 출력 등을 문서화하기 때문에 사용자가 함수에 대한 동작을 이해하기 쉽다. docstring은 console이나 Ipython에서도 확인할 수 있다. ```In [1]: dict.update??```와 같이 입력한다면, dict.update 함수에 대한 docstring을 출력할 수 있다. 또한 객체에 ```__doc__``` method가 정의되어 있다면, 런타임 중이나 소스코드 내에서도 docstring에 접근할 수 있다.
+
+##### Annotation
