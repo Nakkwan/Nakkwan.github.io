@@ -1,0 +1,24 @@
+---
+title: Clean Code for Python
+---
+Pythonic한 code를 위한 Clean code method
+---
+Model과 Param에 ```.cuda``` 설정<br>
+cuda check = ```torch.cuda.is_available()```
+
+### Dataset
+---
+##### DataLoader
+```from torch.utils.data import DataLoader```로부터 DataLoader를 불러와서 사용 <br>
+ex) ```dataloader = DataLoader(dataset)```
+옵션으로는 
+- batch_size=1
+- shuffle=False
+- num_workers=0 <br>
+등이 있다. dataset에는 dataset이나 dataset을 상속받은 custom class를 넣을 수 있다.<br>
+```py
+ for epoch in range(opt.epoch, opt.n_epochs):
+        for i, batch in enumerate(dataloader):
+```
+의 형식으로 쓸 수 있으며, batch에는 dataloader의 return, i에는 반복 횟수가 들어간다. <br>
+```Variable(batch['key'].type(Tensor)).cuda()```
