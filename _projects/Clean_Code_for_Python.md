@@ -36,7 +36,7 @@ Python에서는 index 접근 방식에 많은 방법이 존재한다. 음수 ind
 - __getitem__
 ```py
 def __getitem__(self, item):
-  pass
+    pass
 ```
 와 같이 ```__getitem__``` method를 구현할 수 있다. item (index)값에 따라서 return 값이 바뀌게 코드를 짜면 되지만, <br>
 1. indexing의 결과는 해당 class와 같은 타입이어야 한다. <br>
