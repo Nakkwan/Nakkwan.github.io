@@ -3,12 +3,9 @@ title: Clean Code for Python
 ---
 Pythonic한 code를 위한 Clean code method
 ---
-Model과 Param에 ```.cuda``` 설정<br>
-cuda check = ```torch.cuda.is_available()```
-
-### Dataset
+### Code Formatting
 ---
-##### DataLoader
+##### Docstring
 ```from torch.utils.data import DataLoader```로부터 DataLoader를 불러와서 사용 <br>
 ex) ```dataloader = DataLoader(dataset)```
 옵션으로는 
