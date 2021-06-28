@@ -95,9 +95,9 @@ Container는 ```__contains__``` method를 구현한 객체다. <br>
 ##### Magic Method
 |문장|Magic Method|비고|
 |:---|:---|:---|
-|obj[key] <br> obj[i:j]|__getitem__(key)| |
-|with obj:|__enter__ / __exit__|context manager|
-|for i in obj:|__iter__ / __next__ <br> __len__ / __getitem__|iterable <br> sequence|
-|obj.<attribute>|__getattr__|Dynamic attribute|
-|obj(*args, **kwargs)|__call__(*args, **kwargs)|callable|
+|obj[key] <br> obj[i:j]|&#95;&#95;getitem&#95;&#95;(key)| |
+|with obj:|&#95;&#95;enter&#95;&#95; / &#95;&#95;exit&#95;&#95;|context manager|
+|for i in obj:|&#95;&#95;iter&#95;&#95; / &#95;&#95;next&#95;&#95; <br> &#95;&#95;len&#95;&#95; / &#95;&#95;getitem&#95;&#95;|iterable <br> sequence|
+|obj.<attribute>|&#95;&#95;getattr&#95;&#95;|Dynamic attribute|
+|obj(*args, **kwargs)|&#95;&#95;call&#95;&#95;(*args, **kwargs)|callable|
 
