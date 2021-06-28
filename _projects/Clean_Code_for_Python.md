@@ -101,5 +101,5 @@ Container는 ```__contains__``` method를 구현한 객체다. <br>
 |with obj&#58;|&#95;&#95;enter&#95;&#95; / &#95;&#95;exit&#95;&#95;|context manager|
 |for i in obj&#58;|&#95;&#95;iter&#95;&#95; / &#95;&#95;next&#95;&#95; <br> &#95;&#95;len&#95;&#95; / &#95;&#95;getitem&#95;&#95;|iterable <br> sequence|
 |obj&#46;&#60;attribute&#62;|&#95;&#95;getattr&#95;&#95;|Dynamic attribute|
-|obj(&#42;args, &#42;&#42;kwargs)|&#95;&#95;call&#95;&#95;(&#42;args, &#42;&#42;kwargs)|callable|
+|obj(&#42;args, &#42;&#42;kwargs)|&#95;&#95;call&#95;&#95;|callable|
 
