@@ -60,7 +60,7 @@ Context Manager는 ```__enter__```와 ```__exit__``` 매직 매소드 이외에�
 Python은 다른 언어와 다르게 public, protected, private을 구별하지 않고 모든 property와 함수는 public이다. 하지만 관습적으로 범위를 조정해주는 사항이 있다. (강제는 아님) 모든 속성, 함수는 public이지만 이름 앞에 _ 가 붙으면 내부에서만 사용되고 밖에서는 호출되지 않아야 한다는 암묵적 관습이다. <br>
 __ 은 이름 맹글링(name mangling)이라고 한다. ```_<class_name>__<atrribute_name>``` 이름의 속성을 만든다. 확장되는 class의 속성을 이름 충돌없이 override하기 위한 것이다. 
 
-- Property
+- property
 attribute에 대한 접근 제어를 할 때, property를 사용한다. 
 ```py
 class User:
@@ -77,12 +77,13 @@ def ID(self, new_ID):
         raise ValueError("Not Valid ID")
     self._ID = new_ID
 ```
+
 property.setter의 경우 <user>.ID = <new_ID>가 실행될 때 호출된다. 새 값으로 속성을 할당하는 것 뿐만 아니라 유효성 검사도 할 수 있다. <br> 한 method에서는 하나 이상의 일을 하지 않는 것이 좋기 때문에 property를 사용하여, 혼동을 피하는 것이 좋다.
 
 ##### Iterable
 Python에서 내장 반복형 객체뿐만 아니라 자체 이터러블을 만들 수도 있다. ```for i in object:```의 형태로 객체를 반복하기 위해선 
-    1. 객체가 __next__ 나 __iter__ 메서드 중 하나를 갖고 있는지
-    2. 객체가 시퀀스이고, __len__과 __getitem__을 모두 가졌는지
+1. 객체가 __next__ 나 __iter__ 메서드 중 하나를 갖고 있는지
+2. 객체가 시퀀스이고, __len__과 __getitem__을 모두 가졌는지
 가 필요하다. 
     
 ##### Container
@@ -93,11 +94,12 @@ Container는 ```__contains__``` method를 구현한 객체다. <br>
 객체를 함수처럼 동작하게 하기 위해서 ```__call__``` method를 사용한다. 함수와 다르게 좋은 점은 객체엔 상태가 있기 때문에 정보를 저장할 수 있다는 것이다. 
 
 ##### Magic Method
+
 |문장|Magic Method|비고|
 |:---|:---|:---|
-|obj[key] <br> obj[i:j]|&#95;&#95;getitem&#95;&#95;(key)| |
-|with obj:|&#95;&#95;enter&#95;&#95; / &#95;&#95;exit&#95;&#95;|context manager|
-|for i in obj:|&#95;&#95;iter&#95;&#95; / &#95;&#95;next&#95;&#95; <br> &#95;&#95;len&#95;&#95; / &#95;&#95;getitem&#95;&#95;|iterable <br> sequence|
+|obj[key] <br> obj[i&#58;j]|&#95;&#95;getitem&#95;&#95;(key)| |
+|with obj&#58;|&#95;&#95;enter&#95;&#95; / &#95;&#95;exit&#95;&#95;|context manager|
+|for i in obj&#58;|&#95;&#95;iter&#95;&#95; / &#95;&#95;next&#95;&#95; <br> &#95;&#95;len&#95;&#95; / &#95;&#95;getitem&#95;&#95;|iterable <br> sequence|
 |obj.<attribute>|&#95;&#95;getattr&#95;&#95;|Dynamic attribute|
 |obj(*args, **kwargs)|&#95;&#95;call&#95;&#95;(*args, **kwargs)|callable|
 
