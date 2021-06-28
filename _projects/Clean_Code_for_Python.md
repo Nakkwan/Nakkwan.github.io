@@ -95,11 +95,11 @@ Container는 ```__contains__``` method를 구현한 객체다. <br>
 
 ##### Magic Method
 
-|문장|Magic Method|비고|
+|Content|Magic Method|etc|
 |:---|:---|:---|
-|obj[key] <br> obj[i&#58;j]|&#95;&#95;getitem&#95;&#95;(key)| |
+|obj&#91;key&#93; <br> obj&#91;i&#58;j&#93;|&#95;&#95;getitem&#95;&#95;(key)| |
 |with obj&#58;|&#95;&#95;enter&#95;&#95; / &#95;&#95;exit&#95;&#95;|context manager|
 |for i in obj&#58;|&#95;&#95;iter&#95;&#95; / &#95;&#95;next&#95;&#95; <br> &#95;&#95;len&#95;&#95; / &#95;&#95;getitem&#95;&#95;|iterable <br> sequence|
-|obj.<attribute>|&#95;&#95;getattr&#95;&#95;|Dynamic attribute|
-|obj(*args, **kwargs)|&#95;&#95;call&#95;&#95;(*args, **kwargs)|callable|
+|obj&#46;&#60;attribute&#62;|&#95;&#95;getattr&#95;&#95;|Dynamic attribute|
+|obj(&#42;args, &#42;&#42;kwargs)|&#95;&#95;call&#95;&#95;(&#42;args, &#42;&#42;kwargs)|callable|
 
