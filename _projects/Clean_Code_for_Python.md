@@ -55,10 +55,49 @@ with torch.no_grad():
 ```with```은 ```__enter__``` method를 호출한다. 반환값이 있다면, 구문 마지막의 ```as``` 이후 변수에 할당될 수 있다. 코드 블록이 끝나거나 예외, 오류가 발생하면 ```__exit__``` method를 호출해, 정리 코드를 실행할 수 있다. 위의 코드의 경우, ```with``` 구문이 시작이 되면 gradient를 계산을 멈추고, 구문이 끝난 이후에는 gradient 계산을 다시 실행하는 것을 확인할 수 있다. 또한 ```with``` 구문은 정리 코드뿐만 아니라, 코드를 분리하거나, 특이사항을 처리할 때 쓰이기도 한다. <br>
 Context Manager는 ```__enter__```와 ```__exit__``` 매직 매소드 이외에도 contextlib이라는 module을 이용하여, 더 간결하게 코드를 적용할 수 있다. 
 
+##### Properties, Attribute
 
+Python은 다른 언어와 다르게 public, protected, private을 구별하지 않고 모든 property와 함수는 public이다. 하지만 관습적으로 범위를 조정해주는 사항이 있다. (강제는 아님) 모든 속성, 함수는 public이지만 이름 앞에 _ 가 붙으면 내부에서만 사용되고 밖에서는 호출되지 않아야 한다는 암묵적 관습이다. <br>
+__ 은 이름 맹글링(name mangling)이라고 한다. ```_<class_name>__<atrribute_name>``` 이름의 속성을 만든다. 확장되는 class의 속성을 이름 충돌없이 override하기 위한 것이다. 
 
+- Property
+attribute에 대한 접근 제어를 할 때, property를 사용한다. 
+```py
+class User:
+    def __init__(self, username):
+        self.username = username
+        self._ID = None
+@property
+def ID(self):
+    return self._ID
 
+@property.setter
+def ID(self, new_ID):
+    if not is_valid_ID(new_ID):
+        raise ValueError("Not Valid ID")
+    self._ID = new_ID
+```
+property.setter의 경우 <user>.ID = <new_ID>가 실행될 때 호출된다. 새 값으로 속성을 할당하는 것 뿐만 아니라 유효성 검사도 할 수 있다. <br> 한 method에서는 하나 이상의 일을 하지 않는 것이 좋기 때문에 property를 사용하여, 혼동을 피하는 것이 좋다.
 
+##### Iterable
+Python에서 내장 반복형 객체뿐만 아니라 자체 이터러블을 만들 수도 있다. ```for i in object:```의 형태로 객체를 반복하기 위해선 
+    1. 객체가 __next__ 나 __iter__ 메서드 중 하나를 갖고 있는지
+    2. 객체가 시퀀스이고, __len__과 __getitem__을 모두 가졌는지
+가 필요하다. 
+    
+##### Container
+Container는 ```__contains__``` method를 구현한 객체다. <br>
+```__contains__``는 ```in```키워드에서 호출되고 보통 boolean값을 반환한다. 
 
+##### Callable
+객체를 함수처럼 동작하게 하기 위해서 ```__call__``` method를 사용한다. 함수와 다르게 좋은 점은 객체엔 상태가 있기 때문에 정보를 저장할 수 있다는 것이다. 
 
+##### Magic Method
+|문장|Magic Method|비고|
+|:---|:---|:---|
+|obj[key] <br> obj[i:j]|__getitem__(key)| |
+|with obj:|__enter__ / __exit__|context manager|
+|for i in obj:|__iter__ / __next__ <br> __len__ / __getitem__|iterable <br> sequence|
+|obj.<attribute>|__getattr__|Dynamic attribute|
+|obj(*args, **kwargs)|__call__(*args, **kwargs)|callable|
 
