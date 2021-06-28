@@ -87,7 +87,7 @@ Python에서 내장 반복형 객체뿐만 아니라 자체 이터러블을 만�
     
 ##### Container
 Container는 ```__contains__``` method를 구현한 객체다. <br>
-```__contains__``는 ```in```키워드에서 호출되고 보통 boolean값을 반환한다. 
+```__contains__```는 ```in```키워드에서 호출되고 보통 boolean값을 반환한다. 
 
 ##### Callable
 객체를 함수처럼 동작하게 하기 위해서 ```__call__``` method를 사용한다. 함수와 다르게 좋은 점은 객체엔 상태가 있기 때문에 정보를 저장할 수 있다는 것이다. 
