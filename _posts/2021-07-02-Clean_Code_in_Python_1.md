@@ -37,6 +37,10 @@ In [1]: locate.__annotation__
 ```
 과 같이 사용될 수 있다.
 
+---
+### Pythonic Code
+---
+
 ##### index
 Python에서는 index 접근 방식에 많은 방법이 존재한다. 음수 indexing과, slicing을 이용한 indexing 모두 가능한데, 사용자 클래스에서도 ```__getitem__```과 ```__len__```method를 통해 구현할 수 있다.
 
