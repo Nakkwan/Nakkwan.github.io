@@ -32,8 +32,8 @@ Software Component간 통신 중에 지켜야할 암묵적 규칙<br>
 에측 가능한 오류(Procedure)와 발생하지 않아야할 오류(Assertion)에 대한 예외처리
 
 - Error Handling <br>
-  1) 값 대체
-데이터가 제공되지 않았을 때 기본 데이터를 쓰는 방식 등이 있지만 적용 분야에 한계가 있다. <br>
+  1) 값 대체 <br>
+데이터가 제공되지 않았을 때 기본 데이터를 쓰는 방식 등이 있지만 적용 분야에 한계가 있다.
 
   2) Error logging <br>
   3) Exception <br>
