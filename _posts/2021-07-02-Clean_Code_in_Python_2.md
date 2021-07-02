@@ -50,7 +50,7 @@ except:
 오류 처리 과정에서 오류의 타입을 바꾸고 싶다면, ```raise <e> from <original_error>``` 구문을 사용한다면, 새로운 exception에 원본의 traceback이 포함이 되고 ```__cause__```속성으로 
 설정이 된다.<br>
     
-  4) Assertion
+  4) Assertion <br>
 Assertion은 절대로 일어나지 않아야 할 상황에 사용되므로 발생하게 된다면 보통 프로그램을 중지해야 할 상황이다. 
 
 ##### Cohesion & Coupling
