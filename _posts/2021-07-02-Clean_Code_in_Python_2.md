@@ -32,11 +32,11 @@ Software Component간 통신 중에 지켜야할 암묵적 규칙<br>
 에측 가능한 오류(Procedure)와 발생하지 않아야할 오류(Assertion)에 대한 예외처리
 
 - Error Handling
-1) 값 대체
+  1) 값 대체
 데이터가 제공되지 않았을 때 기본 데이터를 쓰는 방식 등이 있지만 적용 분야에 한계가 있다.
 
-2) Error logging
-3) Exception
+  2) Error logging
+  3) Exception
 외부 component의 문제로 error가 발생했을 시, 해당 error에 대한 정보를 알려주기 위해 exception 처리를 한다. <br>
 호출자에게 잘못을 알려주지만, 캡슐화를 약화시키기 때문에 사용해야할 상황을 신중히 고르는 것이 좋다. <br>
 함수 내부적으로 예외처리를 할 수 있다면 호출 단계에서 exception을 수행하기보단 함수 내부에서 exception을 수행하여 호출 함수에서는 호출만 하는 것이 코드를 읽고 이해하기 편하다.
@@ -49,7 +49,7 @@ except:
 와 같이 광범위한 exception보다 자세한 예외 (ex: KeyError, ValueError)와 같은 예외를 사용한다면, 사용자가 프로그램을 유지보수하기 쉽다. <br> <br>
 오류 처리 과정에서 오류의 타입을 바꾸고 싶다면, ```raise <e> from <original_error>``` 구문을 사용한다면, 새로운 exception에 원본의 traceback이 포함이 되고 ```__cause__```속성으로 설정이 된다.
  
-4) Assertion
+  4) Assertion
 Assertion은 절대로 일어나지 않아야 할 상황에 사용되므로 발생하게 된다면 보통 프로그램을 중지해야 할 상황이다. 
 
 ##### Cohesion & Coupling
