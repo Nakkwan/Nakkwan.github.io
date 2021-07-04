@@ -111,7 +111,29 @@ class Child(base1, base2):
 base1 class
 ```
 
-
+##### 가변인자
+argument에 대해 packing 또는 unpacking을 한고 싶다면, variable 앞에 asterisk(\*)를 붙이면 된다.
+```py
+def series(first, second, third):
+    print(first)
+    print(second)
+    print(third)
+    
+>>> l = [1, 2, 3]
+>>> f(*l)
+1
+2
+3
+```
+```py
+>>> a, *b, c = [1, 2, 3, 4]
+>>> a
+1
+>>> b
+[2, 3]
+>>> c
+4
+```
 
 
 
