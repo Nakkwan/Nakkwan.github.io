@@ -60,7 +60,56 @@ Assertion은 절대로 일어나지 않아야 할 상황에 사용되므로 발�
 - Coupling
 두 개 이상의 객체가 서로 너무 의존적이라면 바람직하지 않다. 두 객체가 서로 너무 의존적이라면, 서로 영향을 끼치기 때문에 **재사용성이 낮고**, 하나를 바꿨을 때 다른 객체에도 영향을 끼치는 **ripple**이 생기고, **낮은 추상화 수준**을 가지게 되기 때문이다. 
 
+---
+#### Composition & Inheritance
 
+상속은 부모 클래스의 method를 얻을 수 있어서 코두 재사용에 좋지만 쓸모 없느 기능까지 가져오게 되는 단점이 있다. 상속은 부모 클래스의 속성을 그대로 이어받으면서 기능을 추가하려고 한 경우가 가장 좋은 상속의 예다.<br>
+
+예를 들어, 고객에 대한 정보를 관리하는 코드의 경우 
+```py
+class Policy(collections.UserDict):
+    def change_policy(self, customer_id, **new_policy_data):
+        self[customer_id].update(**new_policy_data)
+```
+의 경우 UserDict을 사용해서 원하는 기능을 수행할 수 있게 되지만, UserDict을 상속받았기 때문에, ```pop```이나 ```items```같은 원치 않는 method도 같이 포함되게 된다. <br> 
+따라서 이런 경우, ```__getitem__```과 ```__len__``` method를 추가해, private으로 설정된 dict을 가져오는 것이 좋다.
+```py
+class Policy:
+    def __init__(self, policy_Data, **extra_data):
+        self._data = {**policy_Data, **extra_data}
+        
+    def change_policy(self, customer_id, **new_policy_data):
+        self._data[customer_id].update(**new_policy_data)
+        
+    def __getitem__(self, customer_id):
+        return self._data[customer_id]
+        
+    delf __len__(self):
+        return lem(self._data)
+```
+위와 같은 코드는 재사용성과 확장성도 더 뛰어나다.
+
+##### MultiInheritance
+
+Python은 다중 상속을 지원하지만 올바르게 구현되지 않으면 문제를 야기할 수 있다.(ex: 두 부모에 같은 이름의 method가 존재할 경우) <br>
+Python에서는 오른쪽에서 왼쪽의 순서로 상속을 하게 되는데 먼저 상속된 class를 덮어버리는 형식으로 상속된다. 즉, 왼쪽 class가 더 상위 class가 된다.
+```py
+class base1
+    def Mixin(self):
+        print("base1 class")
+        
+class base2
+    def Mixin(self):
+        print("base2 class")
+
+class Child(base1, base2):
+    def Mixin(self):
+        pass
+
+>>> a = Child()
+>>> a.Mixin
+base1 class
+```
 
 
 
