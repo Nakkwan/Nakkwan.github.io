@@ -1,5 +1,5 @@
 ---
-title: &#91;Paper Review&#93; EfficientNet
+title: Paper Review EfficientNet
 tags:
     - Deep Learning
     - Paper
