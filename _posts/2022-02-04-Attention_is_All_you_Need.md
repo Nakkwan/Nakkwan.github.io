@@ -16,7 +16,7 @@ Summary of Transformer paper(Attention is all you need) <br>
 Transformer은 2017년 NIPS에 게재된 논문으로, RNN기반 모델이 SOTA를 이루던 기존 NLP에 새롭게 SOTA를 달성한 모델입니다. 최근 NLP분야에서 좋은 성능을 내는 모델들은 transformer를 기반으로 한 모델들이 많습니다. 대표적으로는 2018년 google에서 공개한 BERT와 2020년 OpenAI에서 공개한 GPT-3가 있습니다. <br>
 
 <p>
-<center><img src="/images/Transformer/Transformer_Research trend.png" width="600"></center>
+<center><img src="/images/Transformer/Transformer_Research_trend.png" width="600"></center>
 <center><em>Fig n.</em></center>
 
 </p>
@@ -41,7 +41,7 @@ Attention의 전체적인 진행 과정은 Fig. 와 같습니다.<br>
 Translation을 수행할 때 계산된 두 언어 사이의 attention score를 나타내면 다음과 같습니다. Translate과정에서 연관된 단어들 사이의 attention이 높은 것을 확인할 수 있고, attention이 training에서 제대로 동작하고 있다는 것을 알 수 있습니다.<br>
 
 <p>
-<center><img src="../images/Transformer/Transformer_Result Attention.png" width="600"></center>
+<center><img src="/images/Transformer/Transformer_Result_Attention.png" width="600"></center>
 <center><em>Fig n.</em></center>
 </p>
 ##### Self-Attention
@@ -57,7 +57,7 @@ Transformer(Attention is all you need)는 제목 그대로 RNN이 아닌 attenti
 -   Decoder <br>
     의 범주로 나눌 수 있습니다. <br>
     <p>
-    <center><img src="../images/Transformer/Transformer_architecture.jpg" width="400"></center>
+    <center><img src="/images/Transformer/Transformer_architecture.jpg" width="400"></center>
     <center><em>Fig n.</em></center>
     </p>
 
@@ -68,7 +68,7 @@ Transformer(Attention is all you need)는 제목 그대로 RNN이 아닌 attenti
 PE은 단어의 위치 정보를 model에 알리는 방식입니다. 단어의 위치를 알 수 없다면 문장의 의미가 완적히 달라질 수 있기 때문입니다. 예를 들어, "귤은 과일이다"와 "과일은 귤이다"의 의미는 완전히 다릅니다. RNN은 위치에 따라 입력된 단어를 순차적으로 받아 처리하기 때문에 각 단어가 위치 정보를 자동적으로 모델이 학습하기 때문에 자연어 처리에서 강력합니다.(Sequentiality inductive bias가 있다고 말합니다.) 그러나 Transformer는 입력된 단어를 순차적으로 받지 않기 때문에 다른 방식(PE)으로 위치 정보를 알립니다. 그림 n과 같이 PE는 일부 값을 입력 임베딩 매트릭스와 합산하여 수행됩니다. <br>
 
 <p>
-<center><img src="../images/Transformer/Transformer_PE_Add.jpg" width="600"> </center>
+<center><img src="/images/Transformer/Transformer_PE_Add.jpg" width="600"> </center>
 <center><em>Fig n.</em></center>
 </p>
 PE를 구현하기 위해서 다음과 같은 조건은 지켜져야 합니다. <br>
@@ -87,7 +87,7 @@ PE를 구현하기 위해서 다음과 같은 조건은 지켜져야 합니다. 
 Transformer에서는 sin, cos 함수를 사용하여 PE를 구현합니다. <br>
 
 <p>
-<center><img src="../images/Transformer/Transformer_PE.jpg" width="600"></center>
+<center><img src="/images/Transformer/Transformer_PE.jpg" width="600"></center>
 <center><em>Fig n.</em></center>
 </p>
 
@@ -104,7 +104,7 @@ $$
 삼각함수를 사용했기 때문에 기본적으로 값의 범위가 -1 ~ 1로 제한되어 있고, 주기함수이기 때문에 sequence의 길이가 달라져도 적용할 수 있습니다. 또한 같은 position에서는 같은 value가 나오기 때문에 1,2,4,5 조건을 다 만족할 수 있습니다. 조건 3을 만족시키기 위해서 $PR(x + \Delta x)=PE(x) \cdot T(\Delta x)$ 를 만족해야하는데 이는 회전 변환으로 만족시킬 수 있습니다. <br>
 
 <p>
-<center><img src="../images/Transformer/Transformer_T_matrix.jpg" width="600"></center>
+<center><img src="/images/Transformer/Transformer_T_matrix.jpg" width="600"></center>
 <center><em>Fig n.</em></center>
 </p>
 PE가 기본적으로 cos, sin의 조합으로 이루어져 있기 때문에 T를 회전변환 블록으로 나타낼 수 있습니다. 회전변환 블록은 <br>
@@ -134,7 +134,7 @@ $$
 Sequence length가 50, $d_{model}$이 128인 Positional Encoding을 나타내면 Fig n.과 같습니다. <br>
 
 <p>
-<center><img src="../images/Transformer/Transforemr_PE_heatmap.jpg" width="600"></center>
+<center><img src="/images/Transformer/Transforemr_PE_heatmap.jpg" width="600"></center>
 <center><em>Fig n.</em></center>
 </p>
 
