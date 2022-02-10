@@ -91,7 +91,7 @@ Transformer에서는 sin, cos 함수를 사용하여 PE를 구현합니다. <br>
 <center><em>Fig n.</em></center>
 </p>
 
-기본적으로 PE는 embedding된 input과 더해져야하기 떄문에 사이즈가 같습니다. 따라서 (sequence length, embedding dimension(=$d_{model}$))차원의 matrix가 됩니다. 행은 sequence에서 단어의 위치를 나타내고, 열은 position vector의 index를 의미합니다. PE의 각 elements는 <br>
+기본적으로 PE는 embedding된 input과 더해져야하기 떄문에 사이즈가 같습니다. 따라서 (sequence length, embedding dimension(=$$d_{model}$$))차원의 matrix가 됩니다. 행은 sequence에서 단어의 위치를 나타내고, 열은 position vector의 index를 의미합니다. PE의 각 elements는 <br>
 
 $$
 \begin{align}
@@ -101,7 +101,7 @@ $$
 $$
 
 로 나타납니다. <br><br>
-삼각함수를 사용했기 때문에 기본적으로 값의 범위가 -1 ~ 1로 제한되어 있고, 주기함수이기 때문에 sequence의 길이가 달라져도 적용할 수 있습니다. 또한 같은 position에서는 같은 value가 나오기 때문에 1,2,4,5 조건을 다 만족할 수 있습니다. 조건 3을 만족시키기 위해서 $PR(x + \Delta x)=PE(x) \cdot T(\Delta x)$ 를 만족해야하는데 이는 회전 변환으로 만족시킬 수 있습니다. <br>
+삼각함수를 사용했기 때문에 기본적으로 값의 범위가 -1 ~ 1로 제한되어 있고, 주기함수이기 때문에 sequence의 길이가 달라져도 적용할 수 있습니다. 또한 같은 position에서는 같은 value가 나오기 때문에 1,2,4,5 조건을 다 만족할 수 있습니다. 조건 3을 만족시키기 위해서 $$PE(x + \Delta x)=PE(x) \cdot T(\Delta x)$$ 를 만족해야하는데 이는 회전 변환으로 만족시킬 수 있습니다. <br>
 
 <p>
 <center><img src="/images/Transformer/Transformer_T_matrix.jpg" width="600"></center>
@@ -117,7 +117,7 @@ $$
 \end{align}
 $$
 
-와 같이 나타낼 수 있고, 전체 회전변환 $T$는 <br>
+와 같이 나타낼 수 있고, 전체 회전변환 $$T$$는 <br>
 
 $$
 \begin{align}
@@ -131,7 +131,7 @@ $$
 $$
 
 로 표현할 수 있습니다. 따라서 각 position 사이의 간격이 동일하다고 말할 수 있으며 PE의 모든 조건을 만족할 수 있습니다.<br>
-Sequence length가 50, $d_{model}$이 128인 Positional Encoding을 나타내면 Fig n.과 같습니다. <br>
+Sequence length가 50, $$d_{model}$$이 128인 Positional Encoding을 나타내면 Fig n.과 같습니다. <br>
 
 <p>
 <center><img src="/images/Transformer/Transforemr_PE_heatmap.jpg" width="600"></center>

@@ -1,5 +1,5 @@
 ---
-title: Paper Review EfficientNet
+title: EfficientNet(Rethinking Model Scaling for Convolutional Neural Networks)
 tags:
     - Deep Learning
     - Paper
