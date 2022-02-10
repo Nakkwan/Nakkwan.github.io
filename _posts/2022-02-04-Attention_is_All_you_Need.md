@@ -16,7 +16,7 @@ Summary of Transformer paper(Attention is all you need) <br>
 Transformer은 2017년 NIPS에 게재된 논문으로, RNN기반 모델이 SOTA를 이루던 기존 NLP에 새롭게 SOTA를 달성한 모델입니다. 최근 NLP분야에서 좋은 성능을 내는 모델들은 transformer를 기반으로 한 모델들이 많습니다. 대표적으로는 2018년 google에서 공개한 BERT와 2020년 OpenAI에서 공개한 GPT-3가 있습니다. <br>
 
 <p>
-<center><img src="../../images/Transformer/Transformer_Research trend.png" width="600"></center>
+<center><img src="tree/main/images/Transformer/Transformer_Research trend.png" width="600"></center>
 <center><em>Fig n.</em></center>
 
 </p>
