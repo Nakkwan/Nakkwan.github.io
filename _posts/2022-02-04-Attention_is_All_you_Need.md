@@ -149,7 +149,7 @@ Sequence length가 50, $$d_{model}$$이 128인 Positional Encoding을 나타내�
 
 우선 인코더는 위치 인코딩과 입력 임베딩을 입력으로 받습니다. 따라서 인코더는 한 번에 하나의 문장을 입력으로 받을 수 있으며 입력은 ($$Seq_{len},\;d_{model}$$) 크기의 행렬입니다. 인코더는 두 개의 중요한 하위 계층인 1) Multi-head Attention, 2) Feedforward Network로 구성됩니다. 또한, normalization layer는 각 하위 layer 뒤에 쌓입니다. <br>
 <p>
-<center><img src="/images/Transformer/Transforemr_encoder.png" width="400"></center>
+<center><img src="/images/Transformer/Transformer_encoder.png" width="400"></center>
 <center><em>Fig n.</em></center>
 </p>
 
@@ -157,21 +157,21 @@ Sequence length가 50, $$d_{model}$$이 128인 Positional Encoding을 나타내�
 Seq2seq의 attention의 경우 Query는 decoder의 hidden state고 Key와 Value는 encoder의 hidden state입니다. 그러나 Transformer는 서로 다른 언어를 서로 번역하는 모델이기 때문에 입력된 문장을 이해하는 것이 중요합니다. 따라서 Transformer의 self-Attention 하위 계층은 모두 Query, Key 및 Value와 동일한 값을 갖습니다. Self-Attention은 input으로 입력된 sequence에서 각 단어의 연관 정도를 측정할 수 있습니다. 예를 들어, "나는 손흥민이 훌륭한 축구선수라는 것을 안다"라는 문장에서 '축구 선수'가 '나'보다 '손흥민'과 더 관련이 있음을 측정할 수 있습니다. Transformer의 self-attention도 multi-head attention을 사용합니다. Multi-head Attention은 여러 output을 가지며 output을 concatenate하여 최종 output을 도출합니다. 상세한 동작 과정은 Fig. n과 같습니다.<br>
 
 <p>
-<center><img src="/images/Transformer/Transformer_Multi-head.jpg" width="500"></center>
+<center><img src="/images/Transformer/Transformer_Multi-head.jpg" width="600"></center>
 <center><em>Fig n.</em></center>
 </p>
 
 Self-Attention이 수행되기 전에 Query, Key, Value에 각각 다른 weight matrix($$W^{Q},\;W^{K},\;W^{V}$$)가 곱해지고 self-attention의 input에 제공됩니다. Multi-head Attention이기 때문에 각 Query, Key, Value에는 head 수만큼 weight matrix가 있습니다. 논문에서는 head의 수를 8로 설정했기 때문에 8개의 weight matrix가 있지만 각 weight matrix의 column size가 ($$d_{model},\;d_{model} /head_{num}$$)이므로 최종 parameter 수는 변경되지 않습니다. 각 weight의 학습이 독립적으로 수행되기 때문에 input sequence의 다양한 연관성을 학습할 수 있습니다. 예를 들어, "그는 수학자이자 철학자이다."라는 문장에서 그는 '수학자'와 '철학자' 모두와 관련이 있지만 multi-head가 아닌 경우 둘 중 하나의 연관성만 잡아낼 가능성이 있습니다. 그러나 multi-head는 여러 측면(weight)의 input을 보기 때문에 여러 연관성을 잡아낼 가능성이 커지게 됩니다. <br>
 
 <p>
-<center><img src="/images/Transformer/Transformer_QKV.jpg" width="500"></center>
+<center><img src="/images/Transformer/Transformer_QKV.jpg" width="600"></center>
 <center><em>Fig n.</em></center>
 </p>
 
 그리고 Transformer는 Scaled Dot-Product Attention을 사용합니다. Dot-Product Attention을 사용하는 이유는 이 외에도 많은 Attention 방법이 있지만 가장 계산하기 쉬운 방법이기 때문입니다. 그리고 계산 과정에서 activation value가 너무 커지면 softmax 과정에서 gradient가 너무 작아져 학습에 방해가 되기 때문에 scaling을 진행해줍니다. 즉, scaling은 activation value를 줄이는 데 사용됩니다. Input으로 sequence을 받을 때 corpus에 없는 단어나 의미 없는 단어는 attention에서 학습되면 안됩니다. 따라서 attention에서 mask technique이 사용됩니다. 이러한 단어는 tokenization할 때 \<pad\>라는 token으로 대체됩니다. \<pad> token은  attention과정에서 masking이 적용됩니다. Masking은 softmax를 통과하기 전에 attention score에 아주 작은 수(−∞)를 더합니다. (Fig n) 매우 작은 수는 softmax를 거치면서 0으로 수렴하므로 어떤 단어와도 연관되지 않도록 학습이 진행됩니다. <br>
 
 <p>
-<center><img src="/images/Transformer/Transformer_paddingmask.jpg" width="400"></center>
+<center><img src="/images/Transformer/Transformer_paddingmask.jpg" width="300"></center>
 <center><em>Fig n.</em></center>
 </p>
 
@@ -183,7 +183,7 @@ Feedforward layer는 Transformer의 두 번째 sublayer입니다. Feedforward ne
 각 sublayer의 output size는 연결 용이성을 위해 input size와 동일하며 각 layer는 residual 및 normalization layer를 사용하여 연결됩니다. Residual connection은 다음과 같이 layer의 input과 ouptut을 더합니다. Residual은 학습을 더 효과적으로 수행할 수 있게 합니다. 기본적으로 한 번에 많은 정보를 학습하던 기존 방식과 다르게 residual은 이전 layer output을 추가하여 학습되므로 이전에 학습한 정보에 따라 모델은 추가적인 정보만 학습하면 되기때문에 network training이 조금 더 쉬워집니다. 또한, 적은 양의 학습량으로 인해 네트워크가 깊어져도 훈련이 용이합니다. <br>
 
 <p>
-<center><img src="/images/Transformer/Transformer_Residual.jpg" width="400"></center>
+<center><img src="/images/Transformer/Transformer_Residual.jpg" width="300"></center>
 <center><em>Fig n.</em></center>
 </p>
 
