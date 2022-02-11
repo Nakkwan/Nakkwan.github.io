@@ -28,7 +28,10 @@ Transformer은 2017년 NIPS에 게재된 논문으로, RNN기반 모델이 SOTA�
 #### Attention
 
 Attention은 decoder에서 예측할 output과 encoder의 sequence들과의 관계가 어느정도 있는지 판단하여 output을 예측하기 위한 방법입니다. 앞서 예를 들었던 "I am a good student"의 경우 'am'보다 'I'가 'student'라는 단어를 예측하는 것에 더욱 연관성이 있기 때문에 'I'라는 단어에 더욱 집중(attention)하여 'student'를 예측하는 것에 사용합니다. 이에 관한 내용은 아래의 그림에 나타나 있습니다. <br>
-
+<p>
+<center><img src="/images/Transformer/Transformer_attention.jpg" width="600"></center>
+<center><em>Fig n.</em></center>
+</p>
 Attention은 기본적으로 Query, Key, Value를 사용하여 attention value를 구합니다. <br>
 
 -   Query: t시점에서의 decoder의 hidden state <br>
@@ -36,7 +39,6 @@ Attention은 기본적으로 Query, Key, Value를 사용하여 attention value�
 -   Value: 모든 시점의 encoder의 hidden state <br>
 
 Attention의 machanism 중 하나인 dot-product machanism의 경우, Query와 Key에 dot-product를 취합니다(Attention Score). Attention score에 softmax를 적용하여 score의 합이 1이 되도록 해줍니다(Attention Weight). Attention weight는 각 encoder의 step이 decoder의 hidden state와 얼마나 연관성이 있는지를 나타냅니다. Attention value는 attention weight에 Key를 weight sum을 적용하여 구합니다. 가중치가 높은 step의 hidden state일수록 attention value에 기여하는 바가 높고, attention value는 decoder의 hidden state에 concatenate되어 사용되기 때문에 해당 step에 더 집중하여 output을 얻을 수 있습니다. <br>
-Attention의 전체적인 진행 과정은 Fig. 와 같습니다.<br>
 
 Translation을 수행할 때 계산된 두 언어 사이의 attention score를 나타내면 다음과 같습니다. Translate과정에서 연관된 단어들 사이의 attention이 높은 것을 확인할 수 있고, attention이 training에서 제대로 동작하고 있다는 것을 알 수 있습니다.<br>
 
@@ -47,6 +49,11 @@ Translation을 수행할 때 계산된 두 언어 사이의 attention score를 �
 ##### Self-Attention
 
 Transformer에서는 self-attention이라는 method가 사용됩니다. Attention과 전체적인 진행 과정은 동일하지만 self-attention은 query, key, value가 모두 encoder의 hidden state라는 점이 다릅니다. Attention은 예측할 decoder의 output과 encoder input의 관계(변역이라면 언어 사이의 관계, 빈칸 예측이라면 단어 사이의 관계)를 얻기 위해 수행하지만, self-attention은 input으로 들어가는 sequence의 이해를 위해서 사용이 됩니다. <br>
+<p>
+<center><img src="/images/Transformer/Transformer_Compare_Architecture.png" width="500"></center>
+<center><em>Fig n.</em></center>
+</p>
+
 
 ### Transformer
 
