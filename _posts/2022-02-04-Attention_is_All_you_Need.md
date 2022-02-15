@@ -20,7 +20,7 @@ NLP에 새롭게 SOTA를 달성한 모델입니다. 최근 NLP분야에서 좋�
 
 <p>
 <center><img src="/images/Transformer/Transformer_Research_trend.png" width="600"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 1.</em></center>
 
 </p>
 기존 NLP분야에서 많이 쓰이던 RNN을 이용한 방식에는 한계점이 있었습니다. <br>
@@ -38,7 +38,7 @@ student"의 경우 'am'보다 'I'가 'student'라는 단어를 예측하는 것�
 
 <p>
 <center><img src="/images/Transformer/Transformer_attention.jpg" width="600"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 2.</em></center>
 </p>
 Attention은 기본적으로 Query, Key, Value를 사용하여 attention value를 구합니다. <br>
 
@@ -61,7 +61,7 @@ Translation을 수행할 때 계산된 두 언어 사이의 attention score를 �
 
 <p>
 <center><img src="/images/Transformer/Transformer_Result_Attention.png" width="400"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 3.</em></center>
 </p>
 ##### Self-Attention
 
@@ -74,7 +74,7 @@ input의 관계(변역이라면 언어 사이의 관계, 빈칸 예측이라면 
 
 <p>
 <center><img src="/images/Transformer/Transformer_Compare_Architecture.png" width="500"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 4.</em></center>
 </p>
 
 ### Transformer
@@ -87,7 +87,7 @@ machanism만 사용하여 architecture를 구성합니다. Architecture는 크�
 - Decoder <br> 의 범주로 나눌 수 있습니다. <br>
   <p>
   <center><img src="/images/Transformer/Transformer_architecture.jpg" width="300"></center>
-  <center><em>Fig n.</em></center>
+  <center><em>Fig 5.</em></center>
   </p>
 
 ##### Positional Encoding
@@ -106,7 +106,7 @@ PE은 단어의 위치 정보를 model에 알리는 방식입니다. 단어의 �
 
 <p>
 <center><img src="/images/Transformer/Transformer_PE_Add.jpg" width="500"> </center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 6.</em></center>
 </p>
 PE를 구현하기 위해서 다음과 같은 조건은 지켜져야 합니다. <br>
 
@@ -128,7 +128,7 @@ Transformer에서는 sin, cos 함수를 사용하여 PE를 구현합니다. <br>
 
 <p>
 <center><img src="/images/Transformer/Transformer_PE.jpg" width="600"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 7.</em></center>
 </p>
 
 기본적으로 PE는 embedding된 input과 더해져야하기 떄문에 사이즈가 같습니다. 따라
@@ -150,7 +150,7 @@ $$
 
 <p>
 <center><img src="/images/Transformer/Transformer_T_matrix.jpg" width="450"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 8.</em></center>
 </p>
 PE가 기본적으로 cos, sin의 조합으로 이루어져 있기 때문에 T를 회전변환 블록으로 나타낼 수 있습니다. 회전변환 블록은 <br>
 
@@ -179,7 +179,7 @@ $$
 
 <p>
 <center><img src="/images/Transformer/Transforemr_PE_heatmap.jpg" width="400"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 9.</em></center>
 </p>
 
 ##### Encoder
@@ -188,7 +188,7 @@ $$
 
 <p>
 <center><img src="/images/Transformer/Transformer_encoder.png" width="400"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 10.</em></center>
 </p>
 
 1.  Seq2seq의 attention의 경우 Query는 decoder의 hidden state고 Key와 Value는
@@ -204,7 +204,7 @@ $$
 
 <p>
 <center><img src="/images/Transformer/Transformer_Multi-head.jpg" width="650"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 11.</em></center>
 </p>
 
 Self-Attention이 수행되기 전에 Query, Key, Value에 각각 다른 weight
@@ -216,7 +216,7 @@ matrix가 있지만 각 weight matrix의 column size가 ($$d_{model},\;d_{model}
 
 <p>
 <center><img src="/images/Transformer/Transformer_QKV.jpg" width="600"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 12.</em></center>
 </p>
 
 그리고 Transformer는 Scaled Dot-Product Attention을 사용합니다. Dot-Product Attention을 사용하는 이유는 이 외에도 많은 Attention 방법이 있지만 가장 계산하기 쉬운 방법이기 때문입니다. 그리고 계산 과정에서 activation value가 너무 커지면 softmax 과정에서 gradient가 너무 작아져 학습에 방해가 되기 때문에 scaling을 진행해줍니다. 즉, scaling은 activation value를 줄이는 데 사용됩니다. Input으로
@@ -224,7 +224,7 @@ sequence을 받을 때 corpus에 없는 단어나 의미 없는 단어는 attent
 
 <p>
 <center><img src="/images/Transformer/Transformer_paddingmask.jpg" width="250"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 13.</em></center>
 </p>
 
 이렇게 계산된 각 head의 attention은 concatenate되고 다음 sublayer로 들어가기 위
@@ -244,7 +244,7 @@ sequence을 받을 때 corpus에 없는 단어나 의미 없는 단어는 attent
 
 <p>
 <center><img src="/images/Transformer/Transformer_Residual.jpg" width="250"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 14n.</em></center>
 </p>
 
 그리고 normalization layer를 사용하는데 normalization도 마찬가지로 학습을 용이하
@@ -262,7 +262,7 @@ sublayer가 있습니다.<br>
 
 <p>
 <center><img src="/images/Transformer/Transformer_decodermask.jpg" width="500"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 15.</em></center>
 </p>
 
 1.  Masked Multi-head Attention은 미래 정보에 대한 내용을 가린다는 점을 제외하고
@@ -275,7 +275,7 @@ sublayer가 있습니다.<br>
 
     <p>
     <center><img src="/images/Transformer/Transformer_bothmask.jpg" width="250"></center>
-    <center><em>Fig n.</em></center>
+    <center><em>Fig 16.</em></center>
     </p>
 
 2.  Multi-head Attention의 key와 value를 encoder에서 가져오는 것을 제외하고 나머지
@@ -284,16 +284,16 @@ sublayer가 있습니다.<br>
 
     <p>
     <center><img src="/images/Transformer/Transformer_EncDec.jpg" width="500"></center>
-    <center><em>Fig n.</em></center>
+    <center><em>Fig 17.</em></center>
     </p>
 
 #### Why self-attention?
 
-Transformer에서 translate을 위한 각 단어와 연관된 매핑에 self-Attention을 사용하는 이유는 세가지 정도가 언급되어 있습니다. 
+Transformer에서 translate을 위한 각 단어와 연관된 매핑에 self-Attention을 사용하는 이유는 세가지 정도가 언급되어 있습니다. <br>
 
 <p>
 <center><img src="/images/Transformer/Transformer_table.jpg" width="600"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 18.</em></center>
 </p>
 
 1. Complexity가 낮습니다. 그림 n과 같이 self-attention은 sequence 길이가 embedding 차원보다 작을 때 layer당 덜 복잡합니다. 현대 사회에서 대부분의 문장은 embedding dimension의 길이(transformer에서는 512)보다 적은 단어로 구성되어 대부분의 경우 self-attention이 recurrent 및  다른 method보다 complexity가 낮습니다. <br>
@@ -311,12 +311,12 @@ Transformer는 우수한 성능으로 인해 최근 연구에 활발히 사용�
 
 <p>
 <center><img src="/images/Transformer/Transformer_inductive_bias.jpg" width="600"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 19.</em></center>
 </p>
 
 예를 들어, RNN은 순차적으로 단어가 입력이 되기 때문에 sequenciality inductive bias를 갖습니다. 그래서 가까운 단어에 대해서는 우수한 성능을 보여주지만, 주어를 언급하는 것과 같이 먼 단어에 대해서는 학습이 어렵습니다. <br>
 그리고 CNN은 kernel과 convolution을 사용합니다. 따라서 output의 한 point에 영향을 끼치는 범위인 reception fleid가 있고, locality inductive bias를 갖습니다. 따라서 CNN은 local image에서 feature을 추출하는 데 탁월한 성능을 보여줍니다. <br>
 이런 면에서 RNN과 CNN은 global region에서 feature을 볼 수 있도록 많은 연구를 진행하고 있습니다.<br>  
-Transformer에서는 NLP에서 inductive bias가 없기 때문에 입력에 대해 위치 인코딩을 적용합니다. Vision 분야에서는 image에 대한 많은 정보를 활용하지만 CNN과 같은 locality가 없기 때문에 transformer는 훈련을 위해 많은 dataset가 필요합니다. 
+Transformer에서는 NLP에서 inductive bias가 없기 때문에 입력에 대해 위치 인코딩을 적용합니다. Vision 분야에서는 image에 대한 많은 정보를 활용하지만 CNN과 같은 locality가 없기 때문에 transformer는 훈련을 위해 많은 dataset가 필요합니다. <br>
 
-### Reference <br>
+### Reference
