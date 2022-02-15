@@ -9,8 +9,17 @@ tags:
 Code term for Pytorch
 <!--more-->
 
-Model과 Param에 ```.cuda``` 설정<br>
-cuda check = ```torch.cuda.is_available()```
+### CUDA
+cuda available check: ```torch.cuda.is_available()```<br>
+cuda device 설정 <br>
+```py
+device = torch.device('cuda:{}'.format(gpu_ids)) if gpu_ids else torch.device('cpu')
+```
+Environment GPU device 설정 <br>
+```py
+os.environ["CUDA_VISIBLE_DEVICES"] = '0'
+```
+Model과 Param에 ```.cuda()``` 또는 ```.to(device)``` 설정<br>
 
 ### Dataset
 ---
@@ -27,17 +36,22 @@ ex) ```dataloader = DataLoader(dataset)```
         for i, batch in enumerate(dataloader):
 ```
 의 형식으로 쓸 수 있으며, batch에는 dataloader의 return, i에는 반복 횟수가 들어간다. <br>
-```Variable(batch['key'].type(Tensor)).cuda()```
 
 ##### Dataset
-```from torch.utils.data import Dataset```<br>
-- ```deg __getitem__(self, index)```
-  - dataloader에서 input으로 하나씩 들어갈 data들
-  - dict 형식으로 return 가능
-- ```def __len__(self)```
-  - input file의 개수를 return
+```from torch.utils.data import Dataset```를 import 후 inheritance하여 사용<br>
+```py
+class ImageDataset(Dataset):
+    def __init__(self, data_dir, opt) -> None:
+        super().__init__()
+        pass
+    def __getitem__(self, index):
+        # dataloader에서 input으로 하나씩 들어갈 data들
+        # dict 형식으로 return 가능
+    def __len__(self):
+        # input file의 개수를 return
+```
 ##### For Custom Dataset
-- ```from torch.utils.data import Dataset```
+- ```import torchvision.transforms as transforms```
   - ```transform.Compose()```를 통해 data전처리 Compose가능
 ```py
 transforms.Compose([
@@ -54,12 +68,12 @@ transforms.Compose([
 ```def forward(self, x)```와 ```def backward(self)```등을 정의 할 수 있음
 - ```torch.nn``
   - ```nn.Conv2d()```, ```nn.LeakyReLU()```, ```nn.ReflectionPad2d()```, ```nn.InstanceNorm2d()```, ```nn.BatchNorm2d()```, ```nn.ConvTranspose2d()```등이 define되어 있음.
-  - ```nn.Sequential()로 Model의 layer를 만들 수 있음
+  - ```nn.Sequential()```로 Model의 layer를 만들 수 있음
 ```py
 nn.Sequential(nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1), 
-                                        nn.LeakyReLU(0.2), 
-                                        nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1), 
-                                        nn.LeakyReLU(0.2))
+                nn.LeakyReLU(0.2), 
+                nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1), 
+                nn.LeakyReLU(0.2))
 ```
 - ```nn.functional as F```
   - nn과 마찬가지로 model에 필요한 function들이 define되어 있음
@@ -69,11 +83,11 @@ nn.Sequential(nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
 ---
 ##### Loss
 Loss는 torch.nn에서 사용가능 <br>
-> ex) ```torch.nn.L1Loss()```, ```torch.nn.MSELoss()```, etc...
-torch.nn.MSELoss()는 Default가 mean이지만 reduction option을 sum으로 설정 가능
+> ex) ```torch.nn.L1Loss()```, ```torch.nn.MSELoss()```, etc... <br>
+> ```torch.nn.MSELoss()```는 default가 mean이지만 reduction option을 sum으로 설정 가능
 ##### Optimizer
 torch.optim에서 사용가능
-> ex) ```torch.optim.Adam()```, ```torch.optim.SGD()```, ```torch.optim.RMSprop()```, etc...
+> ex) ```torch.optim.Adam()```, ```torch.optim.SGD()```, ```torch.optim.RMSprop()```, etc...<br> 
 learning rate와 옵션들을 function에 따라서 lr= ... 등으로 설정 가능 <br>
 > ex) ```torch.optim.Adam(model.parameters(), lr=opt.lr, betas=(0.5, 0.999))```
 
@@ -125,6 +139,19 @@ if i+1 == len(dataloader):
             vis.line(Y = torch.Tensor([PSNR_mean]), X = torch.Tensor([0]), win=plot, update='append', name='mean')
 ```
 
+##### tensorboard
+
+```from torch.utils.tensorboard.write import SummaryWriter```<br>
+```py
+writer = SummaryWriter(log_dir=path)
+
+... pass ...
+
+writer.add_image(tag, image_tensor, step)
+writer.add_scalar(tag, scalar_value, step)
+
+```
+
 ##### Load Model
 ex) ```model.load_state_dict(torch.load("path"))```
 
@@ -147,3 +174,42 @@ opt = parser.parse_args()
 
 ##### image print
 make_grid, torch.cat, save_image 사용
+
+##### nn.Sequential vs nn.ModuleList
+
+nn.Sequential과 nn.ModuleList는 기본적으로 비슷하지만 약간의 차이점이 있습니다. <br>
+nn.Sequential의 경우 내부에 저장된 nn.Module들을 연결하여 하나의 nn.Module처럼 사용할 수 있도록 해줍니다.<br>
+내부적으로 forward도 수행해주기 때문에 여러 개의 nn.Module이 하나의 Module처럼 쓰이길 원할 때 묶어서 사용할 수 있습니다. <br>
+
+```py
+self.block = nn.Sequential(nn.Conv2d(in_dim, out_dim),
+                      nn.GroupNorm(),
+                      nn.SiLU())
+
+def forward(self, x):
+    return self.block(x)
+```
+
+nn.ModuleList는 python의 기본 list와 같이 단순히 Module들을 list로 묶은 것과 같습니다. <br>
+python의 기본 list와 다른 점은 pytorch가 ModuleList내부의 nn.Module들을 인식할 수 있게 해줍니다.
+ython의 기본 list로 nn.Module들을 저장하게 되면, network의 param에 내부 module들이 포함되지 않습니다. <br>
+nn.Sequential과 다른점은 nn.ModuleList는 내부적으로 forward를 수행하지 않기 때문에 각 Module들끼리 연결되어 있지 않습니다. 
+반복되는 구조의 Module들에 설정된 param이 다를 때, ModuleList로 묶어, for문과 함께 parameter를 설정해주는 경우에 많이 쓰일 수 있습니다.<br>
+```py
+self.list = nn.ModuleList([])
+
+for i in range(num):
+    self.list.append(nn.ModuleList([
+                    block(dim, dim_out),
+                    block(dim_out, dim_out),
+                    sampling(dim_out)
+                ]))
+
+def forward(self, x):
+    for block, block2, sample in self.list:
+        x = block(x)
+        x = block2(x)
+        x = sample(x)
+```
+
+> <https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463>
