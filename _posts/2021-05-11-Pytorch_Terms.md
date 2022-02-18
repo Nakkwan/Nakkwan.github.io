@@ -212,4 +212,4 @@ def forward(self, x):
         x = sample(x)
 ```
 
-> <https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463>
+> [Pytorch Forum](https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463)
