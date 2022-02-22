@@ -21,8 +21,8 @@ NLP에 새롭게 SOTA를 달성한 모델입니다. 최근 NLP분야에서 좋�
 <p>
 <center><img src="/images/Transformer/Transformer_Research_trend.png" width="600"></center>
 <center><em>Fig 1. Research trend</em></center>
-
 </p>
+
 기존 NLP분야에서 많이 쓰이던 RNN을 이용한 방식에는 한계점이 있었습니다. <br>
 우선 Seq-to-Seq의 경우 vanishing gradient와 fixed-size context vector의 문제가 나타납니다. RNN 방식을 사용하기 때문에 squence의 길이가 길어지면, gradient가 소실되어 훈련이 잘 안되는 문제가 있습니다. 예를 들어, "I am a good student"라는 문장에서 student라는 단어를 비워놓고 예측한다고 가정할 때, "I"에 관한 정보는 "good"에 비해 student에서 멀리 떨어져 있기 때문에 관계를 학습하기 더 힘듭니다. <br>
 이에 decoder에서 매번 encoder를 참조(가중치 계산)하여 결과를 예측하는 attention 방식이 등장하였습니다. 모든 decoder step에서 encoder를 참조하기 때문에 앞서 말한 문제점은 완화되지만, 여전히 RNN 방식을 사용한다는 한계점이 존재했습니다. Time step으로 인해 병렬처리에 한계가 있기 때문에 연산 속도가 느린 단점이 남아있고, 또한 encoder에서 decoder로 context를 전달하는 context vector의 크기가 정해져 있기 때문에 정보의 손실이 일어날 수 있는 문제점이 있습니다. <br>
