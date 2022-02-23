@@ -10,6 +10,8 @@ tags:
 DDPM은 2020년 NeurIPS에 게재된 논문으로, Diffusion Model(DM)을 기반으로 한 generative model입니다.<br>
 Sampling에 반대되는 방향으로 DM(Gaussian noise를 추가하는 것을 data가 파괴(noise)가 될 때까지 하는 Markov chain)의 reverse를 학습하는 diffusion model입니다. <br>
 
+---
+
 <!--more-->
 
 #### Introduction
@@ -38,8 +40,47 @@ q(x_{1:T} \mid x_{0}) := \prod_{t=1}^T q(x_{t} \mid x_{t-1}), \quad q(x_{t} \mid
 \end{align}
 $$
 
-DM은 posterior인 $$q(x_{1:T} \mid x_{0})$$을 inference 하도록 학습됩니다. <br>
+Forward process에서 $$\beta$$는 learnable하게 설정할 수도 있고, constant variable로 설정할 수도 있습니다. <br>
+또한 forward process에서 임의의 timestep $$t$$에서의 sampling $$x_{t}$$를 $$x_{0}$$에 대한 closed form으로 나타낼 수 있습니다. $$\alpha_{t} := 1 - \beta_{t}, \;\; \bar{\alpha}_{t}:=\prod_{s=1}^{t}\alpha_{s}$$라고 하면 아래와 같이 나타낼 수 있습니다. <br>
 
+$$
+\begin{align}
+q(x_{t} \mid x_{0}) = \mathcal{N}(x_{t};\sqrt{\bar{\alpha}_{t}}x_{0},(1-\bar{\alpha}_{t})I)
+\end{align}
+$$
+
+<details>
+  <summary>
+    details
+  </summary>  
+  <div markdown="1">
+    식 (1)에 의해 <br>
+    \begin{align}
+    q(x_{t} \mid x_{0}) = q(x_{t} \mid x_{t-1})q(x_{t-1} \mid x_{t-2}) \cdots q(x_{2} \mid x_{1})q(x_{1} \mid x_{0}) \\
+    \end{align}
+    과 같이 표현될 수 있습니다. 
+    <ul>
+        <li>Mean </li>
+            Mean의 경우 $$\mathbb{E}(aX) = a\mathbb{X}$$ property를 가지고 있기 때문에 <br>
+            \begin{align}
+            \prod_{s=1}^{t} \sqrt{1-\beta_{t}} = \prod_{s=1}^{t} \sqrt{\alpha_{t}} = \sqrt{\bar{\alpha}_{t}} \\
+            \end{align}
+        <li>Variance </li>
+            Variance도 마찬가지로 $$a\Var(X) = \Var(a^{2}X)$$ property를 가지고 있지만 $$x_{t} = \sqrt{1-\beta_{t}}x_{t-1} + \beta_{t}z, z \sim \mathcal{N}(0,I)$$와 같이 더해지는 형식이기 때문에 mean과 다르게 계산됩니다. <br>
+            $$t=4$$일 때를 예로 들어보면, <br>
+            \begin{align}
+            q(x_{4} \mid x_{0}) &= \sqrt{\alpha_{4}}(\sqrt{\alpha_{3}}(\sqrt{\alpha_{2}}(\sqrt{\alpha_{1}}x_{0}+\beta_{1}z)+\beta_{2}z)+\beta_{3}z)+\beta_{4}z \\
+            &= \sqrt{\bar{\alpha_{4}}}x_{0}-(\alpha_{4}\alpha_{3}\alpha_{2}(\alpha_{1}-1)+\alpha_{4}\alpha_{3}(\alpha_{2}-1)+\alpha_{4}(\alpha_{3}-1)+(\alpha_{4}-1)) \\
+            &= \sqrt{\bar{\alpha_{4}}}x_{0} - (\alpha_{4}\alpha_{3}\alpha_{2}\alpha_{1} - \alpha_{4}\alpha_{3}\alpha_{2} + \alpha_{4}\alpha_{3}\alpha_{2} - \alpha_{4}\alpha_{3} + \alpha_{4}\alpha_{3} - \alpha_{4} + \alpha_{4} -1) \\
+            &= \sqrt{\bar{\alpha_{4}}}x_{0} + 1 - \alpha_{4}\alpha_{3}\alpha_{2}\alpha_{1} \\
+            &= \sqrt{\bar{\alpha_{4}}}x_{0} + 1 - \bar{\alpha}_{4} \\
+            \end{align}
+            따라서, 마찬가지로 step $$t$$에서 Variance: $$1-\bar{\alpha}_{4}$$
+    </ul>
+  </div>
+</details>
+
+Diffusion에서 $$\beta$$의 크기가 충분히 작다면 reverse process 또한 gaussian diffusion이라고 간주할 수 있습니다. <br> 
 $x_{T}$로부터 $x_{0}$(generate image)까지의 process인 reverse process는 다음과 같이 표현됩니다. <br>
 
 $$
@@ -48,18 +89,48 @@ p_{\theta}(x_{0:T}) := p(x_{T})\prod_{t=1}^T r_{\theta}(x_{t-1} \mid x_{t}), \qu
 \end{align}
 $$
 
-Training은 NLL에 대한 variational bound를 optimize함으로써 수행됩니다.
+DM은 posterior인 $$q(x_{1:T} \mid x_{0})$$을 inference 하도록 학습됩니다. Training은 NLL에 대한 variational bound를 optimize함으로써 수행됩니다. <br>
+
 $$
-\begin{align}
-\mathbb{E}[-\log p_{\theta}(x_{0})] \le D_{KL}(q \parallel p) &= \mathbb{E}_{q}[\log \frac{q(x_{1:T} \mid x_{0})}{p_{\theta}(x_{0:T})}] = \mathbb{E}_{q}[-\log \frac{p_{\theta}(x_{0:T})}{q(x_{1:T} \mid x_{0})}] \\
+\begin{align}   
+\mathbb{E}[-\log p_{\theta}(x_{0})] &\le D_{KL}(q \parallel p) :=\mathcal{L}\\
+&= \mathbb{E}_{q}[\log \frac{q(x_{1:T} \mid x_{0})}{p_{\theta}(x_{0:T})}] = \mathbb{E}_{q}[-\log \frac{p_{\theta}(x_{0:T})}{q(x_{1:T} \mid x_{0})}] \\
 &= \mathbb{E}_{q}[-\log p(x_{T})-\sum_{t \ge 1}\log \frac{p_{\theta}(x_{t-1} \mid x_{t})}{q(x_{t} \mid x_{t-1})}] \\
-&:=\mathcal{L}
+&= \mathbb{E}_{q}[-\log p(x_{T})-\sum_{t > 1}\log \frac{p_{\theta}(x_{t-1} \mid x_{t})}{q(x_{t} \mid x_{t-1})}-\log\frac{p_{\theta}(x_{0} \mid x_{1})}{q(x_{1} \mid x_{0})}] \\
+&= \mathbb{E}_{q}[-\log p(x_{T})-\sum_{t > 1}\log \frac{p_{\theta}(x_{t-1} \mid x_{t})}{q(x_{t-1} \mid x_{t},x_{0})}\cdot \frac{q(x_{t-1} \mid x_{0})}{q(x_{t} \mid x_{t})}-\log\frac{p_{\theta}(x_{0} \mid x_{1})}{q(x_{1} \mid x_{0})}] \\
+&= \mathbb{E}_{q}[-\log\frac{p(x_{T})}{q(x_{T} \mid x_{0})}-\sum_{t > 1}\log \frac{p_{\theta}(x_{t-1} \mid x_{t})}{q(x_{t-1} \mid x_{t},x_{0})}-\log p_{\theta}(x_{0} \mid x_{1})] \\
+&= \mathbb{E}_{q}[D_{KL}(q(x_{T}\mid x_{0}) \parallel p(x_{T}))+\sum_{t >1}D_{KL}(q(x_{t-1}\mid x_{t},x_{0}) \parallel p_{\theta}(x_{t-1}\mid x_{t}))-\log p_{\theta}(x_{0} \mid x_{1})] \\
 \end{align}
 $$
 
+첫번째 term($$\mathcal{L}_{T}$$)은 $$x_{T}$$에 대한 term으로, variance가 constant로 설정되어 있고, T step에서는 완전히 destroyed되어 $$x_{T} \sim \mathcal{N}(0,I)$$를 따르기 때문에 무시됩니다.  <br>
+두번째 term($$\mathcal{L}_{t}$$)은 $$t: 1 \sim t-1$$에서의 이상적인 posterior $$q$$로 trainable한 $$p_{\theta}$$를 approximation하기 위해 KL divergence를 최소화하기 위한 term입니다. <br>
+세번째 term($$\mathcal{L}_{0}$$)은 $$t: 1 \sim t-1$$에서와 다르게 실제 input image인 $$x_{0}$$와 비교하기 위해서는 실제 이미지와 같이 8bit로 값들을 quantization해줘야하기 때문에 이에 대한 term은 따로 분리해줬습니다. <br>
+
+<p>
+<center><img src="../images/DDPM/DDPM_loss_term.jpg" width="600"></center>
+<center><em>Fig n.</em></center>
+</p>
+
+$$\mathcal{L}_{t}$$에서 $$p_{\theta}(x_{t-1}\mid x_{t})$$는 forward process의 $$x_{0}$$에서 tractable한 posterior와 KL divergence를 계산합니다. <br>
+
+$$
+\begin{align}  
+q(x_{t-1}\mid x_{t},x_{0}) = \mathcal{N}(x_{t-1};\tilde{\mu}_{t}(x_{t},x_{0}), \tilde{\beta}_{t}I) \\
+\tilde{\mu}_{t}(x_{t},x_{0}) := \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_{t}}{1-\bar{\alpha}_{t}}x_{0} + \frac{\sqrt{\alpha_{t}}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_{t}}x_{t}, \quad \tilde{\beta}_{t} := \frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_{t}}\beta_{t} \\ 
+\end{align}
+$$
+
+$$\mathcal{L}$$의 모든 KL divergence는 gaussian 간이기 때문에 Monte carlo estimate 대신 Rao-Blackwellized 방식으로 계산할 수 있습니다. (Appendix)
+
+#### Diffusion models and denoising autoencoders
+
+
+#### Appendix
+
+
 
 ---
-
 
 -   [DDPM ppt](https://github.com/Nakkwan/Nakkwan.github.io/blob/main/pdf/DDPM.pdf)<br>
 
