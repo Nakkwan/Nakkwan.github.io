@@ -51,7 +51,6 @@ $$
 
 <details>
   <summary>Details</summary>  
-  <div markdown="1" style="background-color: #FFFFFF">
     식 (1)에 의해 <br>
     \begin{align}
       q(x_{t} \mid x_{0}) = q(x_{t} \mid x_{t-1})q(x_{t-1} \mid x_{t-2}) \cdots q(x_{2} \mid x_{1})q(x_{1} \mid x_{0}) \\
@@ -75,7 +74,6 @@ $$
       \end{align}
       따라서, 마찬가지로 step t에서 Variance: 1-\bar{\alpha}_{4}
   </ul>
-  </div>
 </details>
 
 Diffusion에서 $$\beta$$의 크기가 충분히 작다면 reverse process 또한 gaussian diffusion이라고 간주할 수 있습니다. <br> 
