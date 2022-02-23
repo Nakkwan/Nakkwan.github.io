@@ -50,10 +50,8 @@ q(x_{t} \mid x_{0}) = \mathcal{N}(x_{t};\sqrt{\bar{\alpha}_{t}}x_{0},(1-\bar{\al
 $$
 
 <details>
-  <summary>
-    Details
-  </summary>  
-  <div markdown="1">
+  <summary>Details</summary>  
+  <div markdown="1" style="background-color: #FFFFFF">
     식 (1)에 의해 <br>
     \begin{align}
       q(x_{t} \mid x_{0}) = q(x_{t} \mid x_{t-1})q(x_{t-1} \mid x_{t-2}) \cdots q(x_{2} \mid x_{1})q(x_{1} \mid x_{0}) \\
