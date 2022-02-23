@@ -59,13 +59,13 @@ $$
   과 같이 표현될 수 있습니다. <br>
   <ul>
     <li>Mean</li>
-    Mean의 경우 \mathbb{E}(aX) = a\mathbb{X} property를 가지고 있기 때문에 <br>
+    Mean의 경우 $$\mathbb{E}(aX) = a\mathbb{X}$$ property를 가지고 있기 때문에 <br>
     \begin{align}
     \prod_{s=1}^{t} \sqrt{1-\beta_{t}} = \prod_{s=1}^{t} \sqrt{\alpha_{t}} = \sqrt{\bar{\alpha}_{t}} \\
     \end{align}
     <li>Variance</li>
-    Variance도 마찬가지로 aVar(X) = Var(a^{2}X) property를 가지고 있지만 x_{t} = \sqrt{1-\beta_{t}}x_{t-1} + \beta_{t}z, z \sim \mathcal{N}(0,I)와 같이 더해지는 형식이rl 때문에 mean과 다르게 계산됩니다. <br>
-    t=4일 때를 예로 들어보면, <br>
+    Variance도 마찬가지로 $$aVar(X) = Var(a^{2}X)$$ property를 가지고 있지만 $$x_{t} = \sqrt{1-\beta_{t}}x_{t-1} + \beta_{t}z, z \sim \mathcal{N}(0,I)$$와 같이 더해지는 형식이기 때문에 mean과 다르게 계산됩니다. <br>
+    $$t=4$$일 때를 예로 들어보면, <br>
     \begin{align}
     q(x_{4} \mid x_{0}) &= \sqrt{\alpha_{4}}(\sqrt{\alpha_{3}}(\sqrt{\alpha_{2}}(\sqrt{\alpha_{1}}x_{0}+\beta_{1}z)+\beta_{2}z)+\beta_{3}z)+\beta_{4}z \\
     &= \sqrt{\bar{\alpha_{4}}}x_{0}-(\alpha_{4}\alpha_{3}\alpha_{2}(\alpha_{1}-1)+\alpha_{4}\alpha_{3}(\alpha_{2}-1)+\alpha_{4}(\alpha_{3}-1)+(\alpha_{4}-1)) \\
@@ -73,7 +73,7 @@ $$
     &= \sqrt{\bar{\alpha_{4}}}x_{0} + 1 - \alpha_{4}\alpha_{3}\alpha_{2}\alpha_{1} \\
     &= \sqrt{\bar{\alpha_{4}}}x_{0} + 1 - \bar{\alpha}_{4} \\
     \end{align}
-    따라서, 마찬가지로 step t에서 Variance: 1-\bar{\alpha}_{4}
+    따라서, 마찬가지로 step t에서 Variance: $$1-\bar{\alpha}_{4}$$
     </ul>
 </details>
 
