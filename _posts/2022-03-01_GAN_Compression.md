@@ -9,6 +9,8 @@ tags:
 
 GAN Compression: Efficient Architectures for Interactive Conditional GANs는 2020년 CVPR에 게재된 논문으로, CGAN의 compression을 위한 method를 제시한 논문입니다.<br> CGAN은 mobileNet과 같은 image recognition과 비교해서 계산량이 큽니다. 따라서 CGAN에 대해 inference time과 model size를 줄이기 위한 방식을 제시합니다. <br>
 
+---
+
 <!--more-->
 
 #### Introduction
