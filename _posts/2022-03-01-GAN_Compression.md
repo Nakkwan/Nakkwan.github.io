@@ -30,7 +30,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 2. Architecture가 recognition CNN과 다르다. <br> 
     중간 representation만 teacher model에서 student model로 transfer합니다. <br>
 
-그리고 fewer cost model을 찾기 위해 NAS(Network Architecture Search)를 사용합니다.
+그리고 fewer cost model을 찾기 위해 NAS(Network Architecture Search)를 사용합니다. <br>
 
 #### Related work
 
@@ -41,9 +41,9 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     Network model에서 필요하지 않은(중복된) 부분을 없애기 위해, network connection이나 weight에 대한 pruning을 할 수 있다. <br> 
     AMC(AutoML for Model Compression)은
 
-- Knowledge distillation
+- Knowledge distillation <br>
 
-- NAS(Neural Architecture Search)
+- NAS(Neural Architecture Search) <br>
 
 #### Method
 
@@ -117,7 +117,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         모든 가능한 channel 조합을 보며 $$\mathcal{L}$$을 optimize하여 가장 optimal한 generator를 고르기 위해 훈련합니다. <br>
         K가 증가하면 가능한 channel configuration은 극단적으로 증가하고, 각 configuration에 대해 hyperparamter 설정에도 많은 시간이 필요로 하는 문제가 있다. <br>
 
-- Decouple Training and Search
+- Decouple Training and Search <br>
     위와 같은 문제를 해결하기 위해 one-shot NAS와 같이 training과 architecture search를 decoupling합니다. <br>
     먼저 onec-for-all network를 학습하고, 각 subnetwork 또한 동일하게 훈련되고 독립적으로 동작합니다. Subnetwork는 once-for-all network와 weight를 공유합니다. <br>
 
@@ -138,7 +138,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     - Dataset <br>
 
 
-    - Evaluation metrics
+    - Evaluation metrics <br>
 
-- Result
+- Result <br>
 
