@@ -1,25 +1,19 @@
 ---
 title: GAN Compression(Efficient Architectures for Interactive Conditional GANs)
 tags:
-  - Deep Learning
-  - Vision
-  - Generative
-  - Paper
+    - Deep Learning
+    - Vision
+    - Generative
+    - Paper
 ---
 
-GAN Compression: Efficient Architectures for Interactive Conditional GANs는 2020
-년 CVPR에 게재된 논문으로, CGAN의 compression을 위한 method를 제시한 논문입니다
-.<br> CGAN은 mobileNet과 같은 image recognition과 비교해서 계산량이 큽니다. 따라
-서 CGAN에 대해 inference time과 model size를 줄이기 위한 방식을 제시합니다. <br>
+GAN Compression: Efficient Architectures for Interactive Conditional GANs는 2020년 CVPR에 게재된 논문으로, CGAN의 compression을 위한 method를 제시한 논문입니다.<br> CGAN은 mobileNet과 같은 image recognition과 비교해서 계산량이 큽니다. 따라서 CGAN에 대해 inference time과 model size를 줄이기 위한 방식을 제시합니다. <br>
 
 <!--more-->
 
 #### Introduction
 
-GAN의 경우 human interactive한 영역에서 많이 활용되지만, edge device는 hardware
-성능에 한계가 있기 때문에 많은 계산량을 필요로하는 model에 대해서는 bottleneck이
-생깁니다. CycleGAN과 같은 generative model들은 계산량을 많이 필요로 합니다. 따라
-서 GAN compression이 제안됩니다. <br>
+GAN의 경우 human interactive한 영역에서 많이 활용되지만, edge device는 hardware 성능에 한계가 있기 때문에 많은 계산량을 필요로하는 model에 대해서는 bottleneck이 생깁니다. CycleGAN과 같은 generative model들은 계산량을 많이 필요로 합니다. 따라서 GAN compression이 제안됩니다. <br>
 
 <p>
 <center><img src="/images/GAN_compression/Compression_computation_magnitude.jpg" width="400"></center>
@@ -28,14 +22,13 @@ GAN의 경우 human interactive한 영역에서 많이 활용되지만, edge dev
 
 Generative model을 compression 하는데는 2가지 근본적인 어려움이 있습니다. <br>
 
-1. Unstability of GAN training (especially unpaired)<br> Pseudo pair를 만들어 훈
-   련시킵니다. <br>
+1. Unstability of GAN training (especially unpaired)<br> 
+    Pseudo pair를 만들어 훈련시킵니다. <br>
 
-2. Architecture가 recognition CNN과 다르다. <br> 중간 representation만 teacher
-   model에서 student model로 transfer합니다. <br>
+2. Architecture가 recognition CNN과 다르다. <br> 
+    중간 representation만 teacher model에서 student model로 transfer합니다. <br>
 
-그리고 fewer cost model을 찾기 위해 NAS(Network Architecture Search)를 사용합니
-다.
+그리고 fewer cost model을 찾기 위해 NAS(Network Architecture Search)를 사용합니다.
 
 #### Related work
 
