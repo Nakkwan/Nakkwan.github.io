@@ -12,6 +12,8 @@ GAN Compression: Efficient Architectures for Interactive Conditional GANs는 202
 .<br> CGAN은 mobileNet과 같은 image recognition과 비교해서 계산량이 큽니다. 따라
 서 CGAN에 대해 inference time과 model size를 줄이기 위한 방식을 제시합니다. <br>
 
+---
+
 <!--more-->
 
 #### Introduction
