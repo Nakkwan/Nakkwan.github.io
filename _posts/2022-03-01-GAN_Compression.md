@@ -143,41 +143,41 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 - Result <br>
     - Quantitative Result <br>
         <p>
-        <center><img src="../images/GAN_compression/Compression_quantitative_result.jpg" width="600"></center>
+        <center><img src="/images/GAN_compression/Compression_quantitative_result.jpg" width="600"></center>
         <center><em>Fig n.</em></center>
         </p>
 
 
     - Performance vs Computation Trade-off <br>
         <p>
-        <center><img src="../images/GAN_compression/Compression_trade_off.jpg" width="400"></center>
+        <center><img src="/images/GAN_compression/Compression_trade_off.jpg" width="400"></center>
         <center><em>Fig n.</em></center>
         </p>
 
 
     - Qualitative Result <br>
         <p>
-        <center><img src="../images/GAN_compression/Compression_qualitative_result.jpg" width="600"></center>
+        <center><img src="/images/GAN_compression/Compression_qualitative_result.jpg" width="600"></center>
         <center><em>Fig n.</em></center>
         </p>
 
 
     - Accelerate Inference on Hardware <br>
         <p>
-        <center><img src="../images/GAN_compression/Compression_hardware_inference.jpg" width="350"></center>
+        <center><img src="/images/GAN_compression/Compression_hardware_inference.jpg" width="350"></center>
         <center><em>Fig n.</em></center>
         </p>
 
 - Ablation study <br>
     - Advantage of unpaired-to-paired transform <br>
         <p>
-        <center><img src="../images/GAN_compression/Compression_pseudo_advantage.jpg" width="400"></center>
+        <center><img src="/images/GAN_compression/Compression_pseudo_advantage.jpg" width="400"></center>
         <center><em>Fig n.</em></center>
         </p>
 
     - Effectiveness of convolution decomposition <br>
         <p>
-        <center><img src="../images/GAN_compression/Compression_decomposition_performance.jpg" width="400"></center>
+        <center><img src="/images/GAN_compression/Compression_decomposition_performance.jpg" width="400"></center>
         <center><em>Fig n.</em></center>
         </p>
 
