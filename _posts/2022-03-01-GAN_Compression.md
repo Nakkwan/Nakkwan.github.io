@@ -136,6 +136,12 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     
     Model compression에는 output layer의 logit의 분포를 맞추는 knowledge distillation이 대체적으로 많이 쓰입니다. 하지만 CGAN에서는 output이 확률의 분포라기보다 deterministic한 image이기 때문에 distillation하기가 쉽지 않습니다. <br>
     특히 paired dataset으로 훈련된 경우 GT와 generated image의 차이가 많이 없기 때문에 더 잘 동작하지 않습니다. 따라서 teacher $$G$$의 intermediate layer에 대해서 matching을 진행합니다. <br>
+
+    <p>
+    <center><img src="/images/GAN_compression/Compression_distill_logits.jpg" width="400"></center>
+    <center><em>Fig n.</em></center>
+    </p>
+
     Objective function은 <br>
 
     $$
@@ -181,14 +187,14 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
 - Decouple Training and Search <br>
     위와 같은 문제를 해결하기 위해 one-shot NAS와 같이 training과 architecture search를 decoupling합니다. <br>
-    먼저 onec-for-all network를 학습하고, 각 subnetwork 또한 동일하게 훈련되고 독립적으로 동작합니다. Subnetwork는 once-for-all network와 weight를 공유합니다. <br>
+    먼저 once-for-all network를 학습하고, 각 subnetwork 또한 동일하게 훈련되고 독립적으로 동작합니다. Subnetwork는 once-for-all network와 weight를 공유합니다. <br>
 
     Teacher model의 channel은 $$\{C_{k}^{0}\}_{k=1}^{K}$$로 가정합니다. <br>
     주어진 $$\{C_{k}\}_{k=1}^{K}, \;\; C_{k} \le C_{k}^{0}$$에서 once-for-all에서 해당 tensor에 대한 weight를 추출합니다. <br>
 
-    Training step에서 subnetwork를 random하게 sampling하고, eq.4로 optimize합니다. 처음 여러 channel이 더 자주 update되기 때문에 전체 weight중에서 중요한 역할을 합니다. <br>
+    Training step에서 subnetwork를 random하게 sampling하고, eq.4로 optimize합니다. <br>
 
-    Onece-for-all network가 훈련된 다음에 validation에 대한 subnetwork의 성능으로 가장 optimal한 subnetwork를 찾습니다. Once-for-all은 weight sharing으로 훈련되기 때문에 추가적은 training 없이 optimal network를 선택할 수 있고, 성능 향상을 위해 fine-tuning도 진행합니다. <br>
+    Onece-for-all network가 훈련된 다음에 validation에 대한 전체 subnetwork의 성능 평가 후 가장 optimal한 subnetwork를 찾습니다. Once-for-all은 weight sharing으로 훈련되기 때문에 추가적은 training 없이 optimal network를 선택할 수 있고, 성능 향상을 위해 선택된 subnetwork에 대해서는 fine-tuning도 진행합니다. <br>
 
 
 #### Experiments
@@ -198,9 +204,17 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         Pix2pix의 경우 UNet을 ResNet으로 교체하여 사용합니다. <br>
 
     - Dataset <br>
-
+        - Edges $$\rightarrow$$ shoes <br>
+        - Cityscapes <br>
+        - Horse $$\leftrightarrow$$ zebra <br>
+        - Map $$\leftrightarrow$$ aerial photo <br>
 
     - Evaluation metrics <br>
+        - FID(Frechet Inception Distance) <br>
+            Paired의 경우 GT와 generated image간의 FID를 계산하고, unpaired의 경우 pseudo GT와 generated image간의 FID를 계산합니다. <br>
+
+        - Semantic Segmentation Metrics <br>
+            Cityscapes와 같은 dataset에서 generated image에 대한 semantic segmentation을 수행한 후 mIOU를 segmentation metric로 사용하여 평가합니다. <br>
 
 - Result <br>
     - Quantitative Result <br>
