@@ -78,9 +78,9 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     <center><em>Fig n.</em></center>
     </p>
 
-    Resolution에 대한 elastic은 training 중, batch에서 다른 resolution의 이미지들을 sampling함으로써 달성이 됩니다. 나머지는 위의 그림과 같이, kernel size(=K), depth(=D), width(=W) 순으로 subnetwork에 대한 훈련이 이뤄집니다. K에 대해 진행하는 동안 D, W는 최대값을 유지하는 형식으로 훈련이 이뤄집니다. <br>
+    Progressive shrinking 방식은 큰 subnetwork부터 작은 subnetwork까지 학습시키기 때문에, 작은 subnetwork를 fine-tunning할 때 이미 훈련이 되어있는 큰 subnetwork에 간섭하는 것을 방지합니다. 또한 작은 subnetwork가 큰 subnetwork로 잘 initialize되어 있어, 훈련을 빠르게 진행할 수 있습니다 <br>
 
-    Progressive shrinking 방식은 큰 subnetwork부터 작은 subnetwork까지 학습시키때문에, 작은 subnetwork를 fine-tunning할 때 이미 훈련이 되어있는 큰 subnetwork에 간섭하는 것을 방지합니다. 또한 작은 subnetwork가 큰 subnetwork로 잘 initialize되어 있어, 훈련을 빠르게 진행할 수 있습니다 <br>
+    Resolution에 대한 elastic은 training 중, batch에서 다른 resolution의 이미지들을 sampling함으로써 달성이 됩니다. 나머지는 위의 그림과 같이, kernel size(=K), depth(=D), width(=W) 순으로 subnetwork에 대한 훈련이 이뤄집니다. K에 대해 진행하는 동안 D, W는 최대값을 유지하는 형식으로 훈련이 이뤄집니다. <br>
 
     <p>
     <center><img src="/images/GAN_compression/Compression_OFA_elastic_1.jpg" width="600"></center>
@@ -101,21 +101,18 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     - Elastic Width <br>
         Width의 경우 channel을 L1 norm 순으로 정렬하여 작은 subnetwork의 경우 중요한(L1이 큰) channel만 남기고 재구성하는 형식으로 동작합니다. <br>
 
-
-
-
-
 #### Method
 
 - Training Objective <br>
-    CGAN은 source domain $$X$$에서 target domain $$Y$$로의 mapping $$G$$를 훈련시킵니다. CGAN의 training data는 paired와 unpaired 두가지 방식이 있기 때문에 많은model에서 paired와 unpaired를 구별하지 않고 objective function을 구성합니다.General-purpose compression에서는 teacher structure가 어떤 방식으로 training 됐는지에 관계없이 model compression이 가능하도록 paired와 unpaired를 통합했습니다. <br>
+    CGAN은 source domain $$X$$에서 target domain $$Y$$로의 mapping $$G$$를 훈련시킵니다. CGAN의 training data는 paired와 unpaired 두가지 방식이 있기 때문에 많은 model에서 paired와 unpaired를 구별하지 않고 objective function을 구성합니다. General-purpose compression에서는 teacher structure가 어떤 방식으로 training 됐는지에 관계없이 model compression이 가능하도록 paired와 unpaired를 통합했습니다. <br>
 
     <p>
     <center><img src="/images/GAN_compression/Compression_framework.jpg" width="600"></center>
     <center><em>Fig n.</em></center>
     </p>
     
-    Origin teacher generator를 $$G'$$라고 가정합니다. <br> Unpaired data의 경우 compression과정에서 $$G'$$로 generate된 이미지를 student generator $$G$$의 pseudo GT로 사용합니다. <br>
+    Origin teacher generator를 $$G'$$라고 가정합니다. <br> 
+    Unpaired data의 경우 compression과정에서 $$G'$$로 generate된 이미지를 student generator $$G$$의 pseudo GT로 사용합니다. <br>
 
     $$
     \begin{align}
@@ -133,7 +130,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
     $$
     \begin{align}
-    \mathcal{L}_{CGAN} = \mathbb{E}_{x,y}[\log D'(x,y)] + \mathbb{E}_{x}[\log(1 - D'(x,G'(x)))] \\
+    \mathcal{L}_{CGAN} = \mathbb{E}_{x,y}[\log D'(x,y)] + \mathbb{E}_{x}[\log(1 - D'(x,G'(x)))] \\ \\
     \end{align}
     $$
     
@@ -161,6 +158,11 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     Knoewledge에서 architecture의 선택은 중요합니다. GAN에서 단순히 channel을 줄이는 것은 성능이 현저하게 저하되고 compact한 student model을 생성하지 못합니다. 따라서 CGAN에 대한 더 compact한 architecture를 구축하기 위해 NAS를 사용합니다. <br>
 
     - Convolution decomposition and layer sensitivity <br>
+        <p>
+        <center><img src="/images/GAN_compression/Compression_mobilenet.jpg" width="400"></center>
+        <center><em>Fig n.</em></center>
+        </p>
+
         Generator는 classification과 segmentation model에서 가져온 vanilla CNN인 경우가 많습니다. Depthwise separable convolution은 performance-computation trade-off에서 효율적이고 generator에서도 마찬가지입니다. Decomposition을 모든 layer에 적용하면 성능상 degradation이 일어나기 때문에 모두 적용하지는 않습니다. Resblock의 경우 model에서 가장 많은 computation cost를 차지하고 있지만 decomposition의 영향을 받지 않고, upsampling layer의 경우 영향을 많이 받기 때문에 resblock에 대해서만 decomposition을 진행합니다. <br>
 
     - Automated channel reduction with NAS <br>
@@ -254,9 +256,10 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         </p>
 
         Resnet-base인 CycleGAN에서 downsample, updsample, resblock에 대한 sensitivity of convolution decomposition을 비교해봤을 때 위의 그림과 같이 나타납니다. <br>
-        ResBlock에서 channel과 관계없이 MAC가 크게 줄어들어, trade-off 효율이 좋아지는 것을 확인할 수 있습니다. 
+        ResBlock에서 channel과 관계없이 MAC가 크게 줄어들어, trade-off 효율이 좋아지는 것을 확인할 수 있습니다. <br>
 
 #### Reference 
 -   [GAN Compression](https://arxiv.org/abs/2003.08936)<br>
 -   [Once-for-all](https://arxiv.org/abs/1908.09791)<br>
 -   [NAS](https://arxiv.org/abs/1908.09791)<br>
+-   [MobileNet](https://arxiv.org/abs/1704.04861)<br>
