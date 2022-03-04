@@ -110,7 +110,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
         $$
         \begin{align}
-        \{C_{1}^{*}, C_{2}^{*}, \cdots , C_{k}^{*}\} = {\argmin}_{C_{1}, \cdots , C_{k}} \mathcal{L}, \quad \text{s.t.} \;\; MAC < F_{t}\\
+        \{C_{1}^{*}, C_{2}^{*}, \cdots , C_{k}^{*}\} = \operatorname{argmin}_{C_{1}, \cdots , C_{k}} \mathcal{L}, \quad \text{s.t.} \;\; MAC < F_{t}\\
         \end{align}
         $$
 
@@ -147,12 +147,17 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         <center><em>Fig n.</em></center>
         </p>
 
+        제시된 표에 따르면 CGAN을 9&#126;21배 압축할 수 있었고, model size는 5&#126;33배 줄일 수 있습니다. <br>
+
 
     - Performance vs Computation Trade-off <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_trade_off.jpg" width="400"></center>
         <center><em>Fig n.</em></center>
         </p>
+
+        Model의 compression ratio와 상관없이 performance, computation trade-off의 효율이 좋아졌다는 것을 확인할 수 있습니다. <br>
+        Distillation+pruning의 경우 큰 모델에서는 scratch부터 훈련하는 것보다 좋은 성능을 보이지만, NAS 없이 진행하게 되면 sensitivity layer가 너무 많이 사라지는 경향이 있습니다. <br>
 
 
     - Qualitative Result <br>
@@ -171,6 +176,13 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 - Ablation study <br>
     - Advantage of unpaired-to-paired transform <br>
         <p>
+        <center><img src="/images/GAN_compression/Compression_pseudo_advantage_img.jpg" width="600"></center>
+        <center><em>Fig n.</em></center>
+        </p>
+
+        Teacher model로부터 pseudo pair를 생성해 훈련시키는 경우 비교적 성능이 유지되지만, unpaired의 경우 computation budget이 줄어들면서 성능 저하가 심하게 일어나는 것을 확인할 수 있습니다. <br>
+
+        <p>
         <center><img src="/images/GAN_compression/Compression_pseudo_advantage.jpg" width="400"></center>
         <center><em>Fig n.</em></center>
         </p>
@@ -180,5 +192,8 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         <center><img src="/images/GAN_compression/Compression_decomposition_performance.jpg" width="400"></center>
         <center><em>Fig n.</em></center>
         </p>
+
+        Resnet-base인 CycleGAN에서 downsample, updsample, resblock에 대한 sensitivity of convolution decomposition을 비교해봤을 때 위의 그림과 같이 나타납니다. <br>
+        ResBlock에서 channel과 관계없이 MAC가 크게 줄어들어, trade-off 효율이 좋아지는 것을 확인할 수 있습니다. 
 
 #### Reference 
