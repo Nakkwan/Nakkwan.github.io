@@ -7,7 +7,7 @@ tags:
     - Paper
 ---
 
-GAN Compression: Efficient Architectures for Interactive Conditional GANs는 2020년 CVPR에 게재된 논문으로, CGAN의 compression을 위한 method를 제시한 논문입니다.<br> CGAN은 mobileNet과 같은 image recognition과 비교해서 계산량이 큽니다. 따라서 CGAN에 대해 inference time과 model size를 줄이기 위한 방식을 제시합니다. <br>
+GAN Compression: Efficient Architectures for Interactive Conditional GANs는 2020년 CVPR에 게재된 논문으로, edge device를 위한 CGAN의 compression을 위한 method를 제시한 논문입니다.<br> CGAN은 mobileNet과 같은 image recognition과 비교해서 계산량이 큽니다. 따라서 CGAN에 대해 inference time과 model size를 줄이기 위한 방식을 제시합니다. <br>
 
 ---
 
@@ -38,12 +38,72 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     GAN(Generative Adversarial Networks)은 photo-realistic image를 합성하는데 좋은 성능을 보입니다. Conditioanl GAN은 image, label, text와 같은 다양한 conditional input을 주어 이미지 합성을 제어할 수 있도록 합니다. 고해상도의 photo-realistic image 생성은 많은 계산량을 필요로 합니다. 이로 인해 제한된 계산 리소스가 주어진 edge device에 이러한 모델을 배포하기가 어렵습니다. 따라서 interactive application을 위한 효율적인 CGAN architecture에 중점을 둡니다. <br>
 
 - Model Acceleration <br> 
-    Network model에서 필요하지 않은(중복된) 부분을 없애기 위해, network connection이나 weight에 대한 pruning을 할 수 있다. <br> 
-    AMC(AutoML for Model Compression)은
+    Network model에서 필요하지 않은 부분을 없애기 위해, network connection이나 weight에 대한 pruning을 할 수 있습니다. <br> 
+    하지만 대부분의 이런 방식들이 model-specific하다는 문제점이 있다고 합니다. <br>
 
 - Knowledge distillation <br>
+    Pruning이 모델의 크기를 직접적으로 줄이는 방식이었다면 distillation은 큰 모델에서 작은 모델로 transferring하는 방법입니다. <br>
 
 - NAS(Neural Architecture Search) <br>
+    NAS는 RNN를 이용해, model architecture를 설계하는 방식입니다. <br> 
+
+    <p>
+    <center><img src="/images/GAN_compression/Compression_nas.jpg" width="400"></center>
+    <center><em>Fig n.</em></center>
+    </p>
+
+    Model의 accuracy를 강화학습의 reward로 보고 RNN을 훈련시켜, reward가 높아지는 방향으로 모델을 설계하는 방식입니다. <br><br>
+
+    하지만 이런 방식은 computation cost가 크기 때문에 논문에서는 subnetwork들이 weight sharing을 하는 once-for-all 방식을 사용합니다. <br>
+
+    Once-for-all(OFA)는 다양한 device에 retrain없이 효율적으로 모델을 배포할 수 있도록 하는 것을 목표로 한 방법입니다. <br>
+
+    <p>
+    <center><img src="/images/GAN_compression/Compression_OFA_init.jpg" width="400"></center>
+    <center><em>Fig n.</em></center>
+    </p>
+
+    전체적인 동작은 가장 큰 network인 OFA를 학습시킨 후 그보다 작은 subnetwork들을 fine-tunning하는 방식(progressive shrinking, PS)으로 동작합니다. OFA에서 network의 depth(layer의 수), width(channel 수), kernel size, resolution이 다른 subnetwork들이 있으며 동작은 <br>
+
+    $$
+    \begin{align}
+    \underset{W_{0}}{\text{min}}\sum_{arch_{i}}\mathcal{L}_{val}(C(W_{0}, arch_{i})) \\
+    \end{align}
+    $$
+
+    단순히 위의 식을 optimize하게 되면, computation cost도 많이 들게되고, subnetwork간의 간섭이 일어나게 됩니다. 따라서 progressive shrinking 방식을 사용합니다. <br>
+
+    <p>
+    <center><img src="/images/GAN_compression/Compression_OFA_overview.jpg" width="600"></center>
+    <center><em>Fig n.</em></center>
+    </p>
+
+    Resolution에 대한 elastic은 training 중, batch에서 다른 resolution의 이미지들을 sampling함으로써 달성이 됩니다. 나머지는 위의 그림과 같이, kernel size(=K), depth(=D), width(=W) 순으로 subnetwork에 대한 훈련이 이뤄집니다. K에 대해 진행하는 동안 D, W는 최대값을 유지하는 형식으로 훈련이 이뤄집니다. <br>
+
+    Progressive shrinking 방식은 큰 subnetwork부터 작은 subnetwork까지 학습시키때문에, 작은 subnetwork를 fine-tunning할 때 이미 훈련이 되어있는 큰 subnetwork에 간섭하는 것을 방지합니다. 또한 작은 subnetwork가 큰 subnetwork로 잘 initialize되어 있어, 훈련을 빠르게 진행할 수 있습니다 <br>
+
+    <p>
+    <center><img src="/images/GAN_compression/Compression_OFA_elastic_1.jpg" width="600"></center>
+    <center><em>Fig n.</em></center>
+    </p>
+
+    - Elastic kernel size <br>
+        선택할 수 있는 kernel size가 예를들어, (7, 5, 3)일 때, 7x7 kernel의 중앙 5x5, 3x3을 사용함으로써, kernel을 elastic하게 합니다. 단순히 kernel의 중앙을 crop하여 사용하게 되면 성능의 저하가 일어나기 떄문에 각 layer마다 다른 transformation matrix를 이용하여 weight sharing에 사용합니다. <br>
+
+    - Elastic Depth <br>
+        Depth의 경우 작은 subnetwork에 대해서는 N개 중 처음 D개의 layer만 weight sharing으로 사용하고 나머지는 skip됩니다. <br>
+
+    <p>
+    <center><img src="/images/GAN_compression/Compression_OFA_elastic_2.jpg" width="600"></center>
+    <center><em>Fig n.</em></center>
+    </p>
+
+    - Elastic Width <br>
+        Width의 경우 channel을 L1 norm 순으로 정렬하여 작은 subnetwork의 경우 중요한(L1이 큰) channel만 남기고 재구성하는 형식으로 동작합니다. <br>
+
+
+
+
 
 #### Method
 
@@ -197,3 +257,6 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         ResBlock에서 channel과 관계없이 MAC가 크게 줄어들어, trade-off 효율이 좋아지는 것을 확인할 수 있습니다. 
 
 #### Reference 
+-   [GAN Compression](https://arxiv.org/abs/2003.08936)<br>
+-   [Once-for-all](https://arxiv.org/abs/1908.09791)<br>
+-   [NAS](https://arxiv.org/abs/1908.09791)<br>
