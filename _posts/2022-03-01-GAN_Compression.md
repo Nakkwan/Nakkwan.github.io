@@ -186,6 +186,18 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
             losses.append(loss)
         return sum(losses)
 
+    if dataset_mode == 'paired':
+        loss_G_recon = criterionRecon(Sfake_B, real_B) * opt.lambda_recon
+        fake = torch.cat((real_A, Sfake_B), 1)
+    else:
+        loss_G_recon = criterionRecon(Sfake_B, Tfake_B) * opt.lambda_recon
+        fake = Sfake_B
+
+    pred_fake = netD(fake)
+    loss_G_gan = criterionGAN(pred_fake, True, for_discriminator=False) * opt.lambda_gan
+    loss_G_distill = calc_distill_loss() * opt.lambda_distill
+    loss_G = loss_G_gan + loss_G_recon + loss_G_distill
+
     loss_G = loss_G_gan + lambda_recon * loss_G_recon + lambda_distill * loss_G_distill
     ```
 
