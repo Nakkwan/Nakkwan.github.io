@@ -61,7 +61,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
       Once-for-all(OFA)는 다양한 device에 retrain없이 효율적으로 모델을 배포할 수 있도록 하는 것을 목표로 한 방법입니다. <br>
       <p>
-      <center><img src="/images/GAN_compression/Compression_OFA_init.jpg" width="400"></center>
+      <center><img src="/images/GAN_compression/Compression_OFA_init.jpg" width="500"></center>
       <center><em>Fig n.</em></center>
       </p>
 
@@ -78,7 +78,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
       <center><em>Fig n.</em></center>
       </p>
 
-      Progressive shrinking 방식은 큰 subnetwork부터 작은 subnetwork까지 학습시키기 때문에, 작은 subnetwork를 fine-tunning할 때 이미 훈련이 되어있는 큰 subnetwork에 간섭하는 것을 방지합니다. 또한 작은 subnetwork가 큰 subnetwork로 잘 initialize되어 있어, 훈련을 빠르게 진행할 수 있습니다 <br>
+      Progressive shrinking 방식은 큰 subnetwork부터 작은 subnetwork까지 학습시키기 때문에, 작은 subnetwork를 fine-tunning할 때 이미 훈련이 되어있는 큰 subnetwork에 간섭하는 것을 방지합니다. 또한 작은 subnetwork가 큰 subnetwork로 잘 initialize되어 있어, 훈련을 빠르게 진행할 수 있습니다 <br><br>
 
       Resolution에 대한 elastic은 training 중, batch에서 다른 resolution의 이미지들을 sampling함으로써 달성이 됩니다. 나머지는 위의 그림과 같이, kernel size(=K), depth(=D), width(=W) 순으로 subnetwork에 대한 훈련이 이뤄집니다. K에 대해 진행하는 동안 D, W는 최대값을 유지하는 형식으로 훈련이 이뤄집니다. <br>
       <ul>
@@ -94,6 +94,9 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         Width의 경우 channel을 L1 norm 순으로 정렬하여 작은 subnetwork의 경우 중요한(L1이 큰) channel만 남기고 재구성하는 형식으로 동작합니다. <br>
         </ul>
     </details>
+
+<br>
+
 #### Method
 
 - Training Objective <br>
@@ -131,7 +134,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     특히 paired dataset으로 훈련된 경우 GT와 generated image의 차이가 많이 없기 때문에 더 잘 동작하지 않습니다. 따라서 teacher $$G$$의 intermediate layer에 대해서 matching을 진행합니다. <br>
 
     <p>
-    <center><img src="/images/GAN_compression/Compression_distill_logits.jpg" width="400"></center>
+    <center><img src="/images/GAN_compression/Compression_distill_logits.jpg" width="300"></center>
     <center><em>Fig n.</em></center>
     </p>
 
@@ -142,8 +145,24 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     \mathcal{L}_{distill} = \sum^{T}_{t=1} \parallel G_{t}(x)-f_{t}(G'_{t}(x))\parallel_{2} \\
     \end{align}
     $$
+
     
-    T는 layer의 개수를 의미하고, $$f_{t}$$는 teacher model에서 student model로 channel의 개수를 mapping하는 1x1 convolution layer입니다. $$\mathcal{L}_{distill}$$는 $$G_{t}$$와 $$f_{t}$$를 optimize합니다. <br><br>
+    T는 layer의 개수를 의미하고, $$f_{t}$$는 student model에서 teacher model로 channel의 개수를 mapping하는 1x1 convolution layer입니다. $$\mathcal{L}_{distill}$$는 $$G_{t}$$와 $$f_{t}$$를 optimize합니다. <br>
+
+    ```py
+    netAs = []
+    G_params = [self.netG_student.parameters()]
+        for i, n in enumerate(self.mapping_layers):
+            netA = nn.Conv2d(in_channels=student_ngf * 4, out_channels=teacher_ngf * 4, kernel_size=1)
+
+            networks.init_net(netA)
+            G_params.append(netA.parameters())
+            netAs.append(netA)
+            loss_names.append('G_distill%d' % i)
+
+    optimizer_G = torch.optim.Adam(itertools.chain(*G_params), lr=opt.lr, betas=(opt.beta1, 0.999))
+    ```
+    <br>
     
     전체 objective function은 <br>
 
@@ -152,6 +171,23 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     \mathcal{L} = \mathcal{L}_{CGAN} + \lambda_{recon}\mathcal{L}_{recon} + \lambda_{distill}\mathcal{L}_{distill} \\
     \end{align}
     $$
+
+    ```py
+    def calc_distill_loss(self):
+        losses = []
+        for i, netA in enumerate(self.netAs):
+            n = self.mapping_layers[i]
+            netA_replicas = replicate(netA, self.gpu_ids)
+            Sacts = parallel_apply(netA_replicas, tuple([self.Sacts[key] for key in sorted(self.Sacts.keys()) if n in key]))
+            Tacts = [self.Tacts[key] for key in sorted(self.Tacts.keys()) if n in key]
+            loss = [F.mse_loss(Sact, Tact) for Sact, Tact in zip(Sacts, Tacts)]
+            loss = gather(loss, self.gpu_ids[0]).sum()
+            setattr(self, 'loss_G_distill%d' % i, loss)
+            losses.append(loss)
+        return sum(losses)
+
+    loss_G = loss_G_gan + lambda_recon * loss_G_recon + lambda_distill * loss_G_distill
+    ```
 
 - Efficient Generator Design Space <br>
     Knoewledge에서 architecture의 선택은 중요합니다. GAN에서 단순히 channel을 줄이는 것은 성능이 현저하게 저하되고 compact한 student model을 생성하지 못합니다. 따라서 CGAN에 대한 더 compact한 architecture를 구축하기 위해 NAS를 사용합니다. <br>
@@ -162,12 +198,14 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         <center><em>Fig n.</em></center>
         </p>
 
-        Generator는 classification과 segmentation model에서 가져온 vanilla CNN인 경우가 많습니다. Depthwise separable convolution은 performance-computation trade-off에서 효율적이고 generator에서도 마찬가지입니다. Decomposition을 모든 layer에 적용하면 성능상 degradation이 일어나기 때문에 모두 적용하지는 않습니다. Resblock의 경우 model에서 가장 많은 computation cost를 차지하고 있지만 decomposition의 영향을 받지 않고, upsampling layer의 경우 영향을 많이 받기 때문에 resblock에 대해서만 decomposition을 진행합니다. <br>
+        Generator는 classification과 segmentation model에서 가져온 vanilla CNN인 경우가 많습니다. Depthwise separable convolution은 performance-computation trade-off에서 효율적이고 generator에서도 마찬가지입니다. Decomposition을 모든 layer에 적용하면 성능상 degradation이 일어나기 때문에 모두 적용하지는 않습니다. <br>
+        Resblock의 경우 model에서 가장 많은 computation cost를 차지하고 있지만 decomposition의 영향을 받지 않고, upsampling layer의 경우 영향을 많이 받기 때문에 resblock에 대해서만 decomposition을 진행합니다. <br>
 
     - Automated channel reduction with NAS <br>
         기존의 사람이 설계한 균일한 channel을 가진 generator는 optimal하지 않습니다. 불필요한 channel을 없애기 위해 automated channel pruning을 사용하여 channel을 선택합니다. <br>
 
-        각 layer는 MAC와 hardware parallelism의 균형을 위해 8배수로 convolution을 선택할 수 있습니다. 그림에서 $$\{C_{1}, C_{2}, \cdots , C_{k}\}$$가 pruning할 layer의 수이고, $$F_{t}$$가 computation constraint일 때, <br>
+        각 layer는 MAC와 hardware parallelism의 균형을 위해 8배수로 convolution을 선택할 수 있습니다. <br> 
+        그림에서 $$\{C_{1}, C_{2}, \cdots , C_{k}\}$$가 pruning할 layer의 수이고, $$F_{t}$$가 computation constraint일 때, <br>
 
         $$
         \begin{align}
@@ -176,7 +214,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         $$
 
         모든 가능한 channel 조합을 보며 $$\mathcal{L}$$을 optimize하여 가장 optimal한 generator를 고르기 위해 훈련합니다. <br>
-        K가 증가하면 가능한 channel configuration은 극단적으로 증가하고, 각 configuration에 대해 hyperparamter 설정에도 많은 시간이 필요로 하는 문제가 있다. <br>
+        K가 증가하면 가능한 channel configuration은 극단적으로 증가하고, 각 configuration에 대해 hyperparamter 설정에도 많은 시간이 필요로 하는 문제가 있습니다. <br>
 
 - Decouple Training and Search <br>
     위와 같은 문제를 해결하기 위해 one-shot NAS와 같이 training과 architecture search를 decoupling합니다. <br>
@@ -185,7 +223,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     Teacher model의 channel은 $$\{C_{k}^{0}\}_{k=1}^{K}$$로 가정합니다. <br>
     주어진 $$\{C_{k}\}_{k=1}^{K}, \;\; C_{k} \le C_{k}^{0}$$에서 once-for-all에서 해당 tensor에 대한 weight를 추출합니다. <br>
 
-    Training step에서 subnetwork를 random하게 sampling하고, eq.4로 optimize합니다. <br>
+    Training step에서 subnetwork를 random하게 sampling하고, optimize합니다. <br>
 
     Onece-for-all network가 훈련된 다음에 validation에 대한 전체 subnetwork의 성능 평가 후 가장 optimal한 subnetwork를 찾습니다. Once-for-all은 weight sharing으로 훈련되기 때문에 추가적은 training 없이 optimal network를 선택할 수 있고, 성능 향상을 위해 선택된 subnetwork에 대해서는 fine-tuning도 진행합니다. <br>
 
