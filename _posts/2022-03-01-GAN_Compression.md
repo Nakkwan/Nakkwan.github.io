@@ -107,7 +107,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     CGAN은 source domain $$X$$에서 target domain $$Y$$로의 mapping $$G$$를 훈련시킵니다. CGAN의 training data는 paired와 unpaired 두가지 방식이 있기 때문에 많은 model에서 paired와 unpaired를 구별하지 않고 objective function을 구성합니다. General-purpose compression에서는 teacher structure가 어떤 방식으로 training 됐는지에 관계없이 model compression이 가능하도록 paired와 unpaired를 통합했습니다. <br>
 
     <p>
-    <center><img src="/images/GAN_compression/Compression_framework.jpg" width="600"></center>
+    <center><img src="/images/GAN_compression/Compression_framework.jpg" width="700"></center>
     <center><em>Fig n.</em></center>
     </p>
     
