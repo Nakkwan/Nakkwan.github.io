@@ -19,7 +19,7 @@ GAN의 경우 human interactive한 영역에서 많이 활용되지만, edge dev
 
 <p>
 <center><img src="/images/GAN_compression/Compression_computation_magnitude.jpg" width="400"></center>
-<center><em>Fig n.</em></center>
+<center><em>Fig 1.</em></center>
 </p>
 
 Generative model을 compression 하는데는 2가지 근본적인 어려움이 있습니다. <br>
@@ -49,7 +49,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
     <p>
     <center><img src="/images/GAN_compression/Compression_nas.jpg" width="400"></center>
-    <center><em>Fig n.</em></center>
+    <center><em>Fig 2. NAS process</em></center>
     </p>
 
     Model의 accuracy를 강화학습의 reward로 보고 RNN을 훈련시켜, reward가 높아지는 방향으로 모델을 설계하는 방식입니다. <br><br>
@@ -62,7 +62,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
       Once-for-all(OFA)는 다양한 device에 retrain없이 효율적으로 모델을 배포할 수 있도록 하는 것을 목표로 한 방법입니다. <br>
       <p>
       <center><img src="/images/GAN_compression/Compression_OFA_init.jpg" width="500"></center>
-      <center><em>Fig n.</em></center>
+      <center><em>Fig 3. Once-for-all</em></center>
       </p>
 
       전체적인 동작은 가장 큰 network인 OFA를 학습시킨 후 그보다 작은 subnetwork들을 fine-tunning하는 방식(progressive shrinking, PS)으로 동작합니다. OFA에서 network의 depth(layer의 수), width(channel 수), kernel size, resolution이 다른 subnetwork들이 있으며 동작은 <br>
@@ -75,7 +75,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
       <p>
       <center><img src="/images/GAN_compression/Compression_OFA_overview.jpg" width="600"></center>
-      <center><em>Fig n.</em></center>
+      <center><em>Fig 4. Once-for-all process</em></center>
       </p>
 
       Progressive shrinking 방식은 큰 subnetwork부터 작은 subnetwork까지 학습시키기 때문에, 작은 subnetwork를 fine-tunning할 때 이미 훈련이 되어있는 큰 subnetwork에 간섭하는 것을 방지합니다. 또한 작은 subnetwork가 큰 subnetwork로 잘 initialize되어 있어, 훈련을 빠르게 진행할 수 있습니다 <br><br>
@@ -83,7 +83,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
       Resolution에 대한 elastic은 training 중, batch에서 다른 resolution의 이미지들을 sampling함으로써 달성이 됩니다. 나머지는 위의 그림과 같이, kernel size(=K), depth(=D), width(=W) 순으로 subnetwork에 대한 훈련이 이뤄집니다. K에 대해 진행하는 동안 D, W는 최대값을 유지하는 형식으로 훈련이 이뤄집니다. <br>
       <p>
       <center><img src="/images/GAN_compression/Compression_OFA_elastic_1.jpg" width="600"></center>
-      <center><em>Fig n.</em></center>
+      <center><em>Fig 5. Elastic kernel size, depth of Once-for-all</em></center>
       </p>
       <ul>
         <li>Elastic kernel size</li>
@@ -92,7 +92,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
         Depth의 경우 작은 subnetwork에 대해서는 N개 중 처음 D개의 layer만 weight sharing으로 사용하고 나머지는 skip됩니다. <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_OFA_elastic_2.jpg" width="600"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 6. Elastic width of Once-for-all</em></center>
         </p>
         <li>Elastic Width</li>
         Width의 경우 channel을 L1 norm 순으로 정렬하여 작은 subnetwork의 경우 중요한(L1이 큰) channel만 남기고 재구성하는 형식으로 동작합니다. <br>
@@ -108,7 +108,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
     <p>
     <center><img src="/images/GAN_compression/Compression_framework.jpg" width="700"></center>
-    <center><em>Fig n.</em></center>
+    <center><em>Fig 7. Training process of compression</em></center>
     </p>
     
     Origin teacher generator를 $$G'$$라고 가정합니다. <br> 
@@ -139,7 +139,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
     <p>
     <center><img src="/images/GAN_compression/Compression_distill_logits.jpg" width="300"></center>
-    <center><em>Fig n.</em></center>
+    <center><em>Fig 8. Intermediate matching of distillation</em></center>
     </p>
 
     Objective function은 <br>
@@ -199,10 +199,10 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
     pred_fake = netD(fake)
     loss_G_gan = criterionGAN(pred_fake, True, for_discriminator=False) * opt.lambda_gan
-    loss_G_distill = calc_distill_loss() * opt.lambda_distill
+    loss_G_distill = calc_distill_loss() * lambda_distill
     loss_G = loss_G_gan + loss_G_recon + loss_G_distill
 
-    loss_G = loss_G_gan + lambda_recon * loss_G_recon + lambda_distill * loss_G_distill
+    loss_G = loss_G_gan + loss_G_recon + lambda_distill
     ```
 
 - Efficient Generator Design Space <br>
@@ -211,7 +211,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     - Convolution decomposition and layer sensitivity <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_mobilenet.jpg" width="400"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 9. Depthwise separable convolution</em></center>
         </p>
 
         Generator는 classification과 segmentation model에서 가져온 vanilla CNN인 경우가 많습니다. Depthwise separable convolution은 performance-computation trade-off에서 효율적이고 generator에서도 마찬가지입니다. Decomposition을 모든 layer에 적용하면 성능상 degradation이 일어나기 때문에 모두 적용하지는 않습니다. <br>
@@ -241,7 +241,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 
     Training step에서 subnetwork를 random하게 sampling하고, optimize합니다. <br>
 
-    Onece-for-all network가 훈련된 다음에 validation에 대한 전체 subnetwork의 성능 평가 후 가장 optimal한 subnetwork를 찾습니다. Once-for-all은 weight sharing으로 훈련되기 때문에 추가적은 training 없이 optimal network를 선택할 수 있고, 성능 향상을 위해 선택된 subnetwork에 대해서는 fine-tuning도 진행합니다. <br>
+    Once-for-all network가 훈련된 다음에 validation에 대한 전체 subnetwork의 성능 평가 후 가장 optimal한 subnetwork를 찾습니다. Once-for-all은 weight sharing으로 훈련되기 때문에 추가적은 training 없이 optimal network를 선택할 수 있고, 성능 향상을 위해 선택된 subnetwork에 대해서는 fine-tuning도 진행합니다. <br>
 
 
 #### Experiments
@@ -267,7 +267,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     - Quantitative Result <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_quantitative_result.jpg" width="600"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 10. Quantitative Result</em></center>
         </p>
 
         제시된 표에 따르면 CGAN을 9&#126;21배 압축할 수 있었고, model size는 5&#126;33배 줄일 수 있습니다. <br>
@@ -276,7 +276,7 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     - Performance vs Computation Trade-off <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_trade_off.jpg" width="400"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 11. Trade-off</em></center>
         </p>
 
         Model의 compression ratio와 상관없이 performance, computation trade-off의 효율이 좋아졌다는 것을 확인할 수 있습니다. <br>
@@ -286,34 +286,34 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
     - Qualitative Result <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_qualitative_result.jpg" width="600"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 12. Qualitative Result</em></center>
         </p>
 
 
     - Accelerate Inference on Hardware <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_hardware_inference.jpg" width="350"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 13. Accelerate Inference</em></center>
         </p>
 
 - Ablation study <br>
     - Advantage of unpaired-to-paired transform <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_pseudo_advantage_img.jpg" width="600"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 14. Advantage of pseudo GT</em></center>
         </p>
 
         Teacher model로부터 pseudo pair를 생성해 훈련시키는 경우 비교적 성능이 유지되지만, unpaired의 경우 computation budget이 줄어들면서 성능 저하가 심하게 일어나는 것을 확인할 수 있습니다. <br>
 
         <p>
         <center><img src="/images/GAN_compression/Compression_pseudo_advantage.jpg" width="400"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 15.</em></center>
         </p>
 
     - Effectiveness of convolution decomposition <br>
         <p>
         <center><img src="/images/GAN_compression/Compression_decomposition_performance.jpg" width="400"></center>
-        <center><em>Fig n.</em></center>
+        <center><em>Fig 16. Convolution decomposition effectiveness</em></center>
         </p>
 
         Resnet-base인 CycleGAN에서 downsample, updsample, resblock에 대한 sensitivity of convolution decomposition을 비교해봤을 때 위의 그림과 같이 나타납니다. <br>
@@ -324,3 +324,4 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
 -   [Once-for-all](https://arxiv.org/abs/1908.09791)<br>
 -   [NAS](https://arxiv.org/abs/1908.09791)<br>
 -   [MobileNet](https://arxiv.org/abs/1704.04861)<br>
+-   [One-shot NAS](https://arxiv.org/abs/1904.00420)<br>
