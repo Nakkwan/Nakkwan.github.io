@@ -81,6 +81,10 @@ Generative model을 compression 하는데는 2가지 근본적인 어려움이 �
       Progressive shrinking 방식은 큰 subnetwork부터 작은 subnetwork까지 학습시키기 때문에, 작은 subnetwork를 fine-tunning할 때 이미 훈련이 되어있는 큰 subnetwork에 간섭하는 것을 방지합니다. 또한 작은 subnetwork가 큰 subnetwork로 잘 initialize되어 있어, 훈련을 빠르게 진행할 수 있습니다 <br><br>
 
       Resolution에 대한 elastic은 training 중, batch에서 다른 resolution의 이미지들을 sampling함으로써 달성이 됩니다. 나머지는 위의 그림과 같이, kernel size(=K), depth(=D), width(=W) 순으로 subnetwork에 대한 훈련이 이뤄집니다. K에 대해 진행하는 동안 D, W는 최대값을 유지하는 형식으로 훈련이 이뤄집니다. <br>
+      <p>
+      <center><img src="/images/GAN_compression/Compression_OFA_elastic_1.jpg" width="600"></center>
+      <center><em>Fig n.</em></center>
+      </p>
       <ul>
         <li>Elastic kernel size</li>
         선택할 수 있는 kernel size가 예를들어, (7, 5, 3)일 때, 7x7 kernel의 중앙 5x5, 3x3을 사용함으로써, kernel을 elastic하게 합니다. 단순히 kernel의 중앙을 crop하여 사용하게 되면 성능의 저하가 일어나기 떄문에 각 layer마다 다른 transformation matrix를 이용하여 weight sharing에 사용합니다. <br>
