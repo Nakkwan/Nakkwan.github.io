@@ -320,3 +320,4 @@ Transformer는 우수한 성능으로 인해 최근 연구에 활발히 사용�
 Transformer에서는 NLP에서 inductive bias가 없기 때문에 입력에 대해 위치 인코딩을 적용합니다. Vision 분야에서는 image에 대한 많은 정보를 활용하지만 CNN과 같은 locality가 없기 때문에 transformer는 훈련을 위해 많은 dataset가 필요합니다. <br>
 
 ### Reference
+[Transformer paper](https://arxiv.org/abs/1706.03762)
