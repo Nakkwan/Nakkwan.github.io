@@ -13,17 +13,22 @@
 - Hanium exhibit (2020.06 ~ 2020.11)
   - Smart Escort Robot
 - Missile Intercept Simulation (2020.09 ~ 2020.12)
+- Development of AI-based CAD conversion technology for traditional architecture drawing images (2021.05 ~ )
+- AI-based manufacturing site safety management guidebook (2021.10 ~ 2021.12)
 <br>
 
 ### Interest
-- Autonomous Driving
 - Machine Learning
+- Generative Model
+  - VAE
+  - GAN
+- Restoration
 - Objet Detection 
-- Denoising
 <br>
 
 ### Skill
-- C++
 - Python
+- Pytorch
+- C++
 - ROS
 <br>
