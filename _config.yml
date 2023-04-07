@@ -7,8 +7,8 @@ highlighter:      rouge
 excerpt_separator: <!--more-->
 
 # Config for your profile.
-title:            Nakkwan CHOI's Stduy Blog            # Site title
-name:             Nakkwan CHOI            # Your name
+title:            Nakkwan's Study Blog            # Site title
+name:             Nakkwan Choi            # Your name
 avatar:           /theme/img/avatar_img.jpg   # Path to an avatar image
 
 # The theme uses the baseurl throughout, which is useful for running the entire
