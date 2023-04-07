@@ -2,7 +2,7 @@
 layout: defaults/page
 permalink: about.html
 narrow: true
-title: More info about Me
+title: Portfolio
 ## Nakkwan CHOI
 ---
 {% include components/intro.md %}
