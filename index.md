@@ -13,6 +13,8 @@ permalink: /
 Study Log blog of AI reseacher who is interested in Computer Vision.
 {: .fs-6 .fw-300 }
 
+[Email](mailto:nakkwan.choi@gmail.com){: .btn }
+
 <details open markdown="block">
   <summary>
     Table of contents
@@ -66,4 +68,3 @@ CHOI, Nakkwan, et al.
   - Lightning
 - Git
 <br>
-
