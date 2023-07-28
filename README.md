@@ -1,1 +1,0 @@
-# Nakkwan's blog

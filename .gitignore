@@ -1,5 +1,13 @@
-_site
-.DS_Store
+*.gem
+.bundle
+.ruby-version
 .jekyll-cache
 .sass-cache
+<<<<<<< HEAD
+=======
+_site
+Gemfile.lock
+node_modules
+.DS_Store
+>>>>>>> c4c756660eb3f69804236365b72b671224a4f8dc
 .vscode
