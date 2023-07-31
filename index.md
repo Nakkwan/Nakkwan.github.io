@@ -2,18 +2,13 @@
 layout: default
 title: Home
 nav_order: 1
-description: ""
+description: "Study Log blog of AI reseacher who is interested in Computer Vision."
 permalink: /
 ---
 
 # Nakkwan
 {: .no_toc}
 {: .fs-9 .fw-700}
-
-Study Log blog of AI reseacher who is interested in Computer Vision.
-{: .fs-6 .fw-300 }
-
-[Email](mailto:nakkwan.choi@gmail.com){: .btn }
 
 <details open markdown="block">
   <summary>
@@ -23,6 +18,8 @@ Study Log blog of AI reseacher who is interested in Computer Vision.
 1. TOC
 {:toc}
 </details>
+
+[Email](mailto:nakkwan.choi@gmail.com){: .btn } [Github](https://nakkwan.github.io){: .btn }
 
 ---
 ## Educational
