@@ -2,11 +2,11 @@
 layout: default
 title: Home
 nav_order: 1
-description: "Study Log blog of AI reseacher who is interested in Computer Vision."
+description: ""
 permalink: /
 ---
 
-# Nakkwan Blog
+# Nakkwan
 {: .no_toc}
 {: .fs-9 .fw-700}
 
@@ -57,8 +57,7 @@ CHOI, Nakkwan, et al.
 
 ## Interests
 - Computer Vision
-  - Generative Model
-  - Image-to-Image
+  - Generative Model and Application (VAE, Diffusion, Nerf(Recently Studying), etc...)
   - Detection
 <br>
 
