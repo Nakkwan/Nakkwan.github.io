@@ -8,4 +8,4 @@ Gemfile.lock
 node_modules
 .DS_Store
 .vscode
-_config.yaml
+_config.yml
