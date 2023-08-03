@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Theorem
-nav_order: 4
+nav_order: 3
 parent: Papers
 has_children: true
 permalink: /docs/papers/theorem

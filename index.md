@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: Blog is under renewal
 nav_order: 1
 description: "Study Log blog of AI reseacher who is interested in Computer Vision."
 permalink: /

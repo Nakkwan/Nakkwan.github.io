@@ -1,13 +1,14 @@
 ---
 layout: default
-title: Etc
+title: Application
 nav_order: 4
-parent: Papers
+parent: Generative
+grand_parent: Papers
 has_children: true
-permalink: /docs/papers/etc
+permalink: /docs/papers/generative/application
 ---
 
-# Etc
+# Application
 {: .no_toc}
 
 Paper review related to the etc...
