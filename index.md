@@ -43,6 +43,7 @@ CHOI, Nakkwan, et al.
 <br>
 
 ## Projects
+- Development of Self-Elevating Crane System for Installation and Maintenance of Onshore Wind Turbine System (2023.09 ~ 2023.11)
 - Development of AI-based CAD conversion technology for traditional architecture drawing images (2021.05 ~ 2023.02)
 - AI Novatus Academia TA, Gaze tracking SW (2022.11 ~ 2023.01)
 - AI-based manufacturing site safety management guidebook (2021.10 ~ 2022.02)

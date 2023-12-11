@@ -2,7 +2,7 @@
 layout: default
 title: DP, DDP
 parent: Machine Learning
-permalink: /docs/machine_learning/DPDDP
+permalink: /docs/machine_learning/DPDDP_2023_07_20
 ---
 
 # DataParallel and DataDistributed

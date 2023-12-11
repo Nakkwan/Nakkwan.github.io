@@ -2,7 +2,7 @@
 layout: default
 title: einops
 parent: Development
-permalink: /docs/development/einops
+permalink: /docs/development/einops_2023_08_10
 ---
 
 # einops

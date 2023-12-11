@@ -1,11 +1,10 @@
 ---
 layout: default
 title: GAN
-nav_order: 1
-parent: Generative
-grand_parent: Papers
+nav_order: 3
+parent: Computer Vision
 has_children: true
-permalink: /docs/papers/generative/gan
+permalink: /docs/computer_vision/gan
 ---
 
 # GAN

@@ -1,10 +1,9 @@
 ---
 layout: default
 title: Theorem
-nav_order: 3
-parent: Papers
+nav_order: 6
 has_children: true
-permalink: /docs/papers/theorem
+permalink: /docs/theorem
 ---
 
 # Theorem

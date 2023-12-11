@@ -4,7 +4,7 @@ title: Gradient
 parent: PyTorch
 grand_parent: Machine Learning
 has_children: False
-permalink: /docs/machine_learning/pytorch/gradient
+permalink: /docs/machine_learning/pytorch/gradient_2023_07_10
 math: katex
 ---
 

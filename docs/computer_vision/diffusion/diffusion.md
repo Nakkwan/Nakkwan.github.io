@@ -1,11 +1,10 @@
 ---
 layout: default
 title: Diffusion
-nav_order: 3
-parent: Generative
-grand_parent: Papers
+nav_order: 1
+parent: Computer Vision
 has_children: true
-permalink: /docs/papers/generative/diffusion
+permalink: /docs/computer_vision/diffusion_2023_07_10
 ---
 
 # Diffusion

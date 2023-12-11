@@ -2,9 +2,9 @@
 layout: default
 title: Etc
 nav_order: 4
-parent: Papers
+parent: Computer Vision
 has_children: true
-permalink: /docs/papers/etc
+permalink: /docs/computer_vision/etc
 ---
 
 # Etc

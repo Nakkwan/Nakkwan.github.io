@@ -4,7 +4,7 @@ title: Fold and UnFold
 parent: PyTorch
 grand_parent: Machine Learning
 has_children: False
-permalink: /docs/machine_learning/pytorch/foldunFold
+permalink: /docs/machine_learning/pytorch/foldunFold_2023_07_10
 math: katex
 ---
 

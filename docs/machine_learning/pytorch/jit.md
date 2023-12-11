@@ -4,7 +4,7 @@ title: JIT
 parent: PyTorch
 grand_parent: Machine Learning
 has_children: False
-permalink: /docs/machine_learning/pytorch/jit
+permalink: /docs/machine_learning/pytorch/jit_2023_07_10
 math: katex
 ---
 
