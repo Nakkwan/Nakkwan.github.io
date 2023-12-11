@@ -8,8 +8,9 @@ permalink: /docs/etc
 
 # Etc
 {: .no_toc}
-
 Experiential knowledge during development and research
-{: .fs-6 .fw-300 }
+
+Table of contents
+{: .text-delta }
 1. TOC
 {:toc}

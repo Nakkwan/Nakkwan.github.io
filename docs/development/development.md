@@ -8,8 +8,9 @@ permalink: /docs/development
 
 # Development
 {: .no_toc}
-
 Log of studied or searching during the development process
-{: .fs-6 .fw-300 }
+
+Table of contents
+{: .text-delta }
 1. TOC
 {:toc}

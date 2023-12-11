@@ -58,11 +58,15 @@ CHOI, Nakkwan, et al.
   - Generative Model and Application (VAE, Diffusion, Nerf(Recently Studying), etc...)
   - Object Detection
   - Image Processing
+- Modality (Recently Studying)
 <br>
 
 ## Skills
 - Python
   - Pytorch
   - Lightning
+  - FastAPI
 - Git
+- Docker
+- Unity
 <br>

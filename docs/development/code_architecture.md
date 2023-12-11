@@ -14,5 +14,5 @@ Table of contents
 1. TOC
 {:toc}
 
-**Tensor의 연산을 flexible하고 readable하게 할 수 있는 tool**
+
 

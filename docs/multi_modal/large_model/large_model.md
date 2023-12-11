@@ -2,15 +2,16 @@
 layout: default
 title: Large Model
 nav_order: 6
-parent: Modality
+parent: Multi Modal
 has_children: true
-permalink: /docs/modality/large_model
+permalink: /docs/multi_modal/large_model
 ---
 
 # Large Model
 {: .no_toc}
-
 Review of Large AI Model for multi-modal papers
-{: .fs-6 .fw-300 }
+
+Table of contents
+{: .text-delta }
 1. TOC
 {:toc}
