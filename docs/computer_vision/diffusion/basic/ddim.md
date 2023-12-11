@@ -1,19 +1,20 @@
 ---
 layout: default
 title: DDIM
-parent: Diffusion
-grand_parent: Computer Vision
+nav_order: 3
+parent: Basic
+grand_parent: Diffusion
 has_children: true
-permalink: /docs/computer_vision/diffusion/ddim_2023_07_10
+permalink: /docs/computer_vision/diffusion/basic/ddim_2023_07_10
 math: katex
 ---
 
 # DDIM
 {: .no_toc}
-
 [Denoising Diffusion Implicit Models](https://arxiv.org/abs/2010.02502)
-{: .fs-6 .fw-300 }
 
+Table of contents
+{: .text-delta }
 1. TOC
 {:toc}
 

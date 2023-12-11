@@ -7,7 +7,7 @@ has_children: true
 permalink: /docs/computer_vision/vit
 ---
 
-# VIT
+# Vision Transformer
 {: .no_toc}
 
 Review of vision transformer papers

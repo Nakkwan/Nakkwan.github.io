@@ -4,7 +4,7 @@ title: Diffusion
 nav_order: 1
 parent: Computer Vision
 has_children: true
-permalink: /docs/computer_vision/diffusion_2023_07_10
+permalink: /docs/computer_vision/diffusion
 ---
 
 # Diffusion
