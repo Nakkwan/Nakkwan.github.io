@@ -56,7 +56,8 @@ CHOI, Nakkwan, et al.
 ## Interests
 - Computer Vision
   - Generative Model and Application (VAE, Diffusion, Nerf(Recently Studying), etc...)
-  - Detection
+  - Object Detection
+  - Image Processing
 <br>
 
 ## Skills
