@@ -8,8 +8,7 @@ permalink: /docs/technical
 
 # Etc
 {: .no_toc}
-
 Resolution of problems and error situations and other
-{: .fs-6 .fw-300 }
+
 1. TOC
 {:toc}

@@ -10,8 +10,7 @@ permalink: /docs/computer_vision/application
 
 # Application
 {: .no_toc}
-
 Paper review related to the etc...
-{: .fs-6 .fw-300 }
+
 1. TOC
 {:toc}

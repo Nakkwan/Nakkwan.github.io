@@ -3,6 +3,7 @@ layout: default
 title: Loss Landscape
 parent: Theorem
 permalink: /docs/theorem/loss_landscape_2023_10_12
+math: katex
 ---
 
 # Loss Landsacapes are All you Need

@@ -10,8 +10,7 @@ permalink: /docs/computer_vision/diffusion/application
 
 # Application
 {: .no_toc}
-
 Review of paper that applicate diffusion method
-{: .fs-6 .fw-300 }
+
 1. TOC
 {:toc}

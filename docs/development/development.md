@@ -10,7 +10,5 @@ permalink: /docs/development
 {: .no_toc}
 Log of studied or searching during the development process
 
-Table of contents
-{: .text-delta }
 1. TOC
 {:toc}

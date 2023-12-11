@@ -8,8 +8,7 @@ permalink: /docs/computer_vision
 
 # Paper Reviews
 {: .no_toc}
-
 Reviews of papers studied related to computer vision
-{: .fs-6 .fw-300 }
+
 1. TOC
 {:toc}

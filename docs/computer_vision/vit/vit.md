@@ -9,8 +9,7 @@ permalink: /docs/computer_vision/vit
 
 # Vision Transformer
 {: .no_toc}
-
 Review of vision transformer papers
-{: .fs-6 .fw-300 }
+
 1. TOC
 {:toc}

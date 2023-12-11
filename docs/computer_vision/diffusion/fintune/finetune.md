@@ -10,8 +10,7 @@ permalink: /docs/computer_vision/diffusion/finetune
 
 # Finetuning
 {: .no_toc}
-
 Review of finetune paper for diffusion methods
-{: .fs-6 .fw-300 }
+
 1. TOC
 {:toc}

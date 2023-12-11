@@ -10,7 +10,5 @@ permalink: /docs/etc
 {: .no_toc}
 Experiential knowledge during development and research
 
-Table of contents
-{: .text-delta }
 1. TOC
 {:toc}

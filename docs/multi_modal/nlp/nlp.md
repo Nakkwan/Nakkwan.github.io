@@ -11,7 +11,5 @@ permalink: /docs/multi_modal/nlp
 {: .no_toc}
 Review of NLP papers
 
-Table of contents
-{: .text-delta }
 1. TOC
 {:toc}

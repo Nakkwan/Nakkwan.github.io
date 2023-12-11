@@ -10,7 +10,5 @@ permalink: /docs/multi_modal
 {: .no_toc}
 Paper review on multi modal research
 
-Table of contents
-{: .text-delta }
 1. TOC
 {:toc}
