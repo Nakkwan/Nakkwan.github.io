@@ -24,7 +24,7 @@ style reference의 얼굴 동작 패턴 추출 후 portrait에 style code로 인
 이후, voice와 style code에서 stylized facial animation을 합성하는 style-controllable decoder (style-aware adaptation 사용) <br>
 style 적용에 가중치를 주기 위해 adjust the weight <br>
 
-<center><img src="/assets/images/cv/3d/styletalk_fig1.jpg" width="950%" alt="Figure 1"></center>
+<center><img src="/assets/images/cv/3d/styletalk_fig1.jpg" width="95%" alt="Figure 1"></center>
 
 1. style video로부터 [3DMM](#3dmm) parameter 추출 후, style code $$s$$를 얻기 위해 encoder $$E_s$$에 feeding
 2. Audio Encoder $$E_a$$를 통과하여 audio에 대한 feature 추출
