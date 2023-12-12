@@ -1,6 +1,7 @@
 ---
 layout: default
 title: einops
+nav_order: "2023.08.10"
 parent: Development
 permalink: /docs/development/einops_2023_08_10
 ---

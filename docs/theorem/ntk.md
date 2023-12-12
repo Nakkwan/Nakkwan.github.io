@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Neural Tangent Kernel
+nav_order: "2023.12.10"
 parent: Theorem
 permalink: /docs/theorem/ntk_2023_10_12
 math: katex
@@ -54,11 +55,13 @@ $$
 $$\rightarrow$$ $$W$$에 대해서는 linear하고, $$x$$에 대해서는 linear하지 않음 <br>
 여전히, $$W$$에 대해서는 linear하기 때문에 convex한 loss function을 사용하여, 쉬운 optimization이 가능하면서, $$x$$의 non-linearity로 인해, flexibility를 가짐 <br>
 
-하지만 이 방법은 문제점이 있음 <br>
-1. 대부분의 문제에서, basis function을 찾는 것이 매우 어려움
-2. basis function에 대한 연산량이 너무 많음 (feature space로 lifting 후, inner matrix까지)
-$$\rightarrow$$ 예를 들어, 256 res의 경우 $$10^5$$ dim인데, polynomial 3만 해도 $$10^{15}$$로 dim이 급증  <br>    
-$$\rightarrow$$ 여기서 내적까지 하면, 계산량과 메모리에 문제가 있음  <br>
+{: .note-title }
+> 하지만 이 방법은 문제점이 있음
+> 
+> 1. 대부분의 문제에서, basis function을 찾는 것이 매우 어려움
+> 2. basis function에 대한 연산량이 너무 많음 (feature space로 lifting 후, inner matrix까지) <br>
+> $$\rightarrow$$ 예를 들어, 256 res의 경우 $$10^5$$ dim인데, polynomial 3만 해도 $$10^{15}$$로 dim이 급증 <br>
+> $$\rightarrow$$ 여기서 내적까지 하면, 계산량과 메모리에 문제가 있음
 
 위의 고차원 변환 + 연산량 문제를 해결하기 위해 kernel을 사용함 <br>
 
@@ -85,11 +88,13 @@ basis function의 내적과 동치인 값을 얻을 수 있는 함수 $$K$$를 �
 $$\rightarrow$$ 내적에 대한 값이므로 $$K$$는 당연히, symetric하고, positive semi-definite <br>
 kernel function 들은 **Mercer's Theorem**를 만족해야 함 <br>
 
-**자주쓰이는 kernel들**
-Linear: $$K(x_i, x_j)=x^T_ix_j$$  <br>
-Polynomial: $$K(x_i, x_j)=(x_i^Tx_j+c)^d$$ <br>
-Sigmoid: $$K(x_i, x_j)=\tanh\{a(x^T_ix_j)+b\}, \quad a,b \ge0$$ <br>
-Gaussian: $$K(x_i, x_j)=\exp\{-\frac{\lVert x_i-x_j \rVert^2_2}{2\sigma^w}\},\quad \sigma \ne 0$$ <br>
+{: .note-title }
+> 자주쓰이는 kernel들
+> 
+> Linear: $$K(x_i, x_j)=x^T_ix_j$$  <br>
+> Polynomial: $$K(x_i, x_j)=(x_i^Tx_j+c)^d$$ <br>
+> Sigmoid: $$K(x_i, x_j)=\tanh\{a(x^T_ix_j)+b\}, \quad a,b \ge0$$ <br>
+> Gaussian: $$K(x_i, x_j)=\exp\{-\frac{\lVert x_i-x_j \rVert^2_2}{2\sigma^w}\},\quad \sigma \ne 0$$ <br>
 
 Kernel SVM, Kernel regression, Kernel PCA 등에 활용될 수 있음
 
@@ -145,9 +150,13 @@ K(x_i, x_j)=
 $$
 
 이를 **Neural Tangent Kernel (NTK)**라고 함 <br>
-$$\rightarrow$$ NN에 관한 것이기 때문에 Neural <br>
-$$\rightarrow$$ Tangent Space (접공간)이기 때문에 Tangent <br>
-$$\rightarrow$$ Kernel처럼 생각되기 때문에 Kernel <br>
+
+{: .important-title }
+> Neural Tangent Kernel
+> 
+> $$\rightarrow$$ NN에 관한 것이기 때문에 Neural <br>
+> $$\rightarrow$$ Tangent Space (접공간)이기 때문에 Tangent <br>
+> $$\rightarrow$$ Kernel처럼 생각되기 때문에 Kernel <br>
 
 ## NTK의 활용
 <center><img src="/assets/images/theorem/ntk_fig2.jpg" width="70%" alt="Figure 2"></center>
@@ -256,13 +265,17 @@ u(t)&=u(0)\sum^n_{i=1}e^{-\lambda_iv_iv_i^Tt}
 $$
 
 $$u$$라는 것은 error값이 어떻게 바뀌느냐에 대한 것. <br>
-위의 식에서 보면, eigenvalue 값이 rate of change로 보여질 수 있음 <br>
-**따라서, eigenvalue가 0에 가까우면, t가 아무리 커져도(훈련이 진행되어도) $$u$$가 수렴하지 않음** <br>
-**반면, eigenvalue가 크면, 빠르게 수렴** <br>
 
-**eigenvalue는 사실상, fourier coefficient로 볼 수 있고, low-frequency에 대응되는 쪽이, eigenvalue가 큰 부분이고, high-frequency는 eignevalue가 작은 쪽에 대응됨** <br>
-
-**즉, NN은 high-frequency에 대해 fitting을 잘 하지 못함** <br>
+{: .highlight }
+> 위의 식에서 보면, eigenvalue 값이 rate of change로 보여질 수 있음
+> 
+> 따라서, eigenvalue가 0에 가까우면, t가 아무리 커져도(훈련이 진행되어도) $$u$$가 수렴하지 않음
+> 
+> 반면, eigenvalue가 크면, 빠르게 수렴
+> 
+> eigenvalue는 사실상, fourier coefficient로 볼 수 있고, low-frequency에 대응되는 쪽이, eigenvalue가 큰 부분이고, high-frequency는 eignevalue가 작은 쪽에 대응됨
+> 
+> 즉, NN은 high-frequency에 대해 fitting을 잘 하지 못함
 
 따라서, 아래의 fourier feature에서 high-frequency의 값들을 lifting 해줄 수 있는 kernel을 사용하면, fitting이 잘 됨 <br>
 <center><img src="/assets/images/theorem/ntk_fig3.jpg" width="70%" alt="Figure 3"></center>
