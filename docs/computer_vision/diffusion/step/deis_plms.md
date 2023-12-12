@@ -11,9 +11,10 @@ math: katex
 # Fast Sampling of Diffusion Models with Exponential Integrator
 {: .no_toc}
 
-<!-- [Pseudo Numerical Methods for Diffusion Models on Manifolds](https://arxiv.org/abs/2202.09778) -->
-{: .fs-6 .fw-300 }
+[Fast Sampling of Diffusion Models with Exponential Integrator](https://arxiv.org/abs/2204.13902)
 
+Table of Contents
+{: .text-delta }
 1. TOC
 {:toc}
 

@@ -10,9 +10,10 @@ math: katex
 # DreamBooth
 {: .no_toc}
 
-<!-- [Pseudo Numerical Methods for Diffusion Models on Manifolds](https://arxiv.org/abs/2202.09778) -->
-{: .fs-6 .fw-300 }
+[DreamBooth](https://dreambooth.github.io/)
 
+Table of Contents
+{: .text-delta }
 1. TOC
 {:toc}
 

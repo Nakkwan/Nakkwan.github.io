@@ -10,9 +10,10 @@ math: katex
 # Textual Inversion
 {: .no_toc}
 
-<!-- [Pseudo Numerical Methods for Diffusion Models on Manifolds](https://arxiv.org/abs/2202.09778) -->
-{: .fs-6 .fw-300 }
+[An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion](https://arxiv.org/abs/2208.01618)
 
+Table of Contents
+{: .text-delta }
 1. TOC
 {:toc}
 

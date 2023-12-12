@@ -10,9 +10,10 @@ math: katex
 # LoRA
 {: .no_toc}
 
-<!-- [Pseudo Numerical Methods for Diffusion Models on Manifolds](https://arxiv.org/abs/2202.09778) -->
-{: .fs-6 .fw-300 }
+[LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
 
+Table of Contents
+{: .text-delta }
 1. TOC
 {:toc}
 
