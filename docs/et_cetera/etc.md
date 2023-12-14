@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Etc
+title: Et cetera
 nav_order: 8
 has_children: true
 permalink: /docs/etc

@@ -4,7 +4,6 @@ title: Score SDE
 nav_order: 4
 parent: Basic
 grand_parent: Diffusion
-has_children: true
 permalink: /docs/computer_vision/diffusion/basic/score-sde_2023_07_10
 math: katex
 ---

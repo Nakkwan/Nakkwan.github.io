@@ -4,7 +4,6 @@ title: DDIM
 nav_order: 3
 parent: Basic
 grand_parent: Diffusion
-has_children: true
 permalink: /docs/computer_vision/diffusion/basic/ddim_2023_07_10
 math: katex
 ---
