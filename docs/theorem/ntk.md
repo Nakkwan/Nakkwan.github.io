@@ -88,6 +88,17 @@ basis function의 내적과 동치인 값을 얻을 수 있는 함수 $$K$$를 �
 $$\rightarrow$$ 내적에 대한 값이므로 $$K$$는 당연히, symetric하고, positive semi-definite <br>
 kernel function 들은 **Mercer's Theorem**를 만족해야 함 <br>
 
+<details markdown='block'>
+<summary>Mercer's Theorem</summary>
+$$\rightarrow$$ 조금 더 공부가 필요함
+특정 조건을 만족하는 대칭 연속 커널 함수는 무한차원 힐베르트 공간(Hilbert space)으로의 매핑을 암시
+1. Symmetry:커널 함수 K(x,y)는 대칭이어야 함 $$\rightarrow$$ $$K(x,y)=K(y,x)$$
+1. Positive Semi-Definite
+
+$$\rightarrow$$ 고차원(무한차원)에 매핑된다는 것은 복잡한 데이터를 선형으로 분리할 수 있다는 것
+$$\rightarrow$$ 또한, 고차원에 대한 계산을 하지 않고도 kernel trick을 통해 효율적으로 동일한 값을 얻을 수 있음
+</details>
+
 {: .note-title }
 > 자주쓰이는 kernel들
 > 

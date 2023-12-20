@@ -5,6 +5,7 @@ nav_order: "2023_12_09"
 parent: VIT
 grand_parent: Computer Vision
 permalink: /docs/computer_vision/vit/vision_transformer_2023_12_11
+math: katex
 ---
 
 # VIT

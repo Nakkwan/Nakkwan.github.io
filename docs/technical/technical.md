@@ -6,9 +6,9 @@ has_children: true
 permalink: /docs/technical
 ---
 
-# Etc
+# Technical
 {: .no_toc}
-Resolution of problems and error situations and other
+Experiential knowledge and technology learned during the research and development process
 
 1. TOC
 {:toc}

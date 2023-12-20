@@ -2,7 +2,7 @@
 layout: default
 title: Deep Double Descent
 parent: Theorem
-permalink: /docs/theorem/loss_landscape_2023_10_12
+permalink: /docs/theorem/deep_double_descent_2023_10_12
 math: katex
 ---
 
