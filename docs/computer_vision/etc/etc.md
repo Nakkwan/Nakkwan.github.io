@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Etc
-nav_order: 4
+nav_order: 6
 parent: Computer Vision
 has_children: true
 permalink: /docs/computer_vision/etc

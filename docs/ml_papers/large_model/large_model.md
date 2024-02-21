@@ -1,10 +1,10 @@
 ---
 layout: default
 title: Large Model
-nav_order: 6
-parent: Multi Modal
+nav_order: 2
+parent: ML Papers
 has_children: true
-permalink: /docs/multi_modal/large_model
+permalink: /docs/ml_papers/large_model
 ---
 
 # Large Model

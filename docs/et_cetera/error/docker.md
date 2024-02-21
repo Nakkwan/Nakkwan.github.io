@@ -19,7 +19,7 @@ Error occurred in docker
 Dockerfile에서 틀린 것이 없는데, exit code error가 나는 경우, shell의 문제일 수 있음 <br>
 dockerfile에서 build 시 기본 shell은 `/bin/sh`로 설정됨 <br>
 따라서, 정상적인 RUN command에 에러가 발생한다면, `SHELL [’/bin/bash’, ‘-c’]`을 사용하여 기본 shell을 바꿔주자! <br>
-<details open markdown="block">
+<details markdown="block">
 <summary>shell 추가 정보</summary>
 <ul><li>
 Shell은 운영 체제 속 내용물에 접근할 수 있는 기능을 제공하는 프로그램</li><li>
@@ -39,7 +39,7 @@ dockerfile은 RUN 명령어를 실행할 때마다 github에서 commit하듯이 
 따라서, 이전에 RUN cd ~ 와 같이 command를 작성했더라도 다음 **RUN 명령어에는 WORKDIR에서 설정했던 경로에서 command가 실행**됨 <br>
 $$\rightarrow$$ 이 부분을 간과해서 동작에 오류가 났었던 경우가 있음
 
-<details open markdown="block">
+<details markdown="block">
 <summary>RUN 명령어는 2가지 방식으로 동작시킬 수 있음</summary>
 1. sh 형식, 
 2. exec 형식

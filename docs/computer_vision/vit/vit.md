@@ -5,6 +5,7 @@ nav_order: 2
 parent: Computer Vision
 has_children: true
 permalink: /docs/computer_vision/vit
+math: katex
 ---
 
 # Vision Transformer

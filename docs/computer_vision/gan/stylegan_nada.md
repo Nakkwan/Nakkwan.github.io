@@ -1,6 +1,7 @@
 ---
 layout: default
 title: StyelGAN-NADA
+nav_order: "2023.12.11"
 parent: GAN
 grand_parent: Computer Vision
 permalink: /docs/computer_vision/gan/stylegan-nada_2023_12_11

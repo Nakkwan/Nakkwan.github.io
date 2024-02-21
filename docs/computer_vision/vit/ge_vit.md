@@ -1,7 +1,7 @@
 ---
 layout: default
 title: GE-ViT
-nav_order: "2023_12_20"
+nav_order: "2023.12.20"
 parent: VIT
 grand_parent: Computer Vision
 permalink: /docs/computer_vision/vit/ge_vit_2023_12_20

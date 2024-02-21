@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Swin Transformer V2
-nav_order: "2023_12_10"
+nav_order: "2023.12.10"
 parent: VIT
 grand_parent: Computer Vision
 permalink: /docs/computer_vision/vit/swinv2_2023_12_11

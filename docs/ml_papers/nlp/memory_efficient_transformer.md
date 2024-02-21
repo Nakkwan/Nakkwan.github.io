@@ -3,8 +3,8 @@ layout: default
 title: Memory Efficient Transformer
 nav_order: "2023.12.10"
 parent: NLP
-grand_parent: Multi Modal
-permalink: /docs/multi_modal/nlp/memory_efficient_transformer_2023_12_10
+grand_parent: ML Papers
+permalink: /docs/ml_papers/nlp/memory_efficient_transformer_2023_12_10
 math: katex
 ---
 

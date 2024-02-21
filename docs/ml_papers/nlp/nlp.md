@@ -1,10 +1,10 @@
 ---
 layout: default
 title: NLP
-nav_order: 6
-parent: Multi Modal
+nav_order: 1
+parent: ML Papers
 has_children: true
-permalink: /docs/multi_modal/nlp
+permalink: /docs/ml_papers/nlp
 ---
 
 # NLP
