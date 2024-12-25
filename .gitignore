@@ -9,4 +9,4 @@ node_modules
 .DS_Store
 .vscode
 /_config.yml
-/assets/images
+/assets/images/etc
