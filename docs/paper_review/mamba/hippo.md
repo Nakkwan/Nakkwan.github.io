@@ -2,9 +2,9 @@
 layout: default
 title: HIPPO
 nav_order: "2024.02.11"
-parent: Theorem
+parent: Mamba
 grand_parent: Paper Review
-permalink: /docs/paper_review/theorem/hippo_2024_02_11
+permalink: /docs/paper_review/mamba/hippo_2024_02_11
 math: katex
 ---
 
