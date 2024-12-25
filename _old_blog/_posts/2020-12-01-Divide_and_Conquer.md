@@ -10,7 +10,11 @@ Divide & Conquer (분할 정복)은 주어진 문제를 둘 이상의 부분 문
 <!--more-->
 
 다음 그림은 분할 정복의 대략적인 모습입니다.
-<img src="https://user-images.githubusercontent.com/48177363/100746330-e8d98000-3423-11eb-81e3-de946810ff78.PNG" width = "600" height = "400">
+<figure>
+  <img src="https://user-images.githubusercontent.com/48177363/100746330-e8d98000-3423-11eb-81e3-de946810ff78.PNG" width = "600" height = "400">
+	<center><figcaption><b></b></figcaption></center>
+</figure>
+
 
 1. 문제를 더 작은 문제로 나누고 (divide)
 2. base case (더 나누지 않고 바로 풀 수 있는 문제)

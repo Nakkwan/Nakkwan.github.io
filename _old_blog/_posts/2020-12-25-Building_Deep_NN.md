@@ -32,7 +32,10 @@ $$    da^{[l-1]} = W^{[l]T}dz^{[l]}$$<br>
 $$    dz^{[l]} = W^{[l+1]T}dz^{[l+1]} * {g^{[l]}}'(z^{[l]})$$<br>
 
 위의 식들을 그림으로 나타내면 다음과 같습니다. <br>
-<img src="https://user-images.githubusercontent.com/48177363/103478885-104daf00-4e0d-11eb-9865-94d72253f5cc.PNG" width="750" height="450">
+<figure>
+  <img src="https://user-images.githubusercontent.com/48177363/103478885-104daf00-4e0d-11eb-9865-94d72253f5cc.PNG" width="750" height="450">
+	<center><figcaption><b></b></figcaption></center>
+</figure>
 
 ### Parameters & Hyperparameters
 

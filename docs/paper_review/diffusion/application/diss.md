@@ -96,7 +96,10 @@ $$
 이를 통해, diffision model에서 multi-guidance를 제공
 
 ### **Realism Control**
-<center><img src="/assets/images/papers/diffusion/application/diss_fig1.jpg" width="95%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig1.jpg" width="95%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 입력이 항상 realistic하지 않기 때문에 입력에 얼마나 faithful 할 지에 대한 control이 필요 <br>
 $$\rightarrow$$ output이 얼마나 realistic할지 <br>
@@ -150,44 +153,72 @@ Generative Process에서 contour, color, realism에 대한 control과 applicatio
 
 ### **Qualitative Evaluation**
 **Adaptively-realistic image generation from sketch and stroke.** <br>
-<center><img src="/assets/images/papers/diffusion/application/diss_fig2.jpg" width="95%" alt="Figure 2"></center>
-
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig2.jpg" width="95%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 **Multi-modal multi-domain translation.** <br>
 확률 모델이기 때문에 여러 이미지를 생성할 수 있음 <br>
 Sketch는 어느 정도 class의 정보를 포함함을 알 수 있음 <br>
 또한 sketch와 stroke가 다른 이미지에서 와도 생성이 잘됨 (un-aligned에 robust)
-
-<center><img src="/assets/images/papers/diffusion/application/diss_fig3.jpg" width="95%" alt="Figure 3"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig3.jpg" width="95%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
 
 **Applications.** <br>
 
 3차원 control에 더불어, local 영역 편집 및 영역 stroke-to-image도 가능 <br>
 - Inference algorithm만 변경하면 application 가능
-<center><img src="/assets/images/papers/diffusion/application/diss_fig12.jpg" width="75%" alt="Figure 12"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig12.jpg" width="75%" alt="Figure 12"></center>
+	<center><figcaption><em>[Figure 12]</em></figcaption></center>
+</figure>
 
 <table>
 <tr><td style="width:50%">
-<center><img src="/assets/images/papers/diffusion/application/diss_fig4.jpg" width="100%" alt="Figure 4"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig4.jpg" width="100%" alt="Figure 4"></center>
+	<center><figcaption><em>[Figure 4]</em></figcaption></center>
+</figure>
 </td><td>
-<center><img src="/assets/images/papers/diffusion/application/diss_fig5.jpg" width="100%" alt="Figure 5"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig5.jpg" width="100%" alt="Figure 5"></center>
+	<center><figcaption><em>[Figure 5]</em></figcaption></center>
+</figure>
 </td></tr>
 </table>
-<center><img src="/assets/images/papers/diffusion/application/diss_fig6.jpg" width="45%" alt="Figure 6"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig6.jpg" width="45%" alt="Figure 6"></center>
+	<center><figcaption><em>[Figure 6]</em></figcaption></center>
+</figure>
 
 ### **Quantitative Evaluation**
 **Image quality and correspondence to input sketch.** <br>
-<center><img src="/assets/images/papers/diffusion/application/diss_fig7.jpg" width="50%" alt="Figure 7"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig7.jpg" width="50%" alt="Figure 7"></center>
+	<center><figcaption><em>[Figure 7]</em></figcaption></center>
+</figure>
 
 **Realism vs correspondence to input guidance.** <br>
-<center><img src="/assets/images/papers/diffusion/application/diss_fig8.jpg" width="95%" alt="Figure 8"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig8.jpg" width="95%" alt="Figure 8"></center>
+	<center><figcaption><em>[Figure 8]</em></figcaption></center>
+</figure>
 
 **Controlling stroke and sketch scales.** <br>
 <table>
 <tr>
 <td style="width:55%">
-<center><img src="/assets/images/papers/diffusion/application/diss_fig9.jpg" width="100%" alt="Figure 9"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig9.jpg" width="100%" alt="Figure 9"></center>
+	<center><figcaption><em>[Figure 9]</em></figcaption></center>
+</figure>
 </td><td>
-<center><img src="/assets/images/papers/diffusion/application/diss_fig10.jpg" width="100%" alt="Figure 10"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig10.jpg" width="100%" alt="Figure 10"></center>
+	<center><figcaption><em>[Figure 10]</em></figcaption></center>
+</figure>
 </td></tr>
 </table>
 
@@ -197,4 +228,7 @@ Sketch는 어느 정도 class의 정보를 포함함을 알 수 있음 <br>
 Sketch과 colored stroke를 통해 flexible하게 photo-realistic images를 생성하는 DiSS framework 제안 <br>
 1. Two-directional classifier-free guidance <br>
 2. Iterative latent variable refinement
-<center><img src="/assets/images/papers/diffusion/application/diss_fig11.jpg" width="50%" alt="Figure 11"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/application/diss_fig11.jpg" width="50%" alt="Figure 11"></center>
+	<center><figcaption><em>[Figure 11]</em></figcaption></center>
+</figure>

@@ -11,7 +11,10 @@ Neural Network는 __특정한 직무나 기능을 수행하는 방법을 모델�
 <!--more-->
 
 다음 그림은 간단한 Neural Network입니다.
-<img src="https://user-images.githubusercontent.com/48177363/101283812-3721c100-3820-11eb-818c-58ac683fb901.PNG" width="500" height="350"> <br>
+<figure>
+  <img src="https://user-images.githubusercontent.com/48177363/101283812-3721c100-3820-11eb-818c-58ac683fb901.PNG" width="500" height="350"> <br>
+	<center><figcaption><b></b></figcaption></center>
+</figure>
 Logistic Regression을 여러개 연결한 것 같은 모양으로, Input($$x_{i}$$), Output($$\hat{y}$$), Hidden Layer가 존재합니다. Hidden Layer는 입력, 출력과는 달리 보이지 않는 층으로, 그림에서는 2개의 Hidden Layer가 존재합니다. Layer를 말할 땐 입력층은 제외하기 때문에 그림은 2 Layer NN입니다. <br>
 NN에서 기호의 표현은 다음과 같습니다.
 - Layer는 윗 첨자의 대괄호로 나타낸다. 
@@ -28,7 +31,10 @@ NN에서 기호의 표현은 다음과 같습니다.
 - $$a^{[i]}$$ = (i Layer의 Unit 수, 1)
 
 Layer에서 계산 과정을 그림으로 보면 다음과 같습니다. <br>
-<img src="https://user-images.githubusercontent.com/48177363/101284949-0f355c00-3826-11eb-87aa-07c34d6606ae.PNG" width="550" height="350"><br>
+<figure>
+  <img src="https://user-images.githubusercontent.com/48177363/101284949-0f355c00-3826-11eb-87aa-07c34d6606ae.PNG" width="550" height="350"><br>
+	<center><figcaption><b></b></figcaption></center>
+</figure>
 
 ### Represntation
 
@@ -67,8 +73,10 @@ Z^{[1]}_{4}
 ### Forward Propagation
 
 Forward propagation(전방향 전파)는 입력부터 Layer를 거쳐 출력을 얻는 것을 의미합니다. 앞에서 언급했던 것과 같은데 좀 더 일반적인 상황에서 보겠습니다. <br>
-<img src="https://user-images.githubusercontent.com/48177363/101565863-4ae04980-3a11-11eb-9416-6ecb810ff478.PNG" width="550" height="350"><br>
-
+<figure>
+  <img src="https://user-images.githubusercontent.com/48177363/101565863-4ae04980-3a11-11eb-9416-6ecb810ff478.PNG" width="550" height="350"><br>
+	<center><figcaption><b></b></figcaption></center>
+</figure>
 위의 Neural Network는 4 Layer NN입니다. Forward propagation에 대한 일반식을 써보면,<br>
 - $$Z^{[l]} = W^{[l]}a^{[l]} + b^{[l]}$$<br>
 - $$a^{[l]} = g^{[l]}(Z^{[l]})$$<br>

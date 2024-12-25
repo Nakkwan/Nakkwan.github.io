@@ -51,7 +51,10 @@ ControlNet은 pretrain된 LM을 task-specific한 condition으로 finetune할 수
 Resnet, attention, transformer와 같은 NN block의 input을 조작하여, output을 control할 수 있음 <br>
 일반적으로 input $$x$$에 대하여 NN은 다음과 같이 나타남 (a)
 
-<center><img src="/assets/images/papers/diffusion/condition/controlnet_fig1.jpg" width="95%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/condition/controlnet_fig1.jpg" width="95%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 여기서 parameter $$\theta$$를 복사하여, trainable로 복제 <br>
 trainable $$\theta_c$$은 외부 condition $$c$$와 합쳐져 훈련됨 <br>
@@ -110,7 +113,10 @@ SD에 대한 간략한 설명 (논문에는 512를 말하는 듯. 내가 다운�
 - 따라서 ControlNet도 latent에서 동작하고, 4개의 conv layer (4x4 kernel, 2x2 strides, channel=[16, 32, 64, 128])을 사용하여 512 → 64로 encode
     - condition으로 들어올 input과 image를 encode하기 위해
 
-<center><img src="/assets/images/papers/diffusion/condition/controlnet_fig2.jpg" width="95%" alt="Figure 2"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/condition/controlnet_fig2.jpg" width="95%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 
 ### **Training**
 {: .no-toc}
@@ -159,7 +165,10 @@ model.load_state_dict(target_dict, strict=True)
 torch.save(model.state_dict(), output_path)
 ```
 
-<center><img src="/assets/images/papers/diffusion/condition/controlnet_fig2.jpg" width="70%" alt="Figure 2"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/condition/controlnet_fig2.jpg" width="70%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 
 파란 부분은, Unet 부분을 복사해옴 <br>
 13개의 output 각각에 zero_conv_module을 붙임 <br>

@@ -26,10 +26,16 @@ $$\rightarrow$$ 비슷하게 style로는 **CLIPstyler**가 있음
 <table>
 <tr>
 <td style="width:50%">
-<center><img src="/assets/images/papers/gan/stylegan-nada_fig1.jpg" width="100%" alt="Figure 1"></center>
+<figure>
+  <center><img src="/assets/images/papers/gan/stylegan-nada_fig1.jpg" width="100%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 </td>
 <td>
-<center><img src="/assets/images/papers/gan/stylegan-nada_fig2.jpg" width="100%" alt="Figure 2"></center>
+<figure>
+  <center><img src="/assets/images/papers/gan/stylegan-nada_fig2.jpg" width="100%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 </td>
 </tr>
 </table>
@@ -54,7 +60,10 @@ L_{direction} = 1 − \frac{∆I · ∆T}{|∆I| |∆T|}.
 \end{gather}
 $$
 </td><td>
-<center><img src="/assets/images/papers/gan/stylegan-nada_fig3.jpg" width="100%" alt="Figure 3"></center>
+<figure>
+  <center><img src="/assets/images/papers/gan/stylegan-nada_fig3.jpg" width="100%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
 </td></tr>
 </table>
 

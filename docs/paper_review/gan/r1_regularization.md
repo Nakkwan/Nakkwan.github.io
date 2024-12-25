@@ -126,7 +126,10 @@ L(\theta, \phi)=f(\phi, \theta) + f(0)
 \end{align}
 $$
 
-<center><img src="/assets/images/papers/gan/r1-regularization_fig1.jpg" width="60%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/papers/gan/r1-regularization_fig1.jpg" width="60%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 초기에는 $$p_{\mathcal{D}}$$의 방향으로 훈련되게 되지만, distribution이 real에 가까워질수록 $$\phi$$의 절댓값이 커지기 때문에 0 근처에서 distribution이 진동을 하게됨 <br>
 $$\rightarrow$$ Convergence하지 않음

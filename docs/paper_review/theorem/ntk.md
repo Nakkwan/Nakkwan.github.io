@@ -36,7 +36,10 @@ linear regression이 간단하고 convex optimization을 풀기에 좋지만, �
 $$\rightarrow$$ input space  자체를 high-dimension으로 lifting 시킨 후 linear regression을 적용 <br>
 이 때, input space $$\rightarrow$$ feature space를 수행하는 함수를 basis function ($$\Phi$$) 이라고 함
 
-<center><img src="/assets/images/theorem/ntk_fig1.jpg" width="90%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/theorem/ntk_fig1.jpg" width="90%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 $$
 \begin{gather}
@@ -171,7 +174,10 @@ $$
 > $$\rightarrow$$ Kernel처럼 생각되기 때문에 Kernel <br>
 
 ## NTK의 활용
-<center><img src="/assets/images/theorem/ntk_fig2.jpg" width="70%" alt="Figure 2"></center>
+<figure>
+    <center><img src="/assets/images/theorem/ntk_fig2.jpg" width="70%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 **위의 NN의 NTK**
 
 $$
@@ -290,9 +296,15 @@ $$u$$라는 것은 error값이 어떻게 바뀌느냐에 대한 것. <br>
 > 즉, NN은 high-frequency에 대해 fitting을 잘 하지 못함
 
 따라서, 아래의 fourier feature에서 high-frequency의 값들을 lifting 해줄 수 있는 kernel을 사용하면, fitting이 잘 됨 <br>
-<center><img src="/assets/images/theorem/ntk_fig3.jpg" width="70%" alt="Figure 3"></center>
+<figure>
+    <center><img src="/assets/images/theorem/ntk_fig3.jpg" width="70%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
 즉, fourier feature의 경우, 고주파수 부분을 입력으로 넣어준다는 것으로 생각할 수 있음
-<center><img src="/assets/images/theorem/ntk_fig4.jpg" width="50%" alt="Figure 4"></center>
+<figure>
+    <center><img src="/assets/images/theorem/ntk_fig4.jpg" width="50%" alt="Figure 4"></center>
+	<center><figcaption><em>[Figure 4]</em></figcaption></center>
+</figure>
 
 ## Fourier Features
 

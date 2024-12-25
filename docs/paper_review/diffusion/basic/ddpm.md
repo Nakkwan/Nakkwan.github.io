@@ -28,7 +28,10 @@ Target distribution에서 noise를 추가하는 **forward process**와 noise에�
 DM은 VI를 이용한 parameterized Markov chain<br>
 Signal을 파괴(Noise)시키는 Markov chain인 diffusion process의 reverse를 학습<br>
 $$\rightarrow$$ Noise가 작으면 transition을 conditional gaussian으로 설정 가능 $$\mathcal{N}(x|\mu, \Sigma)$$
-<center><img src="/assets/images/papers/diffusion/basic/ddpm_fig1.jpg" width="80%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/basic/ddpm_fig1.jpg" width="80%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 퀄리티는 좋지만, 다른 타입의 모델에 비해, NLL(lossless codelength)가 좋지 않음<br>
 이를 lossless codelength를 인지할 수 없는 이미지 세부 정보를 설명하는 데 사용<br>
@@ -244,15 +247,20 @@ $$T = 1000, \beta_1 = 10^{-4}, \beta_T = 0.02, \mathrm{data scale}: [-1, 1]$$
 Architecture: Backbone of PixelCNN++,
 
 ### **Sample quality**
-
-<center><img src="/assets/images/papers/diffusion/basic/ddpm_fig2.jpg" width="75%" alt="Figure 2"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/basic/ddpm_fig2.jpg" width="75%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 
 ### **Reverse process parameterization and training objective ablation**
 
 epsilon의 경우가 L simple일 때 좋은 성능을 보임
 
 mu는 variance를 훈련시키면, 불안정함
-<center><img src="/assets/images/papers/diffusion/basic/ddpm_fig3.jpg" width="50%" alt="Figure 3"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/basic/ddpm_fig3.jpg" width="50%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
 
 ### **Progressive coding**
 
@@ -277,7 +285,10 @@ $$
 위의 식을 이용하여 조금 더 분석
 
 1~T의 각 step마다 $$x_T$$로부터 $$x_0$$를 복원해봄 (식 (4): $$\hat{x_0}=(x_t-\sqrt{1-\bar{\alpha_t}}\epsilon_\theta(x_t))/\sqrt{\bar{\alpha_t}}$$))
-<center><img src="/assets/images/papers/diffusion/basic/ddpm_fig3.jpg" width="50%" alt="Figure 3"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/basic/ddpm_fig3.jpg" width="50%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
 
 
 왼쪽 그림: 당연하게도 $$x_T$$에 가까울수록, 식 (4)로 $$x_0$$을 복원할 때, 왜곡이 큼
@@ -293,11 +304,17 @@ $$\rightarrow$$ 감지할 수 없는 왜곡이 있음
 
 이미지는 coarse부터 fine으로 생성됨
 
-<center><img src="/assets/images/papers/diffusion/basic/ddpm_fig4.jpg" width="95%" alt="Figure 4"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/basic/ddpm_fig4.jpg" width="95%" alt="Figure 4"></center>
+	<center><figcaption><em>[Figure 4]</em></figcaption></center>
+</figure>
 
 확률적 생성이기 때문에, t가 작을 때부터 공유될수록, 같은 이미지가 생성됨
 
-<center><img src="/assets/images/papers/diffusion/basic/ddpm_fig5.jpg" width="95%" alt="Figure 5"></center>
+<figure>
+    <center><img src="/assets/images/papers/diffusion/basic/ddpm_fig5.jpg" width="95%" alt="Figure 5"></center>
+	<center><figcaption><em>[Figure 5]</em></figcaption></center>
+</figure>
 
 t가 압축 비율로 비유되었을 때, 압축이 적을수록, 왜곡이 적다는 것으로 이해할 수 있음
 

@@ -89,7 +89,10 @@ $$
 ## **Generalization-Enhanced ViT**
 OOD를 개선하기 위해 **GE-ViT**를 설계
 
-<center><img src="/assets/images/papers/vit/gevit_fig1.jpg" width="90%" alt="Figure 1"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig1.jpg" width="90%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 1. **T-ADV**: Adversarial Training <br>
    Domain-invariant representation을 학습하기 위해, adversarial training를 이용하여 $$F$$와 domain classifier $$D$$ 훈련
@@ -124,7 +127,10 @@ OOD를 개선하기 위해 **GE-ViT**를 설계
 
 ## **Systematic Study on ViTs Generalization**
 ### **Background Shifts Generalization Analysis**
-<center><img src="/assets/images/papers/vit/gevit_fig2.jpg" width="95%" alt="Figure 2"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig2.jpg" width="95%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 
 **ViTs perform with a weaker background-bias than CNNs.**
 Class와 관련있는 배경에 대한 Mixed-Same과 랜덤한 배경인 Mixed-Rand의 정확도를 비교한 결과, **VIT는 CNN보다 Background bias가 적음** [(Fig. 2a)](#background-shifts-generalization-analysis)
@@ -141,7 +147,10 @@ ViT가 클수록 모델이 foreground에 더 집중하는 경향이 있음 <br>
 - Patch size가 크면 일반화 성능이 좋아짐
 
 ### **Texture Shifts Generalization Analysis**
-<center><img src="/assets/images/papers/vit/gevit_fig3.jpg" width="95%" alt="Figure 3"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig3.jpg" width="95%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
 $$\rightarrow$$ Results on Stylized-ImageNet, Cue Conflict Stimuli and ImageNet-R.
 
 - ViT는 shape에 대한 강한 bias를 가지고 있고, 이는 mdoel scale과 positive correlation <br>
@@ -149,14 +158,23 @@ $$\rightarrow$$ Results on Stylized-ImageNet, Cue Conflict Stimuli and ImageNet-
 - 큰 patch size 일수록 global feature에 잘 집중함
   
 ### **Style Shifts Generalization Analysis**
-<center><img src="/assets/images/papers/vit/gevit_fig4.jpg" width="95%" alt="Figure 4"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig4.jpg" width="95%" alt="Figure 4"></center>
+	<center><figcaption><em>[Figure 4]</em></figcaption></center>
+</figure>
 $$\rightarrow$$ Results on DomainNet.
 
 <table>
 <tr><td width="55%">
-<center><img src="/assets/images/papers/vit/gevit_fig5_a.jpg" width="100%" alt="Figure 5a"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig5_a.jpg" width="100%" alt="Figure 5a"></center>
+	<center><figcaption><em>[Figure 5a]</em></figcaption></center>
+</figure>
 </td><td>
-<center><img src="/assets/images/papers/vit/gevit_fig5_b.jpg" width="100%" alt="Figure 5b"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig5_b.jpg" width="100%" alt="Figure 5b"></center>
+	<center><figcaption><em>[Figure 5b]</em></figcaption></center>
+</figure>
 </td></tr>
 </table>
 
@@ -168,7 +186,13 @@ $$\rightarrow$$ Results on DomainNet.
 - ViT는 각각 layer level에서 DS level을 제거함
 
 ## **Studies on Generalization-Enhanced ViTs**
-<center><img src="/assets/images/papers/vit/gevit_fig6.jpg" width="100%" alt="Figure 6"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig6.jpg" width="100%" alt="Figure 6"></center>
+	<center><figcaption><em>[Figure 6]</em></figcaption></center>
+</figure>
 <br>
-<center><img src="/assets/images/papers/vit/gevit_fig7.jpg" width="50%" alt="Figure 7"></center>
+<figure>
+   <center><img src="/assets/images/papers/vit/gevit_fig7.jpg" width="50%" alt="Figure 7"></center>
+	<center><figcaption><em>[Figure 7]</em></figcaption></center>
+</figure>
 

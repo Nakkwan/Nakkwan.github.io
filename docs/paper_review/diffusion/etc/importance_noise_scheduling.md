@@ -35,12 +35,18 @@ $$\rightarrow$$ 자연적인 이미지는 local에서 중복성을 나타내기 
 $$\rightarrow$$ 이어서, 이미지의 크기가 커지면, denoising을 더 쉽게 할 수 있음 <br>
 **따라서, 작은 resolution에서와 높은 해상도에서의 optimal scheduling은 다를 수 있음**
 
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig1.jpg" width="95%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig1.jpg" width="95%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 ## **Strategies to adjust noise scheduling**
 ### **Strategy 1: changing noise schedule functions**
 1차원 함수로 noise schedule을 변수화하는 방법 (ex. cosine, sigmoid, linear functions)
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig2.jpg" width="95%" alt="Figure 2"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig2.jpg" width="95%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 
 ### **Strategy 2: adjusting input scaling factor**
 간접적으로 noise의 scale을 조정하는 방법은 [A Generalist Framework for Panoptic Segmentation of Images and Videos](https://arxiv.org/pdf/2210.06366.pdf)에서와 같이 $$x_0$$을 상수 b로 scaling하는 것
@@ -50,7 +56,10 @@ x_t =\sqrt{\gamma(t)}bx_0+\sqrt{1-\gamma(t)}\epsilon
 $$
 
 b가 줄어들면 noise level이 올라감
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig3.jpg" width="95%" alt="Figure 3"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig3.jpg" width="95%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
 
 하지만, b는 variance에 영향을 줄 수 있고, 이는 성능 저하를 야기할 수 있음 <br>
 따라서, variance를 고정시키기 위해 $$\frac{1}{(b^2 - 1)(\gamma(t)+1)}$$같이 scale을 할 수 있음
@@ -58,15 +67,24 @@ b가 줄어들면 noise level이 올라감
 더 간단하게, denoising network에 입력 전에 scaling하는 것도 잘 동작함 <br>
 아래의 그림과 같이, scheduling 모양이 변하지 않고 scale만 변하는 것을 확인할 수 있음
 
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig4.jpg" width="95%" alt="Figure 4"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig4.jpg" width="95%" alt="Figure 4"></center>
+	<center><figcaption><em>[Figure 4]</em></figcaption></center>
+</figure>
 
 ### **Putting it together: a simple compound noise scheduling strategy**
 저자는 $$\gamma(t)=1-t$$와 같은 간단한 scheduling과 입력의 scaling을 이용한 noise scheduling 제안
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig5.jpg" width="95%" alt="Figure 5"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig5.jpg" width="95%" alt="Figure 5"></center>
+	<center><figcaption><em>[Figure 5]</em></figcaption></center>
+</figure>
 
 sampling 시에도 normalization을 해주어야함 <br>
 continuous 하게 학습이 되어서, 이산화는 마음대로 해도 되지만, cosine이 효율적임
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig6.jpg" width="95%" alt="Figure 6"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig6.jpg" width="95%" alt="Figure 6"></center>
+	<center><figcaption><em>[Figure 6]</em></figcaption></center>
+</figure>
 
 ## **Experiments**
 ### **The effect of strategy 1 (noise schedule functions)**
@@ -79,7 +97,10 @@ $$\rightarrow$$ 대체적으로 resolution이 커지면, 큰 T에서 느린 sche
 > 개인적으로, **중심극한정리** 때문도 있을 것이라 생각됨 <br>
 > $$\rightarrow$$ N차원이 작아지면, 최대 $$\sqrt{N}$$만큼 분산의 영향이 커짐
 
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig7.jpg" width="95%" alt="Figure 7"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig7.jpg" width="95%" alt="Figure 7"></center>
+	<center><figcaption><em>[Figure 7]</em></figcaption></center>
+</figure>
 
 ### **The effect of strategy 2 (input scaling)**
 Schedule function은 고정하고 input scale만 변경
@@ -94,7 +115,10 @@ Schedule function은 고정하고 input scale만 변경
 > 2. 이미지 사이즈가 크면, 인근 픽셀의 중복 때문에 shortwave의 영향이 작아지기 때문에 longwave인 평균에도 집중하는 것이 좋은 성능을 보임 
 > 3. 혹은 b를 줄임으로써, 실질적으로 SNR이 주는 것이 noise의 영향을 크게한다고 해석할 수 있음
 
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig8.jpg" width="95%" alt="Figure 8"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig8.jpg" width="95%" alt="Figure 8"></center>
+	<center><figcaption><em>[Figure 8]</em></figcaption></center>
+</figure>
 
 ### **The simple compound strategy, combined with [RIN](https://arxiv.org/abs/2212.11972), enables state-of-the-art single-stage high-resolution image generation based on pixels**
 {: .no_toc}
@@ -102,7 +126,10 @@ RIN과 결합하여 고품질 이미지를 생성가능 <br>
 저자는 Pixel-base DM에서만 테스트하고, latent DM은 테스트하지 않음 <br>
 하지만 잠재적으로 latent에서도 동작할 수 있음
 
-<center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig9.jpg" width="95%" alt="Figure 9"></center>
+<figure>
+    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig9.jpg" width="95%" alt="Figure 9"></center>
+	<center><figcaption><em>[Figure 9]</em></figcaption></center>
+</figure>
 
 ## Reference
 1. [On the Importance of Noise Scheduling for Diffusion Models](https://arxiv.org/abs/2301.10972)

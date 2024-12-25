@@ -23,8 +23,10 @@ Table of contents
 style reference의 얼굴 동작 패턴 추출 후 portrait에 style code로 인코딩 (style encoder) <br>
 이후, voice와 style code에서 stylized facial animation을 합성하는 style-controllable decoder (style-aware adaptation 사용) <br>
 style 적용에 가중치를 주기 위해 adjust the weight <br>
-
-<center><img src="/assets/images/papers/etc/styletalk_fig1.jpg" width="95%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig1.jpg" width="95%" alt="Figure 1"></center>
+	<center><figcaption><b>[Figure 1]</b></figcaption></center>
+</figure>
 
 1. style video로부터 [3DMM](#3dmm) parameter 추출 후, style code $$s$$를 얻기 위해 encoder $$E_s$$에 feeding
 2. Audio Encoder $$E_a$$를 통과하여 audio에 대한 feature 추출
@@ -80,7 +82,10 @@ $$\rightarrow$$ reference의 얼굴을 가진, style clip 표정의 비디오
 훈련의 경우 $$\{I^r, a_{t-w,t+w},V\}$$를 input으로 하여 [Wang](https://arxiv.org/abs/2112.02749)의 방법을 사용함 <br>
 $$\rightarrow$$ $$w$$는 window length이고, 5로 설정됨
 
-<center><img src="/assets/images/papers/etc/styletalk_fig1.jpg" width="95%" alt="Figure 1"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig1.jpg" width="95%" alt="Figure 1"></center>
+	<center><figcaption><em>[Figure 1]</em></figcaption></center>
+</figure>
 
 ### **Audio Encoder**
 음소 단위의 label $$a_{1:T}$$로부터 분절된 feature의 sequence $$a'_{1:T}$$를 추출
@@ -251,7 +256,10 @@ $$D_{sync}, D_{style}$$는 HDTF, MEAD로 12시간 (RTX 3090 GPU 4개, lr: 0.0001
 표정: F-LMD(Landmark Distance on the whole face) 사용 <br>
 비디오 품질: SSIM, CPBD(Cumulative Probability of Blur Detection)
 
-<center><img src="/assets/images/papers/etc/styletalk_fig4.jpg" width="90%" alt="Figure 4"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig4.jpg" width="90%" alt="Figure 4"></center>
+	<center><figcaption><em>[Figure 4]</em></figcaption></center>
+</figure>
 $$\rightarrow$$ unseen에 대해 수행
 
 ### **Qualitative Evaluation**
@@ -261,7 +269,10 @@ EAMM, GC-AVT만 스타일 control 가능하고 꽤나 정확하지만 upper face
 Wav2Lip, AVCT, PC-AVS, GC-AVT는 입술 생성을 잘하지만, 하나의 화법만 가능 <br>
 제안된 방법은 정확한 lip-sync, identity 보존 및 좋은 배경 생성을 할 수 있음
 
-<center><img src="/assets/images/papers/etc/styletalk_fig5.jpg" width="90%" alt="Figure 5"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig5.jpg" width="90%" alt="Figure 5"></center>
+	<center><figcaption><em>[Figure 5]</em></figcaption></center>
+</figure>
 
 ### **Ablation Study**
 {: .no_toc }
@@ -271,8 +282,14 @@ MEAD dataset에서 6개의 변형
 2. $$D_{style}$$, triplet loss $$\rightarrow$$ landmark에 효과적
 3. $$D_{sync}$$ 없애기 $$\rightarrow$$ 입술에 효과적
 
-<center><img src="/assets/images/papers/etc/styletalk_fig6.jpg" width="50%" alt="Figure 6"></center>
-<center><img src="/assets/images/papers/etc/styletalk_fig7.jpg" width="75%" alt="Figure 7"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig6.jpg" width="50%" alt="Figure 6"></center>
+	<center><figcaption><em>[Figure ]6</em></figcaption></center>
+</figure>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig7.jpg" width="75%" alt="Figure 7"></center>
+	<center><figcaption><em>[Figure 7]</em></figcaption></center>
+</figure>
 
 ### **Style Space Inspection**
 {: .no_toc }
@@ -295,7 +312,10 @@ t-SNE를 사용하여 style code $$s$$를 2D에 project
 > PCA는 공분산에서 eigen vector 계산, 중요한 principal component를 뽑음
 
 $$\rightarrow$$ speaker 4명에서 추출
-<center><img src="/assets/images/papers/etc/styletalk_fig8.jpg" width="80%" alt="Figure 8"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig8.jpg" width="80%" alt="Figure 8"></center>
+	<center><figcaption><em>[Figure 8]</em></figcaption></center>
+</figure>
 - (a) speaker 내부의 화법이 같은 감정의 다른 speaker보다 가깝다는 것을 의미
 - (b) 같은 감정이 잘 clustering됨
     - 추가적으로 유사한 감정이 비슷하게 cluster되기도 함 (angry, disgusted)
@@ -303,7 +323,10 @@ $$\rightarrow$$ speaker 4명에서 추출
 
 **Style Manipulation** <br>
 위의 semantically meaningful style code 덕분에 manipulate 가능
-<center><img src="/assets/images/papers/etc/styletalk_fig9.jpg" width="90%" alt="Figure 9"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig9.jpg" width="90%" alt="Figure 9"></center>
+	<center><figcaption><em>[Figure 9]</em></figcaption></center>
+</figure>
 
 - Interpolate in Style Code $$s$$
 
@@ -419,11 +442,17 @@ M=\bar{S}+B_{exp}\delta
 $$
 
 이후, PointNet을 이용하여, mouth에서 embedding
-<center><img src="/assets/images/papers/etc/styletalk_fig10.jpg" width="70%" alt="Figure 10"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig10.jpg" width="70%" alt="Figure 10"></center>
+	<center><figcaption><em>[Figure 10]</em></figcaption></center>
+</figure>
 
 ### **Implementation Details**
 {: .no_toc }
-<center><img src="/assets/images/papers/etc/styletalk_fig11.jpg" width="90%" alt="Figure 11"></center>
+<figure>
+    <center><img src="/assets/images/papers/etc/styletalk_fig11.jpg" width="90%" alt="Figure 11"></center>
+	<center><figcaption><em>[Figure 11]</em></figcaption></center>
+</figure>
 
 ### **Audio Encoder**
 {: .no_toc }

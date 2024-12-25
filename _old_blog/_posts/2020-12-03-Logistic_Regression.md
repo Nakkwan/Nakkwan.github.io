@@ -27,7 +27,10 @@ Regression은 입력에 대한 연속된 출력으로부터 이산적인 결과�
 이제 우선적으로 Binary Classification에 대해 알아보겠습니다. Binary Classification은 결과에 따라 discrete하게 분류하는 것을 의미하는데 결과는 0 또는 1로 나타나게 됩니다.<br>
 예를 들어, 입력된 Image가 고양이인지 아닌지에 대한 Classification이라면, 
 
-<img src="https://user-images.githubusercontent.com/48177363/100990248-05e19080-3595-11eb-9d52-3ea194c886ef.PNG" width="900" height="300">
+<figure>
+  <img src="https://user-images.githubusercontent.com/48177363/100990248-05e19080-3595-11eb-9d52-3ea194c886ef.PNG" width="900" height="300">
+	<center><figcaption><b></b></figcaption></center>
+</figure>
 
 위의 그림과 같이 training data(위의 예제에서는 (64*64*3, 1) vector) 하나를 $$x^{i}$$라 할 때 training data의 개수를 $$n_{x}$$이라 정하면 전체 입력 data는 $$X = \begin{bmatrix}
 x^{0} & . & . & x^{n_{x} - 1}
@@ -65,7 +68,10 @@ Cost function을 줄이기 위한 방향으로 w, b를 학습시키는 방법입
 로 나타납니다. 
 
 위의 식을 자세히 이해하기 위해 예제를 하나 들어보겠습니다.
-<img src="https://user-images.githubusercontent.com/48177363/101114020-f0677780-3623-11eb-8439-ea43f2516b0c.PNG" width="800" height="350">
+<figure>
+  <img src="https://user-images.githubusercontent.com/48177363/101114020-f0677780-3623-11eb-8439-ea43f2516b0c.PNG" width="800" height="350">
+	<center><figcaption><b></b></figcaption></center>
+</figure>
 
 마찬가지로 $$ Z = w_{1}x_{1} + w_{2}x_{2} + b $$라면 $$a = \sigma (z)$$ , $$L(a, y)$$ 일 때, $$dz = a - y$$가 됩니다. 계산에 대한 자세한 증명은 생략하겠습니다. 
 $$\frac{\sigma L}{\sigma w_{1}} = dw_{1} = x_{1}dz, dw_{2} = x_{2}dz,db = dz$$ <br>

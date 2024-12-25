@@ -104,13 +104,22 @@ teacher output과의 adversarial이 아닌 real image에 대한 adversarial을 �
 FFHQ 데이터셋을 사용하여 모델 훈련과 평가를 진행 <br>
 Adam optimizer로 800K training step
 
-<center><img src="/assets/images/papers/gan/blazestylegan_fig2.jpg" width="60%" alt="Figure 2"></center>
+<figure>
+    <center><img src="/assets/images/papers/gan/blazestylegan_fig2.jpg" width="60%" alt="Figure 2"></center>
+	<center><figcaption><em>[Figure 2]</em></figcaption></center>
+</figure>
 
 그리고 256, 512 resolution에서 real-time 달성 <br>
 $$\rightarrow$$ 10 ms runtime 미만이면 real-time이라고 하는 듯
 
-<center><img src="/assets/images/papers/gan/blazestylegan_fig3.jpg" width="90%" alt="Figure 3"></center>
-<center><img src="/assets/images/papers/gan/blazestylegan_fig4.jpg" width="50%" alt="Figure 4"></center>
+<figure>
+    <center><img src="/assets/images/papers/gan/blazestylegan_fig3.jpg" width="90%" alt="Figure 3"></center>
+	<center><figcaption><em>[Figure 3]</em></figcaption></center>
+</figure>
+<figure>
+    <center><img src="/assets/images/papers/gan/blazestylegan_fig4.jpg" width="50%" alt="Figure 4"></center>
+	<center><figcaption><em>[Figure 4]</em></figcaption></center>
+</figure>
 
 ## **Conclusion**
 스마트폰에서 실시간으로 고품질의 얼굴 이미지를 생성할 수 있는 첫 StyleGAN 모델인 BlazeStyleGAN을 소개 <br>
