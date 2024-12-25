@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Soruce code Architecture
-parent: Development
-permalink: /docs/development/code_architecture_2023_08_25
+parent: Etc
+grand_parent: Development
+permalink: /docs/development/etc/code_architecture_2023_08_25
 ---
 
 # Source code Architecture

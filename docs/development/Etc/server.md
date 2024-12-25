@@ -2,8 +2,9 @@
 layout: default
 title: Server Setting
 nav_order: "2023.12.15"
-parent: Development
-permalink: /docs/development/server_setting_2023_12_15
+parent: Etc
+grand_parent: Development
+permalink: /docs/development/etc/server_setting_2023_12_15
 ---
 
 # Server Setting

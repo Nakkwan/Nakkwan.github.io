@@ -4,7 +4,7 @@ title: C++
 nav_order: 2
 parent: Development
 has_children: true
-permalink: /docs/development/C++
+permalink: /docs/development/c++
 ---
 
 # C++
