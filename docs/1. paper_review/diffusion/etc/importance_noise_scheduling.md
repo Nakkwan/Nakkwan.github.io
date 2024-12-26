@@ -36,7 +36,7 @@ $$\rightarrow$$ 이어서, 이미지의 크기가 커지면, denoising을 더 �
 **따라서, 작은 resolution에서와 높은 해상도에서의 optimal scheduling은 다를 수 있음**
 
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig1.jpg" width="95%" alt="Figure 1"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig1.jpg" width="95%" alt="Figure 1"></center>
 	<center><figcaption><em>[Figure 1]</em></figcaption></center>
 </figure>
 
@@ -44,7 +44,7 @@ $$\rightarrow$$ 이어서, 이미지의 크기가 커지면, denoising을 더 �
 ### **Strategy 1: changing noise schedule functions**
 1차원 함수로 noise schedule을 변수화하는 방법 (ex. cosine, sigmoid, linear functions)
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig2.jpg" width="95%" alt="Figure 2"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig2.jpg" width="95%" alt="Figure 2"></center>
 	<center><figcaption><em>[Figure 2]</em></figcaption></center>
 </figure>
 
@@ -57,7 +57,7 @@ $$
 
 b가 줄어들면 noise level이 올라감
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig3.jpg" width="95%" alt="Figure 3"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig3.jpg" width="95%" alt="Figure 3"></center>
 	<center><figcaption><em>[Figure 3]</em></figcaption></center>
 </figure>
 
@@ -68,21 +68,21 @@ b가 줄어들면 noise level이 올라감
 아래의 그림과 같이, scheduling 모양이 변하지 않고 scale만 변하는 것을 확인할 수 있음
 
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig4.jpg" width="95%" alt="Figure 4"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig4.jpg" width="95%" alt="Figure 4"></center>
 	<center><figcaption><em>[Figure 4]</em></figcaption></center>
 </figure>
 
 ### **Putting it together: a simple compound noise scheduling strategy**
 저자는 $$\gamma(t)=1-t$$와 같은 간단한 scheduling과 입력의 scaling을 이용한 noise scheduling 제안
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig5.jpg" width="95%" alt="Figure 5"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig5.jpg" width="95%" alt="Figure 5"></center>
 	<center><figcaption><em>[Figure 5]</em></figcaption></center>
 </figure>
 
 sampling 시에도 normalization을 해주어야함 <br>
 continuous 하게 학습이 되어서, 이산화는 마음대로 해도 되지만, cosine이 효율적임
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig6.jpg" width="95%" alt="Figure 6"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig6.jpg" width="95%" alt="Figure 6"></center>
 	<center><figcaption><em>[Figure 6]</em></figcaption></center>
 </figure>
 
@@ -98,7 +98,7 @@ $$\rightarrow$$ 대체적으로 resolution이 커지면, 큰 T에서 느린 sche
 > $$\rightarrow$$ N차원이 작아지면, 최대 $$\sqrt{N}$$만큼 분산의 영향이 커짐
 
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig7.jpg" width="95%" alt="Figure 7"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig7.jpg" width="95%" alt="Figure 7"></center>
 	<center><figcaption><em>[Figure 7]</em></figcaption></center>
 </figure>
 
@@ -116,7 +116,7 @@ Schedule function은 고정하고 input scale만 변경
 > 3. 혹은 b를 줄임으로써, 실질적으로 SNR이 주는 것이 noise의 영향을 크게한다고 해석할 수 있음
 
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig8.jpg" width="95%" alt="Figure 8"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig8.jpg" width="95%" alt="Figure 8"></center>
 	<center><figcaption><em>[Figure 8]</em></figcaption></center>
 </figure>
 
@@ -127,7 +127,7 @@ RIN과 결합하여 고품질 이미지를 생성가능 <br>
 하지만 잠재적으로 latent에서도 동작할 수 있음
 
 <figure>
-    <center><img src="/assets/images/cv/diffusion/etc/importace-noise-scheduling_fig9.jpg" width="95%" alt="Figure 9"></center>
+    <center><img src="/assets/images/papers/diffusion/etc/importace-noise-scheduling_fig9.jpg" width="95%" alt="Figure 9"></center>
 	<center><figcaption><em>[Figure 9]</em></figcaption></center>
 </figure>
 

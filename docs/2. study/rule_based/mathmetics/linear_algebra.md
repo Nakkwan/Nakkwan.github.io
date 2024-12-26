@@ -203,8 +203,35 @@ PCA는 데이터 분포에서 주성분을 찾는 방법 \
 
 
 ## **Jacobian**
+Jacobian은 Multivariable Vector Function의 변화량을 나타내는 matrix다. 즉, 임의의 함수 $$f(x_1, x_2, \cdots, x_N)$$의 국소적인 선형 변환을 의미한다. \
+다변수 벡터 함수 $$f:R^n \rightarrow R^m$$ 가 주어졌을 때, $$f(x)$$의 Jacobian 행렬 $$J$$은 다음과 같이 정의됩니다
 
+$$
+J = 
+\begin{bmatrix}
+   \frac{\rho f_1}{\rho x_1} & \cdots & \frac{\rho f_1}{\rho x_n} \\
+   \vdots & \ddots & \vdots \\
+   \frac{\rho f_m}{\rho x_1} & \cdots & \frac{\rho f_m}{\rho x_n}
+\end{bmatrix}
+$$
 
+함수에서 입력 근처의 근사 다항식을 구하기 위해 taylor series를 사용하듯이 Multivariable Vector Function에서는 jacobian을 활용하여 $$x_0$$에서의 taylor series의 1차 근사를 할 수 있다. \
+$$\rightarrow f(x) \approx f(x_0​)+J(x_0​) \cdot (x−x_0​)$$
+
+이를 통해, 비선형 시스템을 국소적으로 선형화나 초기 조건에 대한 매개변수의 민감도를 측정하는데 활용할 수 있다.
+Computer Vision에서는 
+1. 이미지 변환(ex: rotation, expand, distortion)에서 픽셀 좌표의 변화
+2. 연속된 영상 프레임에서 물체의 움직임을 추적하는 Optical Flow
+3. Camera Parameter 및 스테레오 매칭을 통해 카메라의 위치와 자세를 추정
+
+에 활용된다.
+
+Matrix는 basis의 변환이라고 할 수 있다. determinant는 이 변환에서 부피의 scaling factor라고 볼 수 있다. \
+따라서, jacobian의 determinant는 국소 공간의 scaling factor로 볼 수 있고, 
+1. 선형 변환의 scaling 및 direction 
+2. 변수 변환에 따른 probability function의 transform
+
+에 활용된다. 
 
 ## **Appexdix**
 ### 1. Why diagonalization is important
