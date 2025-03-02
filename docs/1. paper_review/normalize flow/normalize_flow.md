@@ -34,7 +34,7 @@ Review of NLP papers
 생성 모델에서 데이터를 생성한다는 것은 데이터의 확률 밀도가 높은 분포를 학습하고, 해당 분포에서 샘플링을 수행하여 데이터를 생성하는 것이다.
 즉, 기본이 되는 Gaussian distribution에서 data distribution으로의 mapping을 neural network가 학습하는 것이다.
 
-하지만, $$p(z)\rightarrow p(x)$$를 수행하려면, $$p(z)$$뿐만 아니라 $$p(x)$$도 알아야 한다. 하지만 prior($$=p(z)$$)만 알고 있고, poterior($$=p(x	\mid z)$$, $$p(z)$$에 대한 $$p(x)$$)에 대해 모르기 때문에 이를 구하기 위한 여러 방법들이 사용된다. 
+하지만, $$p(z)\rightarrow p(x)$$를 수행하려면, $$p(z)$$뿐만 아니라 $$p(x)$$도 알아야 한다. 하지만 prior($$=p(z)$$)만 알고 있고, posterior($$=p(x	\mid z)$$, $$p(z)$$에 대한 $$p(x)$$)에 대해 모르기 때문에 이를 구하기 위한 여러 방법들이 사용된다. 
 
 Normalize flow는 역변환이 가능한 함수들의 sequence($$f_1, f_2, \dots f_N$$)를 이용하여 $$z \leftrightarrow x$$의 분포 변환을 수행한다. 
 #### 변수 변환
@@ -63,11 +63,32 @@ $$\rightarrow \log p(x) = \log\pi(z) + \log{(\det J)} $$
 
 
 ## [NICE](https://arxiv.org/abs/1410.8516)
-Normalize flow는 $$f$$가 invertable해야하고, jacobian의 determinant를 구하기 쉽지 않다는 문제가 있었다. 
-NICE는 이런 문제를 Triangular Matrix와 Coupling Layer로 해결한 논문이다. 
+Normalize flow는 $$f$$가 invertable해야하고, jacobian의 determinant를 구하기 쉽지 않다는 문제가 있었다. \
+NICE는 이런 문제를 Coupling Layer를 통해, Jacobian을 Triangular Matrix로 만들어 해결한 논문이다.
 
 #### Triangular Matrix
+Jacobian은 변량 함수의 미분 행렬로, 변환의 지역적 선형성을 나타낸다. 따라서, 확률 분포의 변환을 위해 invertible한 function을 사용하는 normalize flow에서 jacobian의 계산량을 줄이는 것이 중요하다. 적은 Jacobian의 determinant의 계산량과 쉬운 inverse function을 위해 transformation function $$f$$를 설계해야 한다. \
 
+#### Coupling Layer
+Transition의 대상이 되는 $$x$$를 $$x_1, x_2$$로 나눠 아래와 같이 순차적으로 transition을 수행한다. \
+
+$$
+\begin{align}
+y_1&=x_1 \\
+y_2&=x_2 +m(x_1)
+\end{align}
+$$
+
+m이 임의의 함수(논문에선 MLP)일 때, inverse는 
+
+$$
+\begin{align}
+x_1&=y_1 \\
+x_2&=y_2-m(y_1)
+\end{align}
+$$
+
+이기 떄문에 unit Jacobian determinant를 가진다.
 
 
 ## [RealNVP](https://arxiv.org/abs/1605.08803)

@@ -12,7 +12,8 @@ math: katex
 {: .no_toc}
 [Deep High-Resolution Representation Learning for Visual Recognition](https://arxiv.org/abs/1908.07919) <br>
 [Lite-HRNet: A Lightweight High-Resolution Network](https://arxiv.org/abs/2104.06403) <br>
-[HRFormer: High-Resolution Transformer for Dense Prediction](https://arxiv.org/abs/2110.09408)
+[HRFormer: High-Resolution Transformer for Dense Prediction](https://arxiv.org/abs/2110.09408) <br>  <br>
+
 Table of contents
 {: .text-delta }
 1. TOC
@@ -123,21 +124,193 @@ $$
 추가적인 자세한 내용은 논문의 section 4 참조
 
 ## **[Lite-HRNet](https://arxiv.org/abs/2104.06403)**
-### **Naive Lite-HRNet**
+Lite-HRNet은 HRNet과 같이 high-resolution representation을 유지하며 mobile, embedded 환경에서 dense prediction에서 높은 성능을 내기 위해 설계된 light-weight model이다. <br>
+ShuffleNet의 shuffle block과 CCW (Conditional Channel Weighting) Unit의 적용이 주 내용이자 contribution으로 볼 수 있다.
 
+### **Naive Lite-HRNet**
+ShuffleNet V2는 1x1 Convolution의 계산량을 줄이기 위해, channel split 후, 
+한 branch에 DWS Convolution을 적용하고, 나눠졌던 두 channel을 concatenate하도록 설계했다. <br>
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_fig6.jpg" width="50%" alt="Figure 6"></center>
+	<center><figcaption><em>[Figure 6]</em></figcaption></center>
+</figure>
+
+Lite-HRNet은 전체적으로 Small HRNet 구조에서 조금 더 경량화한 구조를 따른다. <br>
+- Stem의 두번 째 Convolution과 모든 residual block을 Shuffle Block으로 교체
+- multi-resolution fusion은 separable convolution으로 대체
 
 ### **Lite-HRNet**
 
-
 #### **Conditional channel weighting**
+1x1 convolution의 경우 $$C_{in}, C_{out}$$에 대해 계산을 진행해야하기 때문에, $$mathcal{O}(C^2)$$의 복잡도를 가진다. <br>
+반면, depthwise convolution은 3x3일 때, $$mathcal{O}(9C)$$의 복잡도를 가지기 때문에 상대적으로 light하다. 
+따라서 1x1 convolution을 Conditional channel weighting으로 대체하여 계산량을 줄인다. <br>
+
+Conditional channel weighting은 $$s$$-stage에서 다음과 같이 계산된다. ($$s$$-stage에는 $$s$$개의 resolution이 존재) <br>
+
+$$
+\begin{gather}
+Y_s = W_s \odot X_s
+\end{gather}
+$$
+
+Element-wise로 계산이 진행되고, $$W_s \in \mathcal{R}^{W_s \times H_s \times C_s}$$일 때, $$X_s \in \mathcal{R}^{C_s}$$로 복잡도가 $$mathcal{O}(C)$$로 1x1 convolution보다 가볍다. <br>
+
+Figure 8.b와 같이, channel weights는 단일 resolution이 아닌, 여러 resolution으로부터 결정된다. <br>
 
 
 #### **Cross-resolution weight computation**
+Figure 4.b와 같이, channel-wise의 conditonal weighting $$\mathcal{H}$$는 $$X_1$$이 가장 큰 resolution일 때, 
+
+$$
+\begin{gather}
+(W_1, W_2, \ddots, W_s) = \mathcal{H}(X_1, X_2, \cdots, X_s)
+\end{gather}
+$$
+
+으로 나타내진다. <br>
+
+$$\mathcal{H}_s(\cdot)$$은 가장 작은 resolution $$X_s \in \mathcal{R}^{W_s \times H_x}$$로 AAP(Adaptive Average Pooling)을 수행하여 모든 resolution을 concatenate한다. 
+
+$$
+\begin{gather}
+X_i'=AAP(X_i)
+\end{gather}
+$$
+
+이후, 1x1 convolution, RELU, 1x1 convolution, sigmoid를 통해 weight $$W_i'$$를 도출하고, 각 resolution에 대해 Upsampling을 하여 최종 weight $$W_i$$를 얻는다. <br>
+Input $$X_i'$$와 $$W_i'$$의 channel수가 같기 때문에 channel들이 각 input resolution에 mathching되고, upsampling을 하기 때문에 element-wise로 conditional channel weighting이 계산된다. <br>
+
+최종적으로 $$s$$-stage에 대해 Cross-resolution weight computation은 아래와 같다. 
+
+$$
+\begin{gather}
+X_i'=AAP(X_i), \quad \text{where} \quad i=1,\cdots,s \\
+X_{in}'=\text{Concat}(X_i, \cdot X_s) \\
+X_h = \text{RELU}(\text{1}\times\text{1Conv}(X_{in})) \\
+W_{out}'= \text{Sig}(\text{1}\times\text{1Conv}(X_h)) \\
+W_{out} = \text{UpSampling}(W_{out}') \\
+W_i = \text{Split}(W_{out}) \quad \text{where} \quad i=1,\cdots,s
+\end{gather}
+$$
+
+이를 통해, 각 resolution은 다른 resolution의 정보를 받아, weighting을 수행하며, 일반적인 1x1 convolution의 역할을 대체한다. 또한, 가장 작은 resolution의 spatial에 따라, 계산이 되기 때문에 하기 표와 같이 계산 복잡도에서도 이점이 있다. <br>
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_tab1.jpg" width="90%" alt="Table 1"></center>
+	<center><figcaption><em>[Table 1]</em></figcaption></center>
+</figure>
+
+#### **Spatial weight computation**
+Figure 8.b에서 $$\mathcal{F}$$는 GAP, FC, ReLU, FC, Sigmoid를 통해 수행된다. 같은 channel에서는 spatial position에 상관없이 같은 weight를 가지고 이는 전체 resolution의 spaital information을 합쳐 weighting하는데 도움을 준다. <br>
 
 
+### **Architecture & Human Pose Estimation**
+Lite-HRNet은 HRNet과 비슷하게, High-resolution을 stride 2 convolution과 shuffle block을 통해 줄이는 stem으로 시작한다. <br>
+Main body는 2개의 CCW block과 1개의 Fusion block으로 이뤄진다. <br>
+$$\rightarrow$$ Fusion block은 depth-wise separable convolution <br>
+
+Stage에서 각 resolution의 channel은 main의 input channel이 C일 때, C, 2C, 4C, 8C의 형태를 가진다. <br>
+EfficientNet 등은 sub-network를 통해 작은 parameter로도 model capacity를 높이지만, Lite-HRNet에서는 여러 stage의 weighting을 통해 1$$\times$$1 Convolution과 비슷한 효과를 내면서 lightweight network를 달성한다. <br>
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_tab2.jpg" width="90%" alt="Table 2"></center>
+	<center><figcaption><em>[Table 2]</em></figcaption></center>
+</figure>
+
+Lite-HRNet은  8개의 V100 GPU에서 32 batch로 adam, 2e<sup>-3</sup> lr로 훈련했으며, 결과는 하기 표와 같다. <br>
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_tab3.jpg" width="90%" alt="Table 3"></center>
+	<center><figcaption><em>[Table 3]</em></figcaption></center>
+</figure>
+<br>
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_tab4.jpg" width="90%" alt="Table 4"></center>
+	<center><figcaption><em>[Table 4]</em></figcaption></center>
+</figure>
 
 
 ## **[HRFormer](https://arxiv.org/abs/2110.09408)**
+ViT(Vision Transformer)는 Classification 등의 task에서 좋은 성능을 보였고, BeiT, DeiT, Swin Transformer와 와 같은 모델들은 distillation, data augmentation, window & shifting 등을 통해 그 성능을 높였다. <br> 
+ViT는 입력 이미지를 일정 크기의 패치로 나눈 뒤 embedding을 통해 token sequence로 변환한다. 하지만 이런 작업은 세밀한 position information을 잃기 쉽고, 고정된 path size를 사용하기 때문에 multi-scale에 대한 modeling이 쉽지 않다. 또한 계산량이 많아서 dense prediction과 같은 작업에 부정적인 영향을 미친다. <br>
+HRFormer는 HRNet의 architecture를 차용하여 high resolution의 feature representation을 유지하며 dense prediction에서도 transformer를 통해 높은 성능을 얻는 것을 목표로 한다. <br>
+HRNet의 구조를 사용하며 Local-window self-attention을 통해 계산량을 줄이고, FFN 내에 depth-wise convolution을 도입하여 local window간의 representation 학습을 효과적으로 수행할 수 있게 한다. <br>
+
 ### **High-Resolution Transformer**
+#### **Multi-resolution parallel transformer**
+HRNet과 같이, stem 이후 main body에서 high resolution부터 시작하여, stage 마다 low resolution을 가지는 parallel stream을 추가해나가는 방식으로 구성된다. 각 stream은 transformer block을 통해, representation을 학습하고 convolutional multi-scale fusion을 통해 stream 간 representation을 교환한다. convolutional multi-scale fusion은 HRNet과 동일하고, transformer block에서 차이점이 존재한다. 
+
+#### **Local-window self-attention**
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_fig7.jpg" width="90%" alt="Figure 7"></center>
+	<center><figcaption><em>[Figure 7]</em></figcaption></center>
+</figure>
+
+Transformer block에서 feature map은 overlap되지 않은 $$K \times K$$ window로 나뉜다. 각 window에서 독립적으로 MHSA가 수행된 후, 각 window의 output을 merge하여 output을 계산한다. <br>
+MHSA와 merge의 수식 및 과정은 아래와 같다. <br>
+
+$$
+\begin{gather}
+    \text{MultiHead}(X_p) = \text{Concat}[\text{head}(X_p)_1, \cdots, \text{head}(X_p)_H]\in\mathcal{R}^{K^2\times D}, \\
+    \text{head}(X_p)_h=\text{Softmax}\left[ \frac{(X_pW_q^h)(X_pW^h_k)^T}{\sqrt{D/H}} \right]X_pW_v^h\in\mathcal{R}^{K^2\times \frac{D}{H}}, \\
+    \hat{X}_p=X_p+\text{MultiHead}(X_p)W_o\in\mathcal{R}^{K^2\times \frac{D}{H}}, \\
+    \{\hat{X}_1,\hat{X}_2,\cdots,\hat{X}_P\}\xrightarrow[]{\text{Merge}}X^{MHSA},
+\end{gather}
+$$
+
+추가적으로, local-window self-attention에 T5의 relative position information을 적용헸다.
+
+{: .note-title }
+> T5의 relative position information
+> 
+> Relative position information은 Query와 Key의 상대적 거리를 통해 공간 위치 정보를 학습하는 방식 <br>
+> Self-attention은 기본적으로 matrix 연산이기 때문에 order-independent고 transformer에 명확한 positional information을 제공할 수 없음 <br>
+> 따라서, sinusoidal 등을 통해 positional embedding을 token에 더하여 위치 정보를 주는데 relative position information은 고정된 position을 사용하지 않고, token간 상대적인 위치 차이에 따라 다른 학습된 embedding을 사용 <br>
+> Relative position의 경우 가능한 거리가 일반 position에 비해 2배가 길기 때문에 bucket 방식을 통해 parameter 수와 model stabilize를 높임 <br>
+> > Non-uniform Quantization과 비슷하게 가까운 거리에는 많은 parameter를 할당 <br>
+> > 먼 거리(상대적으로 덜 중요하다고 판단)는 묶어서 같은 값을 할당하여 하나의 bucket으로 취급 <br>
+> > 모델이 어떤 상대적 위치가 어텐션 계산에 얼마나 큰 영향을 미쳐야 하는지를 스스로 학습 <br>
+> 
+> 또한, 각 bucket에 trainable parameter를 할당하여 훈련 과정에서 attention에 대한 weight를 학습 <br>
+> 이 parameter는 효율성을 위해, 모든 layer가 공유하지만, layer내의 각 head는 다른 값을 사용 <br>
+
+#### **FFN with depth-wise convolution**
+Local-windowself-attention은 overlap없이 windowing되기 때문에 각 window간 정보 교환이 없다. 따라서, FFN 단에서 두 MLP 사이에 $$3 \times 3$$ Convolution을 추가하여 spatial information을 학습한다. <br>
+
+$$
+\begin{gather}
+    \text{FFN} = \text{MLP(DW-Conv(MLP()))}
+\end{gather}
+$$
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_fig8.jpg" width="50%" alt="Figure 8"></center>
+	<center><figcaption><em>[Figure 8]</em></figcaption></center>
+</figure>
+
+#### **Representation head designs**
+Main Body 이후 head는 
+1. Classification: Low resolution을 사용 <br>
+2. Pose Estimation: High resolution에서 regression head만 추가 <br>
+3. Segmenatation: 전체 resoltuion 모두 사용 (low resolution을 upsampling) <br>
 
 
+### **Architecture & Human Pose Estimation**
+Local window의 사이즈는 모든 해상도에서 $$7 \times 7$$을 사용했고, 자세한 내용은 아래의 표와 같다. <br>
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_tab5.jpg" width="90%" alt="Table 5"></center>
+	<center><figcaption><em>[Table 5]</em></figcaption></center>
+</figure>
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_tab6.jpg" width="90%" alt="Table 6"></center>
+	<center><figcaption><em>[Table 6]</em></figcaption></center>
+</figure>
+
+<figure>
+    <center><img src="/assets/images/papers/task/pose/hrnet-series_tab7.jpg" width="90%" alt="Table 7"></center>
+	<center><figcaption><em>[Table 7]</em></figcaption></center>
+</figure>
