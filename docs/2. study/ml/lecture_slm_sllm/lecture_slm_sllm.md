@@ -1,10 +1,9 @@
 ---
 layout: default
 title: Lecture sLM, sLLM
-nav_order: 1
+nav_order: "2025.03.10"
 parent: ML
 grand_parent: Study
-has_children: true
 permalink: /docs/study/ml/lecture_slm_sllm/
 math: katex
 ---
@@ -13,8 +12,14 @@ math: katex
 {: .no_toc}
 
 
+<details close markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
 1. TOC
 {:toc}
+</details>
 
 LLM은 수천억에서 수조개의 parameter를 가지고 있기 때문에, 이를 학습하기 위해선 많은 resource가 필요하다. 따라서, 빠른 모델 훈련과 배포를 위해 sLM(small Language Model), sLLM(smaller Large Language Model)의 필요성이 대두된다. <br>
 
@@ -113,3 +118,10 @@ n번 질문들 통해, 공통적인 답변을 하는지 판단하고, GPT-4를 �
 4. **TriviaQA**: 퀴즈에 대한 정답을 평가
 5. **WinoGrande**: 문제가 주어졌을 때, 논리적으로 추론을 잘하는가? 문맥에 대한 이해 능력
 6. **GSM8k**: 수학 문제에 대한 추론 능력 평가
+
+## **LLM 평가 툴**
+1. [DeepEval](https://docs.confident-ai.com/)
+2. [MLFlow](https://mlflow.org/)
+3. [RAGAs](https://docs.ragas.io/en/stable/)
+4. [Deepchecks](https://www.deepchecks.com/)
+5. [Phoenix](https://github.com/Arize-ai/phoenix)
