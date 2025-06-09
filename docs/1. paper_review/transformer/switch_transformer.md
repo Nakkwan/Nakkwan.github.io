@@ -92,15 +92,65 @@ Switch Transformer에서 설계한 model의 구조는 및 다른 MoE Transformer
 
 <center>
 <div class="img-with-text">
-<img src="/assets/images/papers/transformer/switch_fig4.jpg" width="90%" alt="Table 2">
+<img src="/assets/images/papers/transformer/switch_fig4.jpg" width="70%" alt="Table 2">
 <p style="text-align:justify"><b>Table 2.</b> Benchmarking Switch Transformer & MoE Transformer. Switch Transformer는 다른 MoE보다 speed-quality가 좋고, Memory 사용량이 작다. 또한 낮은 capacity factors에서도 좋은 성능을 보인다.</p>
 </div>
 </center>
 
 ### **Improved Training and Fine-Tuning Techniques**
+Sparse expert model은 일반적인 모델에 비해, layer에서 routing이 이뤄지기 때문에 안정적으로 학습이 되지 않을 수 있다.
 
+#####  **Selective precision with large sparse models**
+이런 불안정성은 bloat16으로의 학습을 어렵게 하기 때문에, 선택적으로 float32로 casting하여 학습한다. 
+
+<center>
+<div class="img-with-text">
+<img src="/assets/images/papers/transformer/switch_fig5.jpg" width="60%" alt="Table 3">
+<p style="text-align:justify"><b>Table 3.</b> 일부 parameter만 float32로 casting하여 학습하는 것이 학습 안정성과 inference time에 도움을 준다.</p>
+</div>
+</center>
+
+#####  **Regularizing large sparse models**
+일반적으로 NLL에서는 large data corpus를 통해 pre-training을 진행한 후, 소규모 data corpus로 finetune을 수행한다. 하지만, 이런 방법은 overfitting의 문제가 발생할 수 있다. <br>
+Switch Layer에서는 dense model에 비해 많은 parameter를 가지고 있기 때문에 overfitting이 더 크게 나타날 수 있다. 따라서, export dropout을 통해 overfitting을 완화한다. <br>
+- 각 expert 레이어의 중간 feed-forward 연산 부분에서만 dropout 비율을 크게 증가시키는 방식
+
+<center>
+<div class="img-with-text">
+<img src="/assets/images/papers/transformer/switch_fig6.jpg" width="60%" alt="Table 4">
+<p style="text-align:justify"><b>Table 4.</b> Switch Transformer에 Dropout을 적용한 것에 대한 성능. Export Layer에만 더 큰 dropout을 적용하는 것이 성능 향상에 도움을 준다.</p>
+</div>
+</center>
 
 ## **Scaling Properties**
+Export를 늘리는 것은 단순히 router에만 연산량 증가를 가하기 때문에 효율적이다.
+따라서, 저자들은 export 수에 따른 Scaling을 조사했다.
+
+### **Scaling Results on a Step-Basis**
+<center>
+<div class="img-with-text">
+<img src="/assets/images/papers/transformer/switch_fig7.jpg" width="60%" alt="Figure 3">
+<p style="text-align:justify"><b>Figure 3.</b> Left: Export 수 증가에 따른 성능 향상. Right: 학습 step당 negative log perplexity</p>
+</div>
+</center>
+
+위 그림과 같이, export 수가 증가할 때, scaling benefit이 있으며 학습 속도 및 효율성이 좋아진다. 하지만, 많은 export 수는 학습 불안정성과 어려움이 존재하기 때문에 신중한 선택이 필요하다.
+
+### **Scaling Results on a Time-Basis**
+
+<center>
+<div class="img-with-text">
+<img src="/assets/images/papers/transformer/switch_fig8.jpg" width="40%" alt="Figure 4">
+<p style="text-align:justify"><b>Figure 4.</b> Switch Transformer는 dense Transformer에 비해 명확한 이점을 보인다.</p>
+</div>
+</center>
+
+<center>
+<div class="img-with-text">
+<img src="/assets/images/papers/transformer/switch_fig9.jpg" width="80%" alt="Figure 5">
+<p style="text-align:justify"><b>Figure 5.</b> Left: Switch-Base는 높은 샘플 효율성(sample efficiency)을 보인다. Right: Switch-Base는 T5-Large 대비 2.5배의 속도 향상을 보인다.</p>
+</div>
+</center>
 
 
 ## **Downstream Results**

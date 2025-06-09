@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Blender
-nav_order: 5
+nav_order: 6
 parent: Development
 has_children: true
 permalink: /docs/development/blender
