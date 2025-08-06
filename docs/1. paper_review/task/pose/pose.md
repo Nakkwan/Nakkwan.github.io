@@ -10,7 +10,7 @@ permalink: /docs/paper_review/task/pose
 
 # Pose Estimation
 {: .no_toc}
-A review of basic nlp papers
+A review of basic Pose Estimation papers
 
 1. TOC
 {:toc}
