@@ -5,6 +5,7 @@ nav_order: 9
 parent: Paper Review
 has_children: true
 permalink: /docs/paper_review/etc
+math: katex
 ---
 
 # Etc

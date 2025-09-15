@@ -2,9 +2,9 @@
 layout: default
 title: Survey on Visual Transformer
 nav_order: "2023.12.21"
-parent: Transformer
-grand_parent: Paper Review
-permalink: /docs/paper_review/transformer/survey_on_vit_2023_12_20
+parent: Survey
+grand_parent: Etc
+permalink: /docs/paper_review/etc/survey/survey_on_vit_2023_12_20
 math: katex
 ---
 
