@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Blog is under renewal
+title: Home
 nav_order: 1
 description: "Study Log blog of AI reseacher who is interested in Computer Vision."
 permalink: /
@@ -22,6 +22,12 @@ permalink: /
 [Email](mailto:nakkwan.choi@gmail.com){: .btn } [Github](https://nakkwan.github.io){: .btn }
 
 ---
+## Work Experience
+- KSOE (2025-06-30 ~)
+  - Researcher
+- Vieworks (2024-01-02 ~ 2025-06-27)
+  - Researcher
+
 ## Educational
 - M.S. degree from UNIST (Ulsan National Institute of Science and Technology) <br> (2021.03 ~ 2023.02)
   - Electronical and Computer Science Engineering
@@ -62,11 +68,8 @@ CHOI, Nakkwan, et al.
 <br>
 
 ## Skills
-- Python
-  - Pytorch
-  - Lightning
-  - FastAPI
+- Python/Pytorch
+- C++/C#
 - Git
 - Docker
-- Unity
 <br>

@@ -3,8 +3,8 @@ layout: default
 title: R1 Regularization
 nav_order: "2023.12.20"
 parent: GAN
-grand_parent: Paper Review
-permalink: /docs/paper_review/gan/r1_reg_2023_12_20
+grand_parent: Generative
+permalink: /docs/paper_review/generative/gan/r1_reg_2023_12_20
 math: katex
 ---
 

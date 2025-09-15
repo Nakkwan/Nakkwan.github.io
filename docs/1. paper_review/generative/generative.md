@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Etc
-nav_order: 9
+title: Generative
+nav_order: 8
 parent: Paper Review
 has_children: true
 permalink: /docs/paper_review/etc
 ---
 
-# Etc
+# Generative
 {: .no_toc}
 Paper review related to the etc...
 

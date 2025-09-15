@@ -3,8 +3,8 @@ layout: default
 title: IAF-VAE
 nav_order: "2023.12.11"
 parent: VAE
-grand_parent: Paper Review
-permalink: /docs/paper_review/vae/iaf-vae_2023_12_11
+grand_parent: Generative
+permalink: /docs/paper_review/generative/vae/iaf-vae_2023_12_11
 ---
 
 # **IAF-VAE**

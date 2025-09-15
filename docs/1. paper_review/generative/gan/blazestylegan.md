@@ -3,8 +3,8 @@ layout: default
 title: BlazeStyleGAN
 nav_order: "2023.12.10"
 parent: GAN
-grand_parent: Paper Review
-permalink: /docs/paper_review/gan/blazestylegan_2023_12_11
+grand_parent: Generative
+permalink: /docs/paper_review/generative/gan/blazestylegan_2023_12_11
 ---
 
 # **BlazeStyleGAN**

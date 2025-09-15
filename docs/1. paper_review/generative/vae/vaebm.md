@@ -3,8 +3,8 @@ layout: default
 title: VAEBM
 nav_order: "2023.12.11"
 parent: VAE
-grand_parent: Paper Review
-permalink: /docs/paper_review/vae/vaebm_2023_12_11
+grand_parent: Generative
+permalink: /docs/paper_review/generative/vae/vaebm_2023_12_11
 ---
 
 # **VAEBM**

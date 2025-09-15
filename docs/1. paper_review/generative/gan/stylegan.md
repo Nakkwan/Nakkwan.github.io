@@ -2,10 +2,10 @@
 layout: default
 title: StyleGAN
 nav_order: 5
-parent: Basic
-grand_parent: GAN
+parent: GAN
+grand_parent: Generative
 has_children: true
-permalink: /docs/paper_review/gan/basic/stylegan_2023_12_10
+permalink: /docs/paper_review/generative/gan/stylegan_2023_12_10
 math: katex
 ---
 

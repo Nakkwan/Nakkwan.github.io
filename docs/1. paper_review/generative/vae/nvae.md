@@ -3,8 +3,8 @@ layout: default
 title: NVAE
 nav_order: "2023.12.11"
 parent: VAE
-grand_parent: Paper Review
-permalink: /docs/paper_review/vae/nvae_2023_12_11
+grand_parent: Generative
+permalink: /docs/paper_review/generative/vae/nvae_2023_12_11
 ---
 
 # **NVAE**

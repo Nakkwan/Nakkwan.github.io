@@ -3,8 +3,8 @@ layout: default
 title: COCO-GAN
 nav_order: "2023.12.11"
 parent: GAN
-grand_parent: Paper Review
-permalink: /docs/paper_review/gan/coco-gan_2023_12_11
+grand_parent: Generative
+permalink: /docs/paper_review/generative/gan/coco-gan_2023_12_11
 ---
 
 # **COCO-GAN**

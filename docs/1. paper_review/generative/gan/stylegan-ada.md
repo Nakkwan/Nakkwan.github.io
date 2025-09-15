@@ -5,7 +5,7 @@ nav_order: 7
 parent: Basic
 grand_parent: GAN
 has_children: true
-permalink: /docs/paper_review/gan/basic/stylegan-ada_2023_12_10
+permalink: /docs/paper_review/generative/gan/basic/stylegan-ada_2023_12_10
 math: katex
 ---
 

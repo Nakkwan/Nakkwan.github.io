@@ -1,10 +1,11 @@
 ---
 layout: default
 title: VAE
-nav_order: 8
-parent: Paper Review
+nav_order: 1
+parent: Generative
+grand_parent: Paper Review
 has_children: true
-permalink: /docs/paper_review/vae
+permalink: /docs/paper_review/generative/vae
 math: katex
 ---
 
