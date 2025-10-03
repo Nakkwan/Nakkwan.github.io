@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Normalize Flow
-nav_order: 5
-parent: Paper Review
+nav_order: 3
+parent: Generative
+grand_parent: Paper Review
 has_children: true
-permalink: /docs/paper_review/normalize_flow
+permalink: /docs/paper_review/generative/normalize_flow
 ---
 
 # Neural ODE

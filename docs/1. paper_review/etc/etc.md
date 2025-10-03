@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Etc
-nav_order: 9
+nav_order: 8
 parent: Paper Review
 has_children: true
 permalink: /docs/paper_review/etc

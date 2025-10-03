@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Generative
-nav_order: 8
+nav_order: 7
 parent: Paper Review
 has_children: true
 permalink: /docs/paper_review/generative

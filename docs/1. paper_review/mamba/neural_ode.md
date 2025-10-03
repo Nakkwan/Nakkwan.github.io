@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Neural ODE
-nav_order: 4
-parent: Paper Review
+nav_order: "2023.02.11"
+parent: Mamba
+grand_parent: Paper Review
 has_children: true
-permalink: /docs/paper_review/neural_ode
+permalink: /docs/paper_review/mamba/neural_ode
 ---
 
 # Neural ODE
